@@ -514,7 +514,6 @@
         const auth = getAuth(app);
         const dbFS = getFirestore(app);
         
-        // Uso estricto de appId o default para que funcione fuera de Canvas
         const appId = typeof __app_id !== 'undefined' ? __app_id : 'default-app-id';
 
         window.db = { users: [] };
@@ -551,6 +550,9 @@
                 }
             } catch (error) {
                 console.error("Autenticación fallida:", error);
+                if (error.code === 'auth/operation-not-allowed') {
+                    window.showToast("Debes habilitar Auth 'Anónimo' en Firebase.", "error");
+                }
                 activarModoLocal();
             }
         };
@@ -589,6 +591,9 @@
                 }
             }, (error) => {
                 console.error("Firestore listener error:", error);
+                if (error.code === 'permission-denied') {
+                    window.showToast("Permisos de lectura denegados en Firebase.", "error");
+                }
                 activarModoLocal();
             });
         });
@@ -598,11 +603,10 @@
         window.saveUserToDB = async function(userObj) {
             if (!auth.currentUser) {
                 console.warn("Modo offline o sin permisos activado.");
-                return true; // Finge éxito en modo local
+                return true; 
             }
 
             try {
-                // Siempre usamos setDoc para evitar conflictos con addDoc en subcolecciones
                 const docId = (userObj.fsId && userObj.fsId !== 'admin_initial') 
                               ? userObj.fsId 
                               : (userObj.id ? userObj.id.toString() : Date.now().toString());
@@ -612,12 +616,15 @@
                 const dataToSave = { ...userObj };
                 delete dataToSave.fsId;
                 
-                // setDoc con merge es el método más robusto en Firebase v9+
                 await setDoc(userRef, dataToSave, { merge: true });
                 return true;
             } catch (error) {
                 console.error("Error guardando:", error);
-                window.showToast("Error de Firebase: " + error.code, "error");
+                if (error.code === 'permission-denied') {
+                    window.showToast("Permiso denegado. Revisa las reglas de seguridad en Firebase Console.", "error");
+                } else {
+                    window.showToast("Error de Firebase: " + error.code, "error");
+                }
                 return false;
             }
         };
