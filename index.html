@@ -490,16 +490,24 @@
         import { getFirestore, collection, doc, setDoc, addDoc, updateDoc, deleteDoc, onSnapshot } from "https://www.gstatic.com/firebasejs/11.6.1/firebase-firestore.js";
 
         let firebaseConfig;
+        let isCanvas = false; // Identificador de entorno (Local/Netlify vs Canvas)
+
         try {
-            const configString = typeof __firebase_config !== 'undefined' ? __firebase_config : '';
-            if (typeof configString === 'string' && configString.trim() !== '') {
-                firebaseConfig = JSON.parse(configString);
-            } else if (typeof configString === 'object' && configString !== null) {
-                firebaseConfig = configString;
+            if (typeof __firebase_config !== 'undefined') {
+                isCanvas = true;
+                const configString = __firebase_config;
+                if (typeof configString === 'string' && configString.trim() !== '') {
+                    firebaseConfig = JSON.parse(configString);
+                } else if (typeof configString === 'object' && configString !== null) {
+                    firebaseConfig = configString;
+                } else {
+                    throw new Error("Configuración vacía, usando fallback");
+                }
             } else {
-                throw new Error("Configuración vacía, usando fallback");
+                throw new Error("No es entorno Canvas");
             }
         } catch (e) {
+            isCanvas = false;
             firebaseConfig = {
                 apiKey: "AIzaSyCLtEfWsxZg8Q14FA43d1RDUEqUiO9eOpc",
                 authDomain: "funetec-equalsby-oficial.firebaseapp.com",
@@ -515,6 +523,15 @@
         const dbFS = getFirestore(app);
         
         const appId = typeof __app_id !== 'undefined' ? __app_id : 'default-app-id';
+
+        // Funciones inteligentes que cambian la ruta dependiendo de dónde esté alojada la página
+        const getCollectionRef = () => {
+            return isCanvas ? collection(dbFS, 'artifacts', appId, 'public', 'data', 'funetec_users') : collection(dbFS, 'funetec_users');
+        };
+
+        const getDocRef = (docId) => {
+            return isCanvas ? doc(dbFS, 'artifacts', appId, 'public', 'data', 'funetec_users', docId) : doc(dbFS, 'funetec_users', docId);
+        };
 
         window.db = { users: [] };
         window.currentUser = null;
@@ -536,14 +553,13 @@
                 window.db.users = [{...fallbackAdmin, fsId: 'admin_initial'}];
                 isDbLoaded = true;
                 setLoginLoading(false);
-                window.showToast("Conexión inestable. Modo local de respaldo activo.", "error");
             }
         }
 
         const initAuthAndDB = async () => {
             try {
                 setLoginLoading(true);
-                if (typeof __initial_auth_token !== 'undefined' && __initial_auth_token) {
+                if (isCanvas && typeof __initial_auth_token !== 'undefined' && __initial_auth_token) {
                     await signInWithCustomToken(auth, __initial_auth_token);
                 } else {
                     await signInAnonymously(auth);
@@ -563,11 +579,11 @@
                 return;
             }
             
-            const usersCollection = collection(dbFS, 'artifacts', appId, 'public', 'data', 'funetec_users');
+            const usersCollection = getCollectionRef();
             
             onSnapshot(usersCollection, (snapshot) => {
                 if (snapshot.empty && !isDbLoaded) {
-                    setDoc(doc(dbFS, 'artifacts', appId, 'public', 'data', 'funetec_users', 'admin_initial'), fallbackAdmin)
+                    setDoc(getDocRef('admin_initial'), fallbackAdmin)
                         .catch(e => console.error("Error al crear admin base:", e));
                     window.db.users = [{...fallbackAdmin, fsId: 'admin_initial'}];
                 } else {
@@ -592,7 +608,7 @@
             }, (error) => {
                 console.error("Firestore listener error:", error);
                 if (error.code === 'permission-denied') {
-                    window.showToast("Permisos de lectura denegados en Firebase.", "error");
+                    window.showToast("Permisos de lectura denegados en Firebase. Revisa las reglas de seguridad.", "error");
                 }
                 activarModoLocal();
             });
@@ -602,8 +618,8 @@
 
         window.saveUserToDB = async function(userObj) {
             if (!auth.currentUser) {
-                console.warn("Modo offline o sin permisos activado.");
-                return true; 
+                window.showToast("Error de conexión: No estás autenticado en Firebase.", "error");
+                return false; 
             }
 
             try {
@@ -611,7 +627,8 @@
                               ? userObj.fsId 
                               : (userObj.id ? userObj.id.toString() : Date.now().toString());
 
-                const userRef = doc(dbFS, 'artifacts', appId, 'public', 'data', 'funetec_users', userObj.fsId === 'admin_initial' ? 'admin_initial' : docId);
+                const targetId = userObj.fsId === 'admin_initial' ? 'admin_initial' : docId;
+                const userRef = getDocRef(targetId);
                 
                 const dataToSave = { ...userObj };
                 delete dataToSave.fsId;
@@ -621,9 +638,9 @@
             } catch (error) {
                 console.error("Error guardando:", error);
                 if (error.code === 'permission-denied') {
-                    window.showToast("Permiso denegado. Revisa las reglas de seguridad en Firebase Console.", "error");
+                    window.showToast("Permiso denegado. Asegúrate de actualizar las reglas de Firestore.", "error");
                 } else {
-                    window.showToast("Error de Firebase: " + error.code, "error");
+                    window.showToast("Error de Firebase al guardar: " + error.code, "error");
                 }
                 return false;
             }
@@ -632,10 +649,10 @@
         window.deleteUserFromDB = async function(fsId) {
             if (!auth.currentUser || !fsId || fsId === 'admin_initial') return;
             try { 
-                await deleteDoc(doc(dbFS, 'artifacts', appId, 'public', 'data', 'funetec_users', fsId)); 
+                await deleteDoc(getDocRef(fsId)); 
             } catch (error) { 
                 console.error("Error eliminando:", error); 
-                window.showToast("Error al borrar en Firebase", "error");
+                window.showToast("Error al borrar en Firebase: " + error.code, "error");
             }
         };
 
@@ -779,7 +796,6 @@
                 document.getElementById('admin-settings-card')?.classList.toggle('hidden', !isAdmin);
                 document.getElementById('admin-tutors-card')?.classList.toggle('hidden', !isAdmin);
                 
-                // Controlar sección de creación de usuarios (solo admin)
                 const createUserSection = document.getElementById('admin-create-user-section');
                 const assignDataSection = document.getElementById('admin-assign-data-section');
                 if (isAdmin) {
@@ -938,7 +954,7 @@
                 }
             } catch (error) {
                 console.error("Error UI:", error);
-                window.showToast("Error inesperado", "error");
+                window.showToast("Error inesperado al guardar", "error");
             } finally {
                 btnSubmit.disabled = false;
                 btnSubmit.innerText = originalText;
