@@ -299,7 +299,7 @@
                 </div>
 
                 <div class="grid grid-cols-1 lg:grid-cols-3 gap-8">
-                    <div class="lg:col-span-1">
+                    <div class="lg:col-span-1" id="admin-create-user-section">
                         <div class="bg-white p-6 rounded-3xl shadow-premium border border-gray-100 sticky top-32">
                             <div class="flex items-center gap-3 mb-6">
                                 <div class="bg-red-50 p-3 rounded-xl text-red-600"><i data-lucide="user-plus" class="w-6 h-6"></i></div>
@@ -335,7 +335,7 @@
                         </div>
                     </div>
 
-                    <div class="lg:col-span-2">
+                    <div class="lg:col-span-2" id="admin-assign-data-section">
                         <div class="bg-white p-6 md:p-8 rounded-3xl shadow-premium border border-gray-100">
                             <div class="flex items-center gap-3 mb-8 pb-6 border-b border-gray-100">
                                 <div class="bg-blue-50 p-3 rounded-xl text-blue-600"><i data-lucide="settings" class="w-6 h-6"></i></div>
@@ -501,7 +501,7 @@
             }
         } catch (e) {
             firebaseConfig = {
-                apiKey: "AIzaSyDlQh475AHA2YIIEBRy17QxmfrKdU1eJpY",
+                apiKey: "AIzaSyCLtEfWsxZg8Q14FA43d1RDUEqUiO9eOpc",
                 authDomain: "funetec-equalsby-oficial.firebaseapp.com",
                 projectId: "funetec-equalsby-oficial",
                 storageBucket: "funetec-equalsby-oficial.firebasestorage.app",
@@ -778,6 +778,19 @@
                 document.getElementById('admin-only-role-selector')?.classList.toggle('hidden', !isAdmin);
                 document.getElementById('admin-settings-card')?.classList.toggle('hidden', !isAdmin);
                 document.getElementById('admin-tutors-card')?.classList.toggle('hidden', !isAdmin);
+                
+                // Controlar sección de creación de usuarios (solo admin)
+                const createUserSection = document.getElementById('admin-create-user-section');
+                const assignDataSection = document.getElementById('admin-assign-data-section');
+                if (isAdmin) {
+                    createUserSection?.classList.remove('hidden');
+                    assignDataSection?.classList.remove('lg:col-span-3');
+                    assignDataSection?.classList.add('lg:col-span-2');
+                } else {
+                    createUserSection?.classList.add('hidden');
+                    assignDataSection?.classList.remove('lg:col-span-2');
+                    assignDataSection?.classList.add('lg:col-span-3');
+                }
                 
                 if(isAdmin) {
                     const uInp = document.getElementById('admin-edit-username');
