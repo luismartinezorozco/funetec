@@ -294,9 +294,14 @@
                             <div class="bg-purple-50 p-3 rounded-xl text-purple-600"><i data-lucide="users" class="w-6 h-6"></i></div>
                             <h3 class="text-xl font-bold text-gray-900">Estudiantes por Curso</h3>
                         </div>
-                        <div class="relative w-full md:w-72">
-                            <div class="absolute inset-y-0 left-0 pl-3 flex items-center pointer-events-none"><i data-lucide="search" class="w-4 h-4 text-gray-400"></i></div>
-                            <input type="text" id="search-student" oninput="window.renderStudentsByCourse(this.value)" placeholder="Buscar estudiante..." class="w-full pl-10 pr-4 py-2.5 rounded-xl bg-gray-50 border border-gray-200 outline-none text-sm transition-all">
+                        <div class="flex items-center gap-3 w-full md:w-auto">
+                            <button onclick="window.exportStudentsToExcel()" class="hidden bg-green-600 hover:bg-green-700 text-white px-4 py-2.5 rounded-xl text-sm font-bold items-center gap-2 transition-colors shadow-sm" id="admin-export-excel-btn" title="Exportar estudiantes a Excel">
+                                <i data-lucide="file-spreadsheet" class="w-5 h-5"></i> Exportar
+                            </button>
+                            <div class="relative w-full md:w-72">
+                                <div class="absolute inset-y-0 left-0 pl-3 flex items-center pointer-events-none"><i data-lucide="search" class="w-4 h-4 text-gray-400"></i></div>
+                                <input type="text" id="search-student" oninput="window.renderStudentsByCourse(this.value)" placeholder="Buscar estudiante..." class="w-full pl-10 pr-4 py-2.5 rounded-xl bg-gray-50 border border-gray-200 outline-none text-sm transition-all">
+                            </div>
                         </div>
                     </div>
                     <div id="students-by-course-container" class="flex flex-col gap-4 max-h-[600px] overflow-y-auto pr-2 custom-scrollbar"></div>
@@ -332,7 +337,7 @@
                                 </div>
                                 <div><label class="block text-sm font-bold text-gray-700 mb-1">Contraseña</label><input type="text" id="new-password" required value="1234" class="w-full px-4 py-3 rounded-xl bg-gray-50 border border-gray-200 outline-none transition-all"></div>
                                 <div class="flex gap-2 mt-2">
-                                    <button type="submit" id="btn-submit-user" class="flex-1 bg-gray-900 text-white font-bold py-3.5 rounded-xl hover:bg-funetec-main transition-colors shadow-md disabled:opacity-50 disabled:cursor-not-allowed">Registrar</button>
+                                    <button type="submit" id="btn-submit-user" class="flex-1 bg-gray-900 text-white font-bold py-3.5 rounded-xl hover:bg-blue-700 transition-colors shadow-md disabled:opacity-50 disabled:cursor-not-allowed">Registrar</button>
                                     <button type="button" id="btn-cancel-user-edit" onclick="window.cancelUserEdit()" class="hidden px-4 bg-gray-200 text-gray-700 font-bold py-3.5 rounded-xl transition-colors shadow-md">Cancelar</button>
                                 </div>
                             </form>
@@ -913,6 +918,90 @@
 
         window.handleLogout = function() { window.currentUser = null; window.showToast("Sesión cerrada"); window.updateNavState(); window.showLanding(); };
 
+        window.exportStudentsToExcel = function() {
+            const searchTerm = document.getElementById('search-student') ? document.getElementById('search-student').value.toLowerCase().trim() : '';
+            
+            const filteredStudents = window.db.users.filter(u => u.role === 'student' && (
+                searchTerm === '' || 
+                u.name.toLowerCase().includes(searchTerm) || 
+                u.username.toLowerCase().includes(searchTerm) || 
+                (u.cedula && u.cedula.toLowerCase().includes(searchTerm))
+            ));
+
+            if (filteredStudents.length === 0) {
+                window.showToast("No hay estudiantes para exportar con los filtros actuales.", "error");
+                return;
+            }
+
+            const exportData = filteredStudents.map(s => {
+                const courseList = s.cursos && s.cursos.length > 0 
+                    ? s.cursos.map(c => c.name).join(', ') 
+                    : 'Sin curso';
+                const statusList = s.cursos && s.cursos.length > 0 
+                    ? s.cursos.map(c => c.status || 'Activo').join(', ') 
+                    : 'N/A';
+                return {
+                    "Nombre Completo": s.name,
+                    "Identificación (C.C.)": s.cedula || 'N/A',
+                    "Usuario": s.username,
+                    "Rol": s.role === 'student' ? 'Estudiante' : s.role,
+                    "Cursos": courseList,
+                    "Estado": statusList
+                };
+            });
+
+            let table = '<table><thead><tr>';
+            const headers = Object.keys(exportData[0]);
+            headers.forEach(h => table += `<th style="background-color: #AF172B; color: white; font-weight: bold; border: 1px solid #dddddd; padding: 8px;">${h}</th>`);
+            table += '</tr></thead><tbody>';
+            
+            exportData.forEach(row => {
+                table += '<tr>';
+                headers.forEach(h => table += `<td style="border: 1px solid #dddddd; padding: 8px;">${row[h]}</td>`);
+                table += '</tr>';
+            });
+            table += '</tbody></table>';
+
+            const excelContent = `
+                <html xmlns:o="urn:schemas-microsoft-com:office:office" xmlns:x="urn:schemas-microsoft-com:office:excel" xmlns="http://www.w3.org/TR/REC-html40">
+                <head>
+                    <meta charset="UTF-8">
+                    <!--[if gte mso 9]>
+                    <xml>
+                        <x:ExcelWorkbook>
+                            <x:ExcelWorksheets>
+                                <x:ExcelWorksheet>
+                                    <x:Name>Estudiantes_FUNETEC</x:Name>
+                                    <x:WorksheetOptions>
+                                        <x:DisplayGridlines/>
+                                    </x:WorksheetOptions>
+                                </x:ExcelWorksheet>
+                            </x:ExcelWorksheets>
+                        </x:ExcelWorkbook>
+                    </xml>
+                    <![endif]-->
+                </head>
+                <body>
+                    <h2>Reporte de Estudiantes - FUNETEC</h2>
+                    <p>Fecha de exportación: ${new Date().toLocaleDateString()}</p>
+                    ${table}
+                </body>
+                </html>
+            `;
+            
+            const blob = new Blob([excelContent], { type: 'application/vnd.ms-excel' });
+            const url = URL.createObjectURL(blob);
+            const link = document.createElement("a");
+            link.href = url;
+            link.download = `Estudiantes_FUNETEC_${new Date().toISOString().split('T')[0]}.xls`;
+            document.body.appendChild(link);
+            link.click();
+            document.body.removeChild(link);
+            URL.revokeObjectURL(url);
+            
+            window.showToast("Archivo exportado correctamente", "success");
+        };
+
         window.renderPortal = function() {
             if (!window.currentUser) return;
             const adminDash = document.getElementById('admin-dashboard');
@@ -927,6 +1016,15 @@
                 document.getElementById('admin-only-role-selector')?.classList.toggle('hidden', !isAdmin);
                 document.getElementById('admin-settings-card')?.classList.toggle('hidden', !isAdmin);
                 document.getElementById('admin-tutors-card')?.classList.toggle('hidden', !isAdmin);
+                
+                const exportBtn = document.getElementById('admin-export-excel-btn');
+                if (isAdmin) {
+                    exportBtn?.classList.remove('hidden');
+                    exportBtn?.classList.add('flex');
+                } else {
+                    exportBtn?.classList.add('hidden');
+                    exportBtn?.classList.remove('flex');
+                }
                 
                 const createUserSection = document.getElementById('admin-create-user-section');
                 const assignDataSection = document.getElementById('admin-assign-data-section');
@@ -1073,6 +1171,7 @@
                     }
                     success = await window.saveUserToDB(nu);
                     if(success) {
+                        // Actualizacion optimista UI local
                         if(!window.db.users.find(u => u.id === nu.id)) window.db.users.push(nu);
                         window.showToast("Usuario guardado");
                     }
