@@ -54,7 +54,6 @@
 </head>
 <body class="bg-gray-50 text-gray-800 antialiased relative min-h-screen flex flex-col">
 
-    <!-- Navegación -->
     <nav id="main-nav" class="bg-white/80 backdrop-blur-md border-b border-gray-100 fixed w-full z-[80] top-0 transition-all duration-300">
         <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
             <div class="flex justify-between h-20 md:h-24">
@@ -116,11 +115,9 @@
 
     <!-- VISTA PÚBLICA (LANDING) -->
     <div id="landing-view" class="flex-grow">
-        <!-- Hero Section -->
         <section id="inicio" class="pt-32 pb-20 md:pt-44 md:pb-28 bg-gradient-to-b from-red-50/50 via-white to-gray-50 relative overflow-hidden">
             <div class="absolute top-0 right-0 -mr-32 -mt-32 w-96 h-96 rounded-full bg-red-200 opacity-30 blur-3xl z-0 mix-blend-multiply"></div>
             <div class="absolute bottom-0 left-0 -ml-32 -mb-32 w-80 h-80 rounded-full bg-orange-100 opacity-30 blur-3xl z-0 mix-blend-multiply"></div>
-            
             <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10 flex flex-col lg:flex-row items-center gap-12 lg:gap-8">
                 <div class="lg:w-1/2 text-center lg:text-left">
                     <div class="inline-flex items-center gap-2 py-1.5 px-4 rounded-full bg-white text-funetec-main font-bold text-sm mb-6 tracking-widest uppercase border border-red-100 shadow-sm"><span class="w-2 h-2 rounded-full bg-funetec-main animate-pulse"></span> Calendario A - 2026</div>
@@ -229,7 +226,9 @@
                         </div>
                         <p class="text-gray-400 mb-8 font-medium leading-relaxed">Formando los profesionales técnicos que la región necesita. Educación de calidad, práctica y orientada al futuro.</p>
                         <div class="flex space-x-4 items-center">
-                            <a href="https://www.instagram.com/FUNETEC_BQ" target="_blank" class="bg-gray-800 p-3.5 rounded-full hover:bg-gradient-to-tr from-yellow-400 via-red-500 to-purple-500 hover:shadow-lg transition-all"><i data-lucide="instagram" class="w-5 h-5 text-white"></i></a>
+                            <a href="https://www.instagram.com/FUNETEC_BQ" target="_blank" class="bg-gray-800 p-3.5 rounded-full hover:bg-gradient-to-tr from-yellow-400 via-red-500 to-purple-500 hover:shadow-lg transition-all flex items-center justify-center">
+                                <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="text-white"><rect width="20" height="20" x="2" y="2" rx="5" ry="5"></rect><path d="M16 11.37A4 4 0 1 1 12.63 8 4 4 0 0 1 16 11.37z"></path><line x1="17.5" x2="17.51" y1="6.5" y2="6.5"></line></svg>
+                            </a>
                             <a href="https://www.instagram.com/FUNETEC_BQ" target="_blank" class="text-gray-300 font-bold hover:text-white transition-colors">@FUNETEC_BQ</a>
                         </div>
                     </div>
@@ -769,7 +768,6 @@
                     await signInAnonymously(auth);
                 }
                 
-                // Lógica del contador de visitas (1 vez por sesión de navegador)
                 try {
                     const metricsRef = getMetricsDocRef();
                     if (!sessionStorage.getItem('funetec_visited')) {
@@ -791,8 +789,6 @@
                     window.showToast("Firebase: Habilita el inicio de sesión 'Anónimo'.", "error");
                 } else if (error.code === 'auth/unauthorized-domain') {
                     window.showToast("Firebase: Agrega este dominio a los dominios autorizados.", "error");
-                } else if (error.message && error.message.includes('requests-from-referer') || error.code === 'auth/network-request-failed') {
-                    window.showToast("Firebase: El dominio está bloqueado en las restricciones de tu API Key en Google Cloud.", "error");
                 } else {
                     window.showToast("Error de Auth: " + error.message, "error");
                 }
@@ -852,7 +848,6 @@
                 activarModoLocal();
             });
             
-            // Listener de Métricas Globales
             onSnapshot(getMetricsDocRef(), (snap) => {
                 if (snap.exists()) {
                     window.db.visits = snap.data().count || 0;
@@ -1120,10 +1115,6 @@
             }
         };
 
-        // ===================================
-        // ADMIN Y TUTORES
-        // ===================================
-
         window.handleAdminSettings = async function(e) {
             e.preventDefault();
             const nu = document.getElementById('admin-edit-username').value;
@@ -1148,14 +1139,7 @@
             if(tutors.length === 0) { list.innerHTML = "<p class='text-sm text-gray-500 italic'>No hay tutores.</p>"; return; }
             
             tutors.forEach(t => {
-                list.innerHTML += `
-                    <div class="flex justify-between bg-gray-50 p-3 rounded-xl border border-gray-100">
-                        <div><p class="font-bold text-gray-800 text-sm">${t.name}</p><p class="text-xs text-gray-500">Usuario: ${t.username} | Certs: ${t.canGenerateCertificates?'Sí':'No'}</p></div>
-                        <div class="flex gap-2">
-                            <button onclick="window.editTutor(${t.id})" class="text-blue-500 p-1"><i data-lucide="pencil" class="w-4 h-4"></i></button>
-                            <button onclick="window.deleteTutor(${t.id})" class="text-red-500 p-1"><i data-lucide="trash-2" class="w-4 h-4"></i></button>
-                        </div>
-                    </div>`;
+                list.innerHTML += `<div class="flex justify-between bg-gray-50 p-3 rounded-xl border border-gray-100"><div><p class="font-bold text-gray-800 text-sm">${t.name}</p><p class="text-xs text-gray-500">Usuario: ${t.username} | Certs: ${t.canGenerateCertificates?'Sí':'No'}</p></div><div class="flex gap-2"><button onclick="window.editTutor(${t.id})" class="text-blue-500 p-1"><i data-lucide="pencil" class="w-4 h-4"></i></button><button onclick="window.deleteTutor(${t.id})" class="text-red-500 p-1"><i data-lucide="trash-2" class="w-4 h-4"></i></button></div></div>`;
             });
             if(typeof lucide !== 'undefined') lucide.createIcons({root: list});
         };
@@ -1370,30 +1354,15 @@
                 const iCol = isN ? 'text-gray-400' : 'text-red-500';
                 const sId = c.replace(/[^a-zA-Z0-9]/g, '');
                 
-                let html = cmap[c].map(s => `
-                    <div onclick="window.selectStudentForAssignment(${s.id})" class="flex items-center justify-between bg-white p-3 rounded-xl border border-gray-200 cursor-pointer hover:border-blue-400 transition-all group mb-3 last:mb-0">
-                        <div class="flex items-center gap-3">
-                            <div class="bg-blue-50 p-2.5 rounded-lg text-blue-600 group-hover:bg-blue-100"><i data-lucide="user" class="w-5 h-5"></i></div>
-                            <div><p class="font-bold text-gray-800 text-sm group-hover:text-blue-700">${s.name}</p><p class="text-xs text-gray-500 mt-0.5">CC: ${s.cedula||'N/A'} | Usuario: ${s.username}</p></div>
-                        </div>
-                        <div class="flex gap-2">
-                            ${isAdmin ? `<button type="button" onclick="event.stopPropagation(); window.editStudent(${s.id})" class="text-blue-500 bg-blue-50 p-2 rounded-lg hover:bg-blue-100" title="Editar"><i data-lucide="pencil" class="w-4 h-4"></i></button>
-                            <button type="button" onclick="event.stopPropagation(); window.deleteStudent(${s.id})" class="text-red-500 bg-red-50 p-2 rounded-lg hover:bg-red-100" title="Eliminar"><i data-lucide="trash-2" class="w-4 h-4"></i></button>` : ''}
-                            <div class="text-blue-600 bg-blue-100 p-2 rounded-lg" title="Seleccionar"><i data-lucide="mouse-pointer-click" class="w-4 h-4"></i></div>
-                        </div>
-                    </div>`).join('');
+                let html = cmap[c].map(s => {
+                    let btns = isAdmin ? "<button type='button' onclick='event.stopPropagation(); window.editStudent(" + s.id + ")' class='text-blue-500 bg-blue-50 p-2 rounded-lg hover:bg-blue-100' title='Editar'><i data-lucide='pencil' class='w-4 h-4'></i></button><button type='button' onclick='event.stopPropagation(); window.deleteStudent(" + s.id + ")' class='text-red-500 bg-red-50 p-2 rounded-lg hover:bg-red-100' title='Eliminar'><i data-lucide='trash-2' class='w-4 h-4'></i></button>" : "";
+                    return "<div onclick='window.selectStudentForAssignment(" + s.id + ")' class='flex items-center justify-between bg-white p-3 rounded-xl border border-gray-200 cursor-pointer hover:border-blue-400 transition-all group mb-3 last:mb-0'><div class='flex items-center gap-3'><div class='bg-blue-50 p-2.5 rounded-lg text-blue-600 group-hover:bg-blue-100'><i data-lucide='user' class='w-5 h-5'></i></div><div><p class='font-bold text-gray-800 text-sm group-hover:text-blue-700'>" + s.name + "</p><p class='text-xs text-gray-500 mt-0.5'>CC: " + (s.cedula||'N/A') + " | Usuario: " + s.username + "</p></div></div><div class='flex gap-2'>" + btns + "<div class='text-blue-600 bg-blue-100 p-2 rounded-lg' title='Seleccionar'><i data-lucide='mouse-pointer-click' class='w-4 h-4'></i></div></div></div>";
+                }).join('');
 
                 const expand = isS || window.expandedCourses.has(c);
                 const hCls = expand ? '' : 'hidden'; const rot = expand ? 'rotate(180deg)' : 'rotate(0deg)';
 
-                cont.innerHTML += `
-                    <div class="bg-gray-50 rounded-2xl border border-gray-200 overflow-hidden flex flex-col">
-                        <div onclick="window.toggleCourseAccordion('${c}')" class="p-4 cursor-pointer flex justify-between">
-                            <h4 class="font-bold ${hCol}"><i data-lucide="bookmark" class="inline w-4 h-4 ${iCol}"></i> ${c} <span class="text-xs text-gray-500">(${cmap[c].length})</span></h4>
-                            <i data-lucide="chevron-down" id="course-icon-${sId}" style="transform: ${rot}"></i>
-                        </div>
-                        <div id="course-list-${sId}" class="${hCls} p-4 border-t border-gray-200 bg-gray-50/50">${html}</div>
-                    </div>`;
+                cont.innerHTML += "<div class='bg-gray-50 rounded-2xl border border-gray-200 overflow-hidden flex flex-col'><div onclick=\"window.toggleCourseAccordion('" + c + "')\" class='p-4 cursor-pointer flex justify-between'><h4 class='font-bold " + hCol + "'><i data-lucide='bookmark' class='inline w-4 h-4 " + iCol + "'></i> " + c + " <span class='text-xs text-gray-500'>(" + cmap[c].length + ")</span></h4><i data-lucide='chevron-down' id='course-icon-" + sId + "' style='transform: " + rot + "'></i></div><div id='course-list-" + sId + "' class='" + hCls + " p-4 border-t border-gray-200 bg-gray-50/50'>" + html + "</div></div>";
             }
             if(typeof lucide !== 'undefined') lucide.createIcons({root: cont});
         };
@@ -1863,22 +1832,16 @@
             if(sortedRecent.length === 0) {
                 listContainer.innerHTML = "<p class='text-sm text-gray-500 italic'>No hay usuarios registrados recientemente.</p>";
             } else {
-                listContainer.innerHTML = sortedRecent.map(u => `
-                    <div class="flex items-center justify-between bg-gray-50 p-3 rounded-xl border border-gray-100">
-                        <div class="flex items-center gap-3">
-                            <div class="${u.role === 'tutor' ? 'bg-purple-100 text-purple-600' : 'bg-blue-100 text-blue-600'} p-2 rounded-lg">
-                                <i data-lucide="${u.role === 'tutor' ? 'user-round' : 'graduation-cap'}" class="w-4 h-4"></i>
-                            </div>
-                            <div>
-                                <p class="font-bold text-sm text-gray-800">${u.name}</p>
-                                <p class="text-xs text-gray-500">Rol: <span class="font-semibold">${u.role === 'tutor' ? 'Tutor Docente' : 'Estudiante'}</span> | Usuario: ${u.username}</p>
-                            </div>
-                        </div>
-                        <div class="text-xs font-bold text-gray-400 bg-white px-2 py-1 rounded shadow-sm border border-gray-200">
-                            ${new Date(u.id).toLocaleDateString()}
-                        </div>
-                    </div>
-                `).join('');
+                let html = "";
+                sortedRecent.forEach(u => {
+                    const colorBg = u.role === 'tutor' ? 'bg-purple-100 text-purple-600' : 'bg-blue-100 text-blue-600';
+                    const iconName = u.role === 'tutor' ? 'user-round' : 'graduation-cap';
+                    const roleName = u.role === 'tutor' ? 'Tutor Docente' : 'Estudiante';
+                    const dateStr = new Date(u.id).toLocaleDateString();
+                    
+                    html += "<div class='flex items-center justify-between bg-gray-50 p-3 rounded-xl border border-gray-100'><div class='flex items-center gap-3'><div class='" + colorBg + " p-2 rounded-lg'><i data-lucide='" + iconName + "' class='w-4 h-4'></i></div><div><p class='font-bold text-sm text-gray-800'>" + u.name + "</p><p class='text-xs text-gray-500'>Rol: <span class='font-semibold'>" + roleName + "</span> | Usuario: " + u.username + "</p></div></div><div class='text-xs font-bold text-gray-400 bg-white px-2 py-1 rounded shadow-sm border border-gray-200'>" + dateStr + "</div></div>";
+                });
+                listContainer.innerHTML = html;
             }
             if(typeof lucide !== 'undefined') lucide.createIcons({root: listContainer});
         };
