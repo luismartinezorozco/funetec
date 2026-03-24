@@ -6,11 +6,9 @@
     <title>FUNETEC - Fundación Educativa Técnica de la Costa</title>
     <!-- Favicon SVG -->
     <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 64 64'%3E%3Crect x='10' y='10' width='12' height='44' fill='%23AF172B'/%3E%3Crect x='26' y='24' width='12' height='30' fill='%23FF2A2D'/%3E%3Crect x='42' y='10' width='12' height='44' fill='%23E2686F'/%3E%3C/svg%3E" type="image/svg+xml">
-    <!-- Tailwind CSS -->
+    <!-- Tailwind CSS & Lucide Icons -->
     <script src="https://cdn.tailwindcss.com"></script>
-    <!-- Lucide Icons -->
     <script src="https://unpkg.com/lucide@latest"></script>
-    <!-- Google Fonts -->
     <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700;800;900&family=Playfair+Display:ital,wght@1,600;1,700&display=swap" rel="stylesheet">
     <style>
         body { font-family: 'Poppins', sans-serif; }
@@ -54,6 +52,7 @@
 </head>
 <body class="bg-gray-50 text-gray-800 antialiased relative min-h-screen flex flex-col">
 
+    <!-- NAVEGACIÓN PRINCIPAL -->
     <nav id="main-nav" class="bg-white/80 backdrop-blur-md border-b border-gray-100 fixed w-full z-[80] top-0 transition-all duration-300">
         <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
             <div class="flex justify-between h-20 md:h-24">
@@ -113,16 +112,17 @@
         </div>
     </nav>
 
-    <!-- VISTA PÚBLICA (LANDING) -->
+    <!-- VISTA PÚBLICA (LANDING PAGE) -->
     <div id="landing-view" class="flex-grow">
+        <!-- Inicio (Hero) -->
         <section id="inicio" class="pt-32 pb-20 md:pt-44 md:pb-28 bg-gradient-to-b from-red-50/50 via-white to-gray-50 relative overflow-hidden">
             <div class="absolute top-0 right-0 -mr-32 -mt-32 w-96 h-96 rounded-full bg-red-200 opacity-30 blur-3xl z-0 mix-blend-multiply"></div>
             <div class="absolute bottom-0 left-0 -ml-32 -mb-32 w-80 h-80 rounded-full bg-orange-100 opacity-30 blur-3xl z-0 mix-blend-multiply"></div>
             <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10 flex flex-col lg:flex-row items-center gap-12 lg:gap-8">
                 <div class="lg:w-1/2 text-center lg:text-left">
                     <div class="inline-flex items-center gap-2 py-1.5 px-4 rounded-full bg-white text-funetec-main font-bold text-sm mb-6 tracking-widest uppercase border border-red-100 shadow-sm"><span class="w-2 h-2 rounded-full bg-funetec-main animate-pulse"></span> Calendario A - 2026</div>
-                    <h1 class="text-4xl md:text-6xl lg:text-7xl font-black text-gray-900 leading-[1.1] mb-6 tracking-tight text-balance">El tiempo corre <br><span class="text-transparent bg-clip-text bg-gradient-to-r from-red-700 to-red-500">¿Aún estás pensando qué estudiar?</span></h1>
-                    <p class="text-lg md:text-xl text-gray-600 mb-10 max-w-lg mx-auto lg:mx-0 font-medium text-balance">Las matrículas están abiertas. Prepárate para tu futuro con nuestros programas de alta demanda laboral. ¡Te estamos esperando!</p>
+                    <h1 id="landing-hero-title" class="text-4xl md:text-6xl lg:text-7xl font-black text-gray-900 leading-[1.1] mb-6 tracking-tight text-balance">Cargando...</h1>
+                    <p id="landing-hero-subtitle" class="text-lg md:text-xl text-gray-600 mb-10 max-w-lg mx-auto lg:mx-0 font-medium text-balance"></p>
                     <div class="flex flex-col sm:flex-row gap-4 justify-center lg:justify-start">
                         <a href="#programas" class="bg-gradient-to-r from-red-700 to-red-600 text-white px-8 py-4 rounded-full font-bold text-lg hover:shadow-lg hover:-translate-y-1 transition-all flex justify-center items-center gap-2">Ver Programas <i data-lucide="arrow-down" class="w-5 h-5"></i></a>
                         <a href="#cursos" class="bg-white text-gray-800 border border-gray-200 px-8 py-4 rounded-full font-bold text-lg hover:bg-gray-50 hover:-translate-y-1 transition-all shadow-sm text-center">Cursos Cortos</a>
@@ -141,16 +141,13 @@
             </div>
         </section>
 
-        <!-- Programas Técnicos -->
+        <!-- Programas Técnicos (CMS Inyectado) -->
         <section id="programas" class="py-24 bg-gray-50 relative">
             <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
                 <div class="text-center mb-20"><h2 class="text-funetec-main font-bold tracking-widest uppercase text-sm mb-3">Tu futuro empieza aquí</h2><h3 class="text-4xl md:text-5xl font-black tracking-tight text-gray-900 uppercase">Programas Técnicos</h3><div class="w-24 h-1.5 bg-gradient-to-r from-red-600 to-red-400 mx-auto mt-6 rounded-full"></div></div>
 
-                <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8 mb-16">
-                    <div class="bg-white rounded-3xl shadow-premium hover:shadow-premium-hover hover:-translate-y-2 transition-all relative overflow-hidden group flex flex-col border border-gray-100/50"><div class="h-64 relative overflow-hidden bg-gray-200"><img src="https://images.unsplash.com/photo-1587854692152-cbe660dbde88?ixlib=rb-4.0.3&auto=format&fit=crop&w=600&q=80" alt="Farmacia" class="w-full h-full object-cover group-hover:scale-110 transition-transform duration-700"><div class="absolute inset-0 bg-gradient-to-t from-gray-900/80 via-gray-900/20 to-transparent"></div></div><div class="p-8 flex-grow flex flex-col relative bg-white"><div class="absolute -top-10 right-8 w-20 h-20 rounded-2xl bg-white shadow-lg flex items-center justify-center text-funetec-main border border-gray-50 z-10"><i data-lucide="pill" class="w-10 h-10"></i></div><h3 class="text-2xl font-black text-gray-900 leading-tight uppercase mb-6 pr-20">Auxiliar en<br><span class="text-transparent bg-clip-text bg-gradient-to-r from-red-700 to-red-500">Servicios Farmacéuticos</span></h3><div class="bg-gray-50/80 rounded-2xl p-5 mb-2 border border-gray-100 flex-grow"><h4 class="text-sm font-bold text-gray-800 uppercase tracking-wider mb-4 flex items-center gap-2"><i data-lucide="calendar-clock" class="w-5 h-5 text-red-500"></i> Horario de clases</h4><ul class="space-y-3"><li class="flex items-center justify-between text-sm bg-white p-3 rounded-xl shadow-sm border border-gray-50"><span class="font-semibold text-gray-600">Lunes y Miércoles</span><span class="text-gray-900 font-bold">1:00pm - 6:00pm</span></li><li class="flex items-center justify-between text-sm bg-white p-3 rounded-xl shadow-sm border border-gray-50"><span class="font-semibold text-gray-600">Sábados</span><span class="text-gray-900 font-bold">1:00pm - 6:00pm</span></li></ul></div><a href="https://wa.me/573046781679" target="_blank" class="mt-6 w-full flex justify-center items-center gap-2 bg-gradient-to-r from-red-600 to-red-500 text-white py-3.5 rounded-xl font-bold hover:shadow-lg transition-all">ESTUDIAR AHORA <i data-lucide="arrow-right" class="w-5 h-5"></i></a></div></div>
-                    <div class="bg-white rounded-3xl shadow-premium hover:shadow-premium-hover hover:-translate-y-2 transition-all relative overflow-hidden group flex flex-col border border-gray-100/50"><div class="h-64 relative overflow-hidden bg-gray-200"><img src="https://images.unsplash.com/photo-1519494026892-80bbd2d6fd0d?ixlib=rb-4.0.3&auto=format&fit=crop&w=600&q=80" alt="Admin" class="w-full h-full object-cover group-hover:scale-110 transition-transform duration-700"><div class="absolute inset-0 bg-gradient-to-t from-gray-900/80 via-gray-900/20 to-transparent"></div></div><div class="p-8 flex-grow flex flex-col relative bg-white"><div class="absolute -top-10 right-8 w-20 h-20 rounded-2xl bg-white shadow-lg flex items-center justify-center text-funetec-main border border-gray-50 z-10"><i data-lucide="clipboard-plus" class="w-10 h-10"></i></div><h3 class="text-2xl font-black text-gray-900 leading-tight uppercase mb-6 pr-20">Auxiliar Administrativo<br><span class="text-transparent bg-clip-text bg-gradient-to-r from-red-700 to-red-500">En Salud</span></h3><div class="bg-gray-50/80 rounded-2xl p-5 mb-2 border border-gray-100 flex-grow"><h4 class="text-sm font-bold text-gray-800 uppercase tracking-wider mb-4 flex items-center gap-2"><i data-lucide="calendar-clock" class="w-5 h-5 text-red-500"></i> Horario de clases</h4><ul class="space-y-3"><li class="flex items-center justify-between text-sm bg-white p-3 rounded-xl shadow-sm border border-gray-50"><span class="font-semibold text-gray-600">Martes y Jueves</span><span class="text-gray-900 font-bold">7:00am - 12:00pm</span></li><li class="flex items-center justify-between text-sm bg-white p-3 rounded-xl shadow-sm border border-gray-50"><span class="font-semibold text-gray-600">Sábados</span><span class="text-gray-900 font-bold">7:00am - 12:00pm</span></li><li class="flex items-center justify-between text-sm bg-white p-3 rounded-xl shadow-sm border border-gray-50"><span class="font-semibold text-gray-600">Sábados</span><span class="text-gray-900 font-bold">1:00pm - 6:00pm</span></li></ul></div><a href="https://wa.me/573046781679" target="_blank" class="mt-6 w-full flex justify-center items-center gap-2 bg-gradient-to-r from-red-600 to-red-500 text-white py-3.5 rounded-xl font-bold hover:shadow-lg transition-all">ESTUDIAR AHORA <i data-lucide="arrow-right" class="w-5 h-5"></i></a></div></div>
-                    <div class="bg-white rounded-3xl shadow-premium hover:shadow-premium-hover hover:-translate-y-2 transition-all relative overflow-hidden group flex flex-col border border-gray-100/50"><div class="h-64 relative overflow-hidden bg-gray-200"><img src="https://images.unsplash.com/photo-1537368910025-700350fe46c7?ixlib=rb-4.0.3&auto=format&fit=crop&w=600&q=80" alt="Enfermería" class="w-full h-full object-cover group-hover:scale-110 transition-transform duration-700"><div class="absolute inset-0 bg-gradient-to-t from-gray-900/80 via-gray-900/20 to-transparent"></div></div><div class="p-8 flex-grow flex flex-col relative bg-white"><div class="absolute -top-10 right-8 w-20 h-20 rounded-2xl bg-white shadow-lg flex items-center justify-center text-funetec-main border border-gray-50 z-10"><i data-lucide="stethoscope" class="w-10 h-10"></i></div><h3 class="text-2xl font-black text-gray-900 leading-tight uppercase mb-6 pr-20">Auxiliar en<br><span class="text-transparent bg-clip-text bg-gradient-to-r from-red-700 to-red-500">Enfermería</span></h3><div class="bg-gray-50/80 rounded-2xl p-5 mb-2 border border-gray-100 flex-grow"><h4 class="text-sm font-bold text-gray-800 uppercase tracking-wider mb-4 flex items-center gap-2"><i data-lucide="calendar-clock" class="w-5 h-5 text-red-500"></i> Horario de clases</h4><ul class="space-y-3"><li class="flex items-center justify-between text-sm bg-white p-3 rounded-xl shadow-sm border border-gray-50"><span class="font-semibold text-gray-600">Lunes y Miércoles</span><span class="text-gray-900 font-bold">7:00am - 12:00pm</span></li><li class="flex items-center justify-between text-sm bg-white p-3 rounded-xl shadow-sm border border-gray-50"><span class="font-semibold text-gray-600">Sábados</span><span class="text-gray-900 font-bold">7:00am - 1:00pm</span></li></ul></div><a href="https://wa.me/573046781679" target="_blank" class="mt-6 w-full flex justify-center items-center gap-2 bg-gradient-to-r from-red-600 to-red-500 text-white py-3.5 rounded-xl font-bold hover:shadow-lg transition-all">ESTUDIAR AHORA <i data-lucide="arrow-right" class="w-5 h-5"></i></a></div></div>
-                </div>
+                <!-- Contenedor dinámico CMS -->
+                <div id="render-landing-programas" class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8 mb-16"></div>
 
                 <div class="bg-white rounded-3xl shadow-premium p-8 md:p-12 border border-gray-100 mt-12">
                     <div class="text-center mb-10">
@@ -169,18 +166,13 @@
             </div>
         </section>
 
-        <!-- Cursos Cortos -->
+        <!-- Cursos Cortos (CMS Inyectado) -->
         <section id="cursos" class="py-24 bg-white relative">
             <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
                 <div class="text-center mb-16"><div class="inline-flex items-center gap-2 bg-red-50 border border-red-100 text-red-600 px-5 py-2 rounded-full font-bold text-sm uppercase tracking-widest mb-5 shadow-sm"><span class="relative flex h-3 w-3"><span class="animate-ping absolute inline-flex h-full w-full rounded-full bg-red-400 opacity-75"></span><span class="relative inline-flex rounded-full h-3 w-3 bg-red-600"></span></span>¡Inician esta semana!</div><h3 class="text-4xl md:text-5xl font-black text-gray-900 uppercase">Cursos Cortos</h3><div class="w-24 h-1.5 bg-gradient-to-r from-red-600 to-red-400 mx-auto mt-6 rounded-full"></div></div>
 
-                <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-10">
-                    <div class="bg-white rounded-3xl shadow-premium hover:shadow-premium-hover border border-gray-100/50 hover:-translate-y-2 transition-all relative overflow-hidden group flex flex-col"><div class="h-60 relative overflow-hidden bg-gray-200"><img src="https://images.unsplash.com/photo-1516549655169-df83a0774514?ixlib=rb-4.0.3&auto=format&fit=crop&w=600&q=80" alt="RCP" class="w-full h-full object-cover group-hover:scale-110 transition duration-700"><div class="absolute inset-0 bg-gradient-to-t from-gray-900/60 to-transparent"></div><div class="absolute top-5 right-5 bg-white/95 backdrop-blur px-5 py-2 rounded-full text-gray-900 font-black shadow-lg text-lg">$120.000</div></div><div class="p-8 flex-grow flex flex-col"><h3 class="text-2xl font-black text-gray-900 uppercase mb-3">Curso 5 en 1</h3><div class="text-xs bg-red-50 text-red-700 px-3 py-1.5 rounded-lg inline-block mb-5 font-bold w-max uppercase border border-red-100">Presencial Teórico-Práctico</div><ul class="space-y-3 mb-8 flex-grow font-medium text-gray-600 text-sm"><li class="flex items-start gap-3"><i data-lucide="check-circle-2" class="w-5 h-5 text-green-500"></i> BLS</li><li class="flex items-start gap-3"><i data-lucide="check-circle-2" class="w-5 h-5 text-green-500"></i> ACLS</li><li class="flex items-start gap-3"><i data-lucide="check-circle-2" class="w-5 h-5 text-green-500"></i> Violencia de Género</li><li class="flex items-start gap-3"><i data-lucide="check-circle-2" class="w-5 h-5 text-green-500"></i> Sustancias Químicas</li><li class="flex items-start gap-3"><i data-lucide="check-circle-2" class="w-5 h-5 text-green-500"></i> Gestión de Duelo</li></ul><div class="bg-gray-50 rounded-2xl p-5 border border-gray-100 mb-6"><div class="flex items-center gap-3 text-gray-900 font-bold text-lg mb-2"><i data-lucide="calendar-days" class="w-5 h-5 text-red-500"></i> 16 - MARZO - 2026</div><div class="flex items-center gap-3 text-gray-600 font-semibold"><i data-lucide="clock" class="w-5 h-5 text-red-500"></i> 8:00 AM</div></div><a href="https://wa.me/573046781679" target="_blank" class="mt-auto w-full flex justify-center items-center gap-2 bg-gradient-to-r from-red-600 to-red-500 text-white py-3.5 rounded-xl font-bold hover:shadow-lg transition-all">ESTUDIAR AHORA <i data-lucide="arrow-right" class="w-5 h-5"></i></a></div></div>
-                    
-                    <div class="bg-white rounded-3xl shadow-premium hover:shadow-premium-hover border border-gray-100/50 hover:-translate-y-2 transition-all relative overflow-hidden group flex flex-col"><div class="h-60 relative overflow-hidden bg-gray-200"><img src="https://images.unsplash.com/photo-1604654894610-df63bc536371?ixlib=rb-4.0.3&auto=format&fit=crop&w=600&q=80" alt="Uñas acrílicas" class="w-full h-full object-cover group-hover:scale-110 transition duration-700"><div class="absolute inset-0 bg-gradient-to-t from-gray-900/60 to-transparent"></div><div class="absolute top-5 right-5 bg-white/95 backdrop-blur px-5 py-2 rounded-full text-gray-900 font-black shadow-lg text-lg">$200.000</div></div><div class="p-8 flex-grow flex flex-col"><h3 class="text-2xl font-black text-gray-900 uppercase mb-3">Uñas Acrílicas</h3><div class="flex flex-wrap gap-2 mb-5"><div class="text-xs bg-red-50 text-red-700 px-3 py-1.5 rounded-lg inline-block font-bold uppercase border border-red-100">Curso Corto</div><div class="text-xs bg-gray-100 text-gray-700 px-3 py-1.5 rounded-lg inline-block font-bold uppercase">Duración: 2 Meses</div></div><p class="text-gray-600 font-medium mb-8 flex-grow text-sm leading-relaxed">Aprende las técnicas más actualizadas para la aplicación, esculpido y diseño de uñas acrílicas. Prepárate para emprender.</p><div class="bg-gray-50 rounded-2xl p-5 border border-gray-100 mb-6"><div class="flex items-center gap-3 text-gray-900 font-bold mb-2"><i data-lucide="calendar-days" class="w-5 h-5 text-red-500"></i> Inicio: 17 de Marzo</div><div class="flex items-start gap-3 text-gray-600 font-semibold text-sm"><i data-lucide="clock" class="w-5 h-5 text-red-500"></i><span>Martes y Jueves<br>8:00am - 12:00pm</span></div></div><a href="https://wa.me/573046781679" target="_blank" class="mt-auto w-full flex justify-center items-center gap-2 bg-gradient-to-r from-red-600 to-red-500 text-white py-3.5 rounded-xl font-bold hover:shadow-lg transition-all">ESTUDIAR AHORA <i data-lucide="arrow-right" class="w-5 h-5"></i></a></div></div>
-                    
-                    <div class="bg-white rounded-3xl shadow-premium hover:shadow-premium-hover border border-gray-100/50 hover:-translate-y-2 transition-all relative overflow-hidden group flex flex-col"><div class="h-60 relative overflow-hidden bg-gray-200"><img src="https://images.unsplash.com/photo-1584308666744-24d5c474f2ae?ixlib=rb-4.0.3&auto=format&fit=crop&w=600&q=80" alt="Inyectología" class="w-full h-full object-cover group-hover:scale-110 transition duration-700"><div class="absolute inset-0 bg-gradient-to-t from-gray-900/60 to-transparent"></div><div class="absolute top-5 right-5 bg-white/95 backdrop-blur px-5 py-2 rounded-full text-gray-900 font-black shadow-lg text-lg">$120.000</div></div><div class="p-8 flex-grow flex flex-col"><h3 class="text-2xl font-black text-gray-900 uppercase mb-3 leading-tight">Inyectología y Venopunción</h3><div class="text-xs bg-red-50 text-red-700 px-3 py-1.5 rounded-lg inline-block mb-5 font-bold uppercase w-max border border-red-100">Curso Corto</div><div class="bg-yellow-50 border border-yellow-200 text-yellow-800 p-4 rounded-2xl mb-8 font-bold flex items-center gap-3 text-sm flex-grow shadow-sm"><i data-lucide="package-check" class="w-6 h-6 flex-shrink-0 text-yellow-600"></i>INCLUYE MATERIAL COMPLETO</div><div class="bg-gray-50 rounded-2xl p-5 border border-gray-100 mb-6"><div class="flex items-center gap-3 text-gray-900 font-bold text-lg mb-2"><i data-lucide="calendar-days" class="w-5 h-5 text-red-500"></i> 20 - MARZO - 2026</div><div class="flex items-center gap-3 text-gray-600 font-semibold"><i data-lucide="clock" class="w-5 h-5 text-red-500"></i> 8:00 AM</div></div><a href="https://wa.me/573046781679" target="_blank" class="mt-auto w-full flex justify-center items-center gap-2 bg-gradient-to-r from-red-600 to-red-500 text-white py-3.5 rounded-xl font-bold hover:shadow-lg transition-all">ESTUDIAR AHORA <i data-lucide="arrow-right" class="w-5 h-5"></i></a></div></div>
-                </div>
+                <!-- Contenedor dinámico CMS -->
+                <div id="render-landing-cursos" class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-10"></div>
                 
                 <div class="text-center mt-16">
                     <a href="https://wa.me/573046781679" target="_blank" class="inline-flex items-center gap-2 bg-gray-900 text-white px-10 py-4 rounded-full font-bold text-lg hover:bg-gray-800 hover:-translate-y-1 transition-all uppercase tracking-wider">Consultar Otros Cursos <i data-lucide="message-circle" class="w-5 h-5"></i></a>
@@ -212,7 +204,7 @@
             </div>
         </section>
 
-        <!-- Footer -->
+        <!-- Footer Público -->
         <footer id="contacto" class="bg-gray-900 text-white pt-20 pb-10">
             <div class="h-1.5 w-full bg-gradient-to-r from-red-800 via-red-500 to-red-300 absolute top-0 left-0"></div>
             <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
@@ -261,26 +253,27 @@
         </footer>
     </div>
 
+    <!-- Botón Whatsapp -->
     <a href="https://wa.me/573046781679" target="_blank" id="whatsapp-float" class="fixed bottom-8 right-8 bg-[#25D366] text-white p-4 rounded-full shadow-[0_10px_30px_rgba(37,211,102,0.4)] hover:bg-[#20bd5a] hover:scale-110 transition-all duration-300 z-50 flex items-center justify-center group animate-whatsapp-pulse hover:animate-none">
         <i data-lucide="message-circle" class="w-8 h-8 text-white"></i>
         <span class="absolute right-[115%] bg-white text-gray-800 text-sm font-bold px-4 py-2 rounded-xl shadow-lg opacity-0 group-hover:opacity-100 transition-opacity duration-300 whitespace-nowrap pointer-events-none origin-right scale-95 group-hover:scale-100">¡Escríbenos!</span>
     </a>
 
-    <!-- PORTAL -->
+    <!-- PORTAL (VISTA PRIVADA) -->
     <main id="portal-view" class="hidden flex-grow bg-gray-50 pt-28 pb-12 px-4 sm:px-6 lg:px-8 min-h-screen">
         <div class="max-w-7xl mx-auto">
             
-            <!-- DEVELOPER DASHBOARD -->
+            <!-- 1. DEVELOPER DASHBOARD -->
             <div id="developer-dashboard" class="hidden">
                 <div class="mb-8 flex flex-col md:flex-row md:items-end justify-between gap-4">
                     <div class="flex items-center gap-5">
                         <div class="w-16 h-16 bg-gray-900 text-white rounded-full flex items-center justify-center flex-shrink-0 shadow-inner"><i data-lucide="terminal" class="w-8 h-8"></i></div>
-                        <div><h2 class="text-3xl font-black text-gray-900 uppercase">Panel de Desarrollador</h2><p class="text-gray-600 mt-1 font-medium">Control del sistema, copias de seguridad y métricas.</p></div>
+                        <div><h2 class="text-3xl font-black text-gray-900 uppercase">Panel de Desarrollador</h2><p class="text-gray-600 mt-1 font-medium">Control del sistema, copias de seguridad, métricas y CMS.</p></div>
                     </div>
                 </div>
 
                 <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8 mb-8">
-                    <!-- Stats Cards -->
+                    <!-- Métricas -->
                     <div class="bg-white p-6 rounded-3xl shadow-premium border border-gray-100 flex items-center gap-4 relative overflow-hidden group">
                         <div class="absolute inset-0 bg-green-500 opacity-0 group-hover:opacity-5 transition-opacity"></div>
                         <div class="bg-green-50 p-4 rounded-2xl text-green-600 relative z-10"><i data-lucide="globe" class="w-8 h-8"></i></div>
@@ -301,12 +294,60 @@
                     </div>
                 </div>
 
+                <!-- CMS Gestor de Contenido -->
+                <div class="bg-white p-6 md:p-8 rounded-3xl shadow-premium border border-gray-100 mb-8">
+                    <div class="flex items-center gap-3 mb-6 pb-4 border-b border-gray-100">
+                        <div class="bg-indigo-50 p-3 rounded-xl text-indigo-600"><i data-lucide="layout-template" class="w-6 h-6"></i></div>
+                        <h3 class="text-xl font-bold text-gray-900">Gestor de Contenido (CMS) - Página de Inicio</h3>
+                    </div>
+                    <div class="grid grid-cols-1 lg:grid-cols-3 gap-8">
+                        <div class="lg:col-span-1 bg-gray-50 p-5 rounded-2xl border border-gray-200 h-max">
+                            <h4 class="font-bold text-gray-800 mb-4 flex items-center gap-2"><i data-lucide="type" class="w-4 h-4 text-indigo-500"></i> Textos Principales</h4>
+                            <div class="space-y-4">
+                                <div><label class="block text-xs font-bold text-gray-500 mb-1 uppercase">Título Principal (HTML permitido)</label><textarea id="cms-hero-title" rows="3" class="w-full px-3 py-2 rounded-xl bg-white border border-gray-300 outline-none text-sm"></textarea></div>
+                                <div><label class="block text-xs font-bold text-gray-500 mb-1 uppercase">Subtítulo</label><textarea id="cms-hero-subtitle" rows="4" class="w-full px-3 py-2 rounded-xl bg-white border border-gray-300 outline-none text-sm"></textarea></div>
+                                <button onclick="window.saveCMSLanding()" class="w-full bg-indigo-600 text-white font-bold py-2.5 rounded-xl hover:bg-indigo-700 transition-colors text-sm shadow-md">Guardar Textos Generales</button>
+                            </div>
+                        </div>
+
+                        <div class="lg:col-span-2 space-y-6">
+                            <div class="border border-gray-200 rounded-2xl p-5">
+                                <h4 class="font-bold text-gray-800 mb-4 flex items-center justify-between"><span class="flex items-center gap-2"><i data-lucide="briefcase" class="w-4 h-4 text-red-500"></i> Programas Técnicos</span></h4>
+                                <div id="cms-programas-list" class="space-y-3 mb-4 max-h-[200px] overflow-y-auto pr-2 custom-scrollbar"></div>
+                                <form onsubmit="window.addCMSProgram(event)" class="bg-gray-50 p-4 rounded-xl border border-gray-200 grid grid-cols-1 sm:grid-cols-2 gap-3 items-end">
+                                    <div class="sm:col-span-2"><label class="block text-xs font-bold text-gray-500 mb-1">Título del Programa</label><input type="text" id="cms-prog-title" required class="w-full px-3 py-2 rounded-lg bg-white border border-gray-300 outline-none text-sm" placeholder="Ej: Auxiliar en Enfermería"></div>
+                                    <div><label class="block text-xs font-bold text-gray-500 mb-1">URL Imagen</label><input type="text" id="cms-prog-img" required class="w-full px-3 py-2 rounded-lg bg-white border border-gray-300 outline-none text-sm" placeholder="https://..."></div>
+                                    <div><label class="block text-xs font-bold text-gray-500 mb-1">Ícono (Lucide)</label><input type="text" id="cms-prog-icon" required class="w-full px-3 py-2 rounded-lg bg-white border border-gray-300 outline-none text-sm" placeholder="Ej: pill, stethoscope..."></div>
+                                    <div class="sm:col-span-2"><label class="block text-xs font-bold text-gray-500 mb-1">HTML Horarios (etiquetas &lt;li&gt;)</label><textarea id="cms-prog-html" required rows="2" class="w-full px-3 py-2 rounded-lg bg-white border border-gray-300 outline-none text-sm font-mono"></textarea></div>
+                                    <button type="submit" class="sm:col-span-2 bg-gray-900 text-white font-bold py-2 rounded-lg hover:bg-gray-800 transition-colors text-sm">Añadir Programa</button>
+                                </form>
+                            </div>
+
+                            <div class="border border-gray-200 rounded-2xl p-5">
+                                <h4 class="font-bold text-gray-800 mb-4 flex items-center justify-between"><span class="flex items-center gap-2"><i data-lucide="book-open" class="w-4 h-4 text-blue-500"></i> Cursos Cortos</span></h4>
+                                <div id="cms-cursos-list" class="space-y-3 mb-4 max-h-[200px] overflow-y-auto pr-2 custom-scrollbar"></div>
+                                <form onsubmit="window.addCMSCourse(event)" class="bg-gray-50 p-4 rounded-xl border border-gray-200 grid grid-cols-1 sm:grid-cols-2 gap-3 items-end">
+                                    <div><label class="block text-xs font-bold text-gray-500 mb-1">Título del Curso</label><input type="text" id="cms-cur-title" required class="w-full px-3 py-2 rounded-lg bg-white border border-gray-300 outline-none text-sm"></div>
+                                    <div><label class="block text-xs font-bold text-gray-500 mb-1">Precio</label><input type="text" id="cms-cur-price" required class="w-full px-3 py-2 rounded-lg bg-white border border-gray-300 outline-none text-sm" placeholder="$120.000"></div>
+                                    <div><label class="block text-xs font-bold text-gray-500 mb-1">Etiqueta Principal</label><input type="text" id="cms-cur-badge1" required class="w-full px-3 py-2 rounded-lg bg-white border border-gray-300 outline-none text-sm" placeholder="Curso Corto"></div>
+                                    <div><label class="block text-xs font-bold text-gray-500 mb-1">Etiqueta Extra (Opcional)</label><input type="text" id="cms-cur-badge2" class="w-full px-3 py-2 rounded-lg bg-white border border-gray-300 outline-none text-sm" placeholder="Duración..."></div>
+                                    <div><label class="block text-xs font-bold text-gray-500 mb-1">Fecha</label><input type="text" id="cms-cur-date" required class="w-full px-3 py-2 rounded-lg bg-white border border-gray-300 outline-none text-sm" placeholder="Ej: 20 Marzo"></div>
+                                    <div><label class="block text-xs font-bold text-gray-500 mb-1">Horario</label><input type="text" id="cms-cur-time" required class="w-full px-3 py-2 rounded-lg bg-white border border-gray-300 outline-none text-sm" placeholder="Ej: 8:00 AM"></div>
+                                    <div class="sm:col-span-2"><label class="block text-xs font-bold text-gray-500 mb-1">URL Imagen</label><input type="text" id="cms-cur-img" required class="w-full px-3 py-2 rounded-lg bg-white border border-gray-300 outline-none text-sm"></div>
+                                    <div class="sm:col-span-2"><label class="block text-xs font-bold text-gray-500 mb-1">HTML Detalles / Lista</label><textarea id="cms-cur-html" required rows="2" class="w-full px-3 py-2 rounded-lg bg-white border border-gray-300 outline-none text-sm font-mono"></textarea></div>
+                                    <button type="submit" class="sm:col-span-2 bg-gray-900 text-white font-bold py-2 rounded-lg hover:bg-gray-800 transition-colors text-sm">Añadir Curso</button>
+                                </form>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
                 <div class="grid grid-cols-1 lg:grid-cols-2 gap-8 mb-8">
-                    <!-- Configuración Dev -->
+                    <!-- Configuración Perfil Dev -->
                     <div class="bg-gray-900 text-white p-6 md:p-8 rounded-3xl shadow-premium relative overflow-hidden">
                         <div class="absolute top-0 right-0 w-40 h-40 bg-gray-800 rounded-bl-full opacity-50 z-0"></div>
                         <div class="relative z-10">
-                            <h3 class="text-xl font-bold mb-4 flex items-center gap-2 border-b border-gray-700 pb-4"><i data-lucide="user-cog" class="w-5 h-5 text-blue-400"></i> Mi Perfil (Desarrollador)</h3>
+                            <h3 class="text-xl font-bold mb-4 flex items-center gap-2 border-b border-gray-700 pb-4"><i data-lucide="user-cog" class="w-5 h-5 text-blue-400"></i> Mi Perfil</h3>
                             <form onsubmit="window.handleDevSettings(event)" class="space-y-4">
                                 <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
                                     <div><label class="block text-xs font-bold text-gray-400 mb-1">Cambiar Usuario</label><input type="text" id="dev-edit-username" required class="w-full px-4 py-2.5 rounded-xl bg-gray-800 border border-gray-700 focus:border-blue-500 outline-none text-sm text-white placeholder-gray-500"></div>
@@ -321,12 +362,10 @@
                     <div class="bg-white p-6 md:p-8 rounded-3xl shadow-premium border border-gray-100">
                         <h3 class="text-xl font-bold text-gray-900 flex items-center gap-2 border-b border-gray-100 pb-4 mb-4"><i data-lucide="database-backup" class="w-5 h-5 text-green-600"></i> Copias de Seguridad (JSON)</h3>
                         <p class="text-sm text-gray-600 mb-6">Exporta o restaura la base de datos completa de usuarios. Ten cuidado al importar, sobrescribirá los datos actuales.</p>
-                        
                         <div class="flex flex-col gap-4">
                             <button onclick="window.exportDatabaseBackup()" class="w-full bg-green-600 text-white font-bold py-3 rounded-xl hover:bg-green-700 transition-colors flex items-center justify-center gap-2 shadow-md">
                                 <i data-lucide="download" class="w-5 h-5"></i> Exportar Base de Datos
                             </button>
-                            
                             <div class="relative w-full border-2 border-dashed border-gray-300 rounded-xl p-4 text-center hover:border-blue-500 transition-colors bg-gray-50">
                                 <input type="file" id="import-db-file" accept=".json" onchange="window.importDatabaseBackup(event)" class="absolute inset-0 w-full h-full opacity-0 cursor-pointer">
                                 <div class="pointer-events-none flex flex-col items-center gap-2 text-gray-500">
@@ -347,9 +386,10 @@
                 </div>
             </div>
 
+            <!-- 2. ADMIN DASHBOARD -->
             <div id="admin-dashboard" class="hidden">
                 <div class="grid grid-cols-1 lg:grid-cols-2 gap-8 mb-8">
-                    <div id="admin-settings-card" class="hidden bg-gray-900 text-white p-6 md:p-8 rounded-3xl shadow-premium relative overflow-hidden">
+                    <div id="admin-settings-card" class="bg-gray-900 text-white p-6 md:p-8 rounded-3xl shadow-premium relative overflow-hidden hidden">
                         <div class="absolute top-0 right-0 w-40 h-40 bg-gray-800 rounded-bl-full opacity-50 z-0"></div>
                         <div class="relative z-10">
                             <h3 class="text-xl font-bold mb-4 flex items-center gap-2 border-b border-gray-700 pb-4"><i data-lucide="user-cog" class="w-5 h-5 text-red-400"></i> Mi Perfil</h3>
@@ -362,7 +402,7 @@
                             </form>
                         </div>
                     </div>
-                    <div id="admin-tutors-card" class="hidden bg-white p-6 md:p-8 rounded-3xl shadow-premium border border-gray-100">
+                    <div id="admin-tutors-card" class="bg-white p-6 md:p-8 rounded-3xl shadow-premium border border-gray-100 hidden">
                         <div class="flex items-center justify-between border-b border-gray-100 pb-4 mb-4">
                             <h3 class="text-xl font-bold text-gray-900 flex items-center gap-2"><i data-lucide="users-round" class="w-5 h-5 text-purple-600"></i> Tutores Registrados</h3>
                         </div>
@@ -493,6 +533,7 @@
                 </div>
             </div>
 
+            <!-- 3. STUDENT DASHBOARD -->
             <div id="student-dashboard" class="hidden">
                 <div class="mb-8 flex flex-col md:flex-row md:items-end justify-between gap-4">
                     <div class="flex items-center gap-5"><div class="w-16 h-16 bg-red-100 text-red-600 rounded-full flex items-center justify-center flex-shrink-0 shadow-inner"><i data-lucide="graduation-cap" class="w-8 h-8"></i></div><div><h2 class="text-3xl font-black text-gray-900 uppercase">Hola, <span id="student-greeting-name" class="text-funetec-main"></span></h2><p class="text-gray-600 mt-1 font-medium">Bienvenido a tu portal académico FUNETEC.</p></div></div>
@@ -549,7 +590,6 @@
             <button onclick="window.closeBoletin()" class="bg-white text-gray-800 px-4 py-2 rounded-lg font-bold flex items-center gap-2 shadow-lg hover:bg-gray-100 transition"><i data-lucide="x" class="w-4 h-4"></i> Cerrar</button>
         </div>
         <div id="boletin-container" class="bg-white relative shadow-2xl flex flex-col text-sm border border-gray-200">
-            <!-- Header -->
             <div class="flex items-center justify-between border-b-4 border-[#AF172B] pb-6 mb-6 px-12 pt-12">
                 <div class="flex items-center gap-4">
                     <div class="flex items-end space-x-1.5 h-12">
@@ -565,7 +605,6 @@
                     <p class="text-gray-500 font-semibold mt-1">Reporte de Rendimiento</p>
                 </div>
             </div>
-            <!-- Student Info -->
             <div class="bg-gray-50 p-6 mx-12 rounded-xl border border-gray-200 mb-8 flex flex-wrap gap-x-12 gap-y-4">
                 <div>
                     <p class="text-[10px] uppercase font-bold text-gray-400 tracking-wider">Estudiante</p>
@@ -584,7 +623,6 @@
                     <p class="text-lg font-bold text-gray-700" id="render-boletin-date"></p>
                 </div>
             </div>
-            <!-- Grades Table -->
             <div class="flex-grow px-12 pb-12">
                 <table class="w-full text-left border-collapse border border-gray-300 rounded-lg overflow-hidden">
                     <thead>
@@ -595,12 +633,8 @@
                             <th class="py-3 px-4 font-bold text-center w-32 border-b border-gray-700">Nota / Prom.</th>
                         </tr>
                     </thead>
-                    <tbody id="render-boletin-grades">
-                        <!-- Generado por JS -->
-                    </tbody>
+                    <tbody id="render-boletin-grades"></tbody>
                 </table>
-                
-                <!-- Signatures -->
                 <div class="mt-16 flex justify-between items-end border-t border-gray-200 pt-8">
                     <div class="text-center w-64">
                         <div class="border-b border-gray-800 pb-1 mb-1 h-12"></div>
@@ -679,7 +713,7 @@
         </div>
     </div>
 
-    <!-- Integración Base de Datos (Firebase Firestore) -->
+    <!-- Integración Base de Datos (Firebase Firestore) y Scripts Finales -->
     <script type="module">
         import { initializeApp } from "https://www.gstatic.com/firebasejs/11.6.1/firebase-app.js";
         import { getAuth, signInAnonymously, signInWithCustomToken, onAuthStateChanged } from "https://www.gstatic.com/firebasejs/11.6.1/firebase-auth.js";
@@ -732,7 +766,26 @@
             return isCanvas ? doc(dbFS, 'artifacts', appId, 'public', 'data', 'funetec_metrics', 'global_stats') : doc(dbFS, 'funetec_metrics', 'global_stats');
         };
 
-        window.db = { users: [], visits: 0 };
+        const getLandingDocRef = () => {
+            return isCanvas ? doc(dbFS, 'artifacts', appId, 'public', 'data', 'funetec_config', 'landing') : doc(dbFS, 'funetec_config', 'landing');
+        };
+
+        const defaultLandingConfig = {
+            heroTitle: `El tiempo corre <br><span class="text-transparent bg-clip-text bg-gradient-to-r from-red-700 to-red-500">¿Aún estás pensando qué estudiar?</span>`,
+            heroSubtitle: `Las matrículas están abiertas. Prepárate para tu futuro con nuestros programas de alta demanda laboral. ¡Te estamos esperando!`,
+            programas: [
+                { id: 1, title: `Auxiliar en<br><span class="text-transparent bg-clip-text bg-gradient-to-r from-red-700 to-red-500">Servicios Farmacéuticos</span>`, icon: "pill", image: "https://images.unsplash.com/photo-1587854692152-cbe660dbde88?ixlib=rb-4.0.3&auto=format&fit=crop&w=600&q=80", infoHtml: `<li class="flex items-center justify-between text-sm bg-white p-3 rounded-xl shadow-sm border border-gray-50"><span class="font-semibold text-gray-600">Lunes y Miércoles</span><span class="text-gray-900 font-bold">1:00pm - 6:00pm</span></li><li class="flex items-center justify-between text-sm bg-white p-3 rounded-xl shadow-sm border border-gray-50"><span class="font-semibold text-gray-600">Sábados</span><span class="text-gray-900 font-bold">1:00pm - 6:00pm</span></li>` },
+                { id: 2, title: `Auxiliar Administrativo<br><span class="text-transparent bg-clip-text bg-gradient-to-r from-red-700 to-red-500">En Salud</span>`, icon: "clipboard-plus", image: "https://images.unsplash.com/photo-1519494026892-80bbd2d6fd0d?ixlib=rb-4.0.3&auto=format&fit=crop&w=600&q=80", infoHtml: `<li class="flex items-center justify-between text-sm bg-white p-3 rounded-xl shadow-sm border border-gray-50"><span class="font-semibold text-gray-600">Martes y Jueves</span><span class="text-gray-900 font-bold">7:00am - 12:00pm</span></li><li class="flex items-center justify-between text-sm bg-white p-3 rounded-xl shadow-sm border border-gray-50"><span class="font-semibold text-gray-600">Sábados</span><span class="text-gray-900 font-bold">7:00am - 12:00pm</span></li><li class="flex items-center justify-between text-sm bg-white p-3 rounded-xl shadow-sm border border-gray-50"><span class="font-semibold text-gray-600">Sábados</span><span class="text-gray-900 font-bold">1:00pm - 6:00pm</span></li>` },
+                { id: 3, title: `Auxiliar en<br><span class="text-transparent bg-clip-text bg-gradient-to-r from-red-700 to-red-500">Enfermería</span>`, icon: "stethoscope", image: "https://images.unsplash.com/photo-1537368910025-700350fe46c7?ixlib=rb-4.0.3&auto=format&fit=crop&w=600&q=80", infoHtml: `<li class="flex items-center justify-between text-sm bg-white p-3 rounded-xl shadow-sm border border-gray-50"><span class="font-semibold text-gray-600">Lunes y Miércoles</span><span class="text-gray-900 font-bold">7:00am - 12:00pm</span></li><li class="flex items-center justify-between text-sm bg-white p-3 rounded-xl shadow-sm border border-gray-50"><span class="font-semibold text-gray-600">Sábados</span><span class="text-gray-900 font-bold">7:00am - 1:00pm</span></li>` }
+            ],
+            cursos: [
+                { id: 1, title: "Curso 5 en 1", price: "$120.000", image: "https://images.unsplash.com/photo-1516549655169-df83a0774514?ixlib=rb-4.0.3&auto=format&fit=crop&w=600&q=80", badge: "Presencial Teórico-Práctico", extraBadge: "", listHtml: `<li class="flex items-start gap-3"><i data-lucide="check-circle-2" class="w-5 h-5 text-green-500"></i> BLS</li><li class="flex items-start gap-3"><i data-lucide="check-circle-2" class="w-5 h-5 text-green-500"></i> ACLS</li><li class="flex items-start gap-3"><i data-lucide="check-circle-2" class="w-5 h-5 text-green-500"></i> Violencia de Género</li><li class="flex items-start gap-3"><i data-lucide="check-circle-2" class="w-5 h-5 text-green-500"></i> Sustancias Químicas</li><li class="flex items-start gap-3"><i data-lucide="check-circle-2" class="w-5 h-5 text-green-500"></i> Gestión de Duelo</li>`, date: "16 - MARZO - 2026", time: "8:00 AM" },
+                { id: 2, title: "Uñas Acrílicas", price: "$200.000", image: "https://images.unsplash.com/photo-1604654894610-df63bc536371?ixlib=rb-4.0.3&auto=format&fit=crop&w=600&q=80", badge: "Curso Corto", extraBadge: "Duración: 2 Meses", listHtml: `<p class="text-gray-600 font-medium mb-8 flex-grow text-sm leading-relaxed">Aprende las técnicas más actualizadas para la aplicación, esculpido y diseño de uñas acrílicas. Prepárate para emprender.</p>`, date: "Inicio: 17 de Marzo", time: `Martes y Jueves<br>8:00am - 12:00pm` },
+                { id: 3, title: "Inyectología y Venopunción", price: "$120.000", image: "https://images.unsplash.com/photo-1584308666744-24d5c474f2ae?ixlib=rb-4.0.3&auto=format&fit=crop&w=600&q=80", badge: "Curso Corto", extraBadge: "", listHtml: `<div class="bg-yellow-50 border border-yellow-200 text-yellow-800 p-4 rounded-2xl mb-8 font-bold flex items-center gap-3 text-sm flex-grow shadow-sm"><i data-lucide="package-check" class="w-6 h-6 flex-shrink-0 text-yellow-600"></i>INCLUYE MATERIAL COMPLETO</div>`, date: "20 - MARZO - 2026", time: "8:00 AM" }
+            ]
+        };
+
+        window.db = { users: [], visits: 0, landing: defaultLandingConfig };
         window.currentUser = null;
         window.expandedCourses = new Set();
         let isDbLoaded = false;
@@ -756,6 +809,7 @@
                 ];
                 isDbLoaded = true;
                 setLoginLoading(false);
+                window.renderLandingContent();
             }
         }
 
@@ -785,13 +839,6 @@
                 
             } catch (error) {
                 console.error("Autenticación fallida:", error);
-                if (error.code === 'auth/operation-not-allowed') {
-                    window.showToast("Firebase: Habilita el inicio de sesión 'Anónimo'.", "error");
-                } else if (error.code === 'auth/unauthorized-domain') {
-                    window.showToast("Firebase: Agrega este dominio a los dominios autorizados.", "error");
-                } else {
-                    window.showToast("Error de Auth: " + error.message, "error");
-                }
                 activarModoLocal();
             }
         };
@@ -803,11 +850,12 @@
             }
             
             const usersCollection = getCollectionRef();
+            const landingRef = getLandingDocRef();
             
             onSnapshot(usersCollection, (snapshot) => {
                 if (snapshot.empty && !isDbLoaded) {
-                    setDoc(getDocRef('admin_initial'), fallbackAdmin).catch(e => console.error("Error al crear admin base:", e));
-                    setDoc(getDocRef('dev_initial'), fallbackDev).catch(e => console.error("Error al crear dev base:", e));
+                    setDoc(getDocRef('admin_initial'), fallbackAdmin).catch(e => console.error(e));
+                    setDoc(getDocRef('dev_initial'), fallbackDev).catch(e => console.error(e));
                     window.db.users = [
                         {...fallbackAdmin, fsId: 'admin_initial'},
                         {...fallbackDev, fsId: 'dev_initial'}
@@ -820,11 +868,11 @@
                 }
 
                 if (!window.db.users.find(u => u.role === 'admin')) {
-                    setDoc(getDocRef('admin_initial'), fallbackAdmin).catch(e => console.error("Error al restaurar admin:", e));
+                    setDoc(getDocRef('admin_initial'), fallbackAdmin).catch(e => console.error(e));
                     window.db.users.push({...fallbackAdmin, fsId: 'admin_initial'});
                 }
                 if (!window.db.users.find(u => u.role === 'developer')) {
-                    setDoc(getDocRef('dev_initial'), fallbackDev).catch(e => console.error("Error al restaurar dev:", e));
+                    setDoc(getDocRef('dev_initial'), fallbackDev).catch(e => console.error(e));
                     window.db.users.push({...fallbackDev, fsId: 'dev_initial'});
                 }
 
@@ -842,9 +890,6 @@
                 }
             }, (error) => {
                 console.error("Firestore listener error:", error);
-                if (error.code === 'permission-denied') {
-                    window.showToast("Firebase Firestore: Permiso denegado. Tus reglas de seguridad bloquean la lectura.", "error");
-                }
                 activarModoLocal();
             });
             
@@ -855,6 +900,18 @@
                     const pubEl = document.getElementById('public-visits-count');
                     if (devEl) devEl.innerText = window.db.visits;
                     if (pubEl) pubEl.innerText = window.db.visits;
+                }
+            });
+
+            onSnapshot(landingRef, (snap) => {
+                if (snap.exists()) {
+                    window.db.landing = { ...defaultLandingConfig, ...snap.data() };
+                } else {
+                    window.db.landing = { ...defaultLandingConfig };
+                }
+                window.renderLandingContent();
+                if (window.currentUser && window.currentUser.role === 'developer') {
+                    window.renderDevCMS();
                 }
             });
         });
@@ -885,11 +942,7 @@
                 return true;
             } catch (error) {
                 console.error("Error guardando:", error);
-                if (error.code === 'permission-denied') {
-                    window.showToast("Firebase: Permiso denegado. Revisa tus reglas de seguridad.", "error");
-                } else {
-                    window.showToast("Error de Firebase: " + error.code, "error");
-                }
+                window.showToast("Error de Firebase: " + error.code, "error");
                 return false;
             }
         };
@@ -920,6 +973,7 @@
                     nav.classList.toggle('bg-white/80', window.scrollY <= 20);
                 }
             });
+            window.renderLandingContent(); 
         });
 
         window.showToast = function(msg, type = 'success') {
@@ -1065,6 +1119,7 @@
                 if(pInp) pInp.value = window.currentUser.password;
                 
                 window.renderDevDashboard();
+                window.renderDevCMS();
                 
             } else if (window.currentUser.role === 'admin' || window.currentUser.role === 'tutor') {
                 adminDash?.classList.remove('hidden');
@@ -1115,6 +1170,68 @@
             }
         };
 
+        window.renderLandingContent = function() {
+            const conf = window.db.landing;
+            if(!conf) return;
+
+            const hTitle = document.getElementById('landing-hero-title');
+            const hSub = document.getElementById('landing-hero-subtitle');
+            if(hTitle) hTitle.innerHTML = conf.heroTitle;
+            if(hSub) hSub.innerHTML = conf.heroSubtitle;
+
+            const pGrid = document.getElementById('render-landing-programas');
+            if(pGrid) {
+                let pHTML = '';
+                conf.programas.forEach(p => {
+                    pHTML += `<div class="bg-white rounded-3xl shadow-premium hover:shadow-premium-hover hover:-translate-y-2 transition-all relative overflow-hidden group flex flex-col border border-gray-100/50">
+                        <div class="h-64 relative overflow-hidden bg-gray-200">
+                            <img src="${p.image}" alt="Programa" class="w-full h-full object-cover group-hover:scale-110 transition-transform duration-700">
+                            <div class="absolute inset-0 bg-gradient-to-t from-gray-900/80 via-gray-900/20 to-transparent"></div>
+                        </div>
+                        <div class="p-8 flex-grow flex flex-col relative bg-white">
+                            <div class="absolute -top-10 right-8 w-20 h-20 rounded-2xl bg-white shadow-lg flex items-center justify-center text-funetec-main border border-gray-50 z-10"><i data-lucide="${p.icon}" class="w-10 h-10"></i></div>
+                            <h3 class="text-2xl font-black text-gray-900 leading-tight uppercase mb-6 pr-20">${p.title}</h3>
+                            <div class="bg-gray-50/80 rounded-2xl p-5 mb-2 border border-gray-100 flex-grow">
+                                <h4 class="text-sm font-bold text-gray-800 uppercase tracking-wider mb-4 flex items-center gap-2"><i data-lucide="calendar-clock" class="w-5 h-5 text-red-500"></i> Horario de clases</h4>
+                                <ul class="space-y-3">${p.infoHtml}</ul>
+                            </div>
+                            <a href="https://wa.me/573046781679" target="_blank" class="mt-6 w-full flex justify-center items-center gap-2 bg-gradient-to-r from-red-600 to-red-500 text-white py-3.5 rounded-xl font-bold hover:shadow-lg transition-all">ESTUDIAR AHORA <i data-lucide="arrow-right" class="w-5 h-5"></i></a>
+                        </div>
+                    </div>`;
+                });
+                pGrid.innerHTML = pHTML;
+            }
+
+            const cGrid = document.getElementById('render-landing-cursos');
+            if(cGrid) {
+                let cHTML = '';
+                conf.cursos.forEach(c => {
+                    cHTML += `<div class="bg-white rounded-3xl shadow-premium hover:shadow-premium-hover border border-gray-100/50 hover:-translate-y-2 transition-all relative overflow-hidden group flex flex-col">
+                        <div class="h-60 relative overflow-hidden bg-gray-200">
+                            <img src="${c.image}" alt="${c.title}" class="w-full h-full object-cover group-hover:scale-110 transition duration-700">
+                            <div class="absolute inset-0 bg-gradient-to-t from-gray-900/60 to-transparent"></div>
+                            <div class="absolute top-5 right-5 bg-white/95 backdrop-blur px-5 py-2 rounded-full text-gray-900 font-black shadow-lg text-lg">${c.price}</div>
+                        </div>
+                        <div class="p-8 flex-grow flex flex-col">
+                            <h3 class="text-2xl font-black text-gray-900 uppercase mb-3">${c.title}</h3>
+                            <div class="flex flex-wrap gap-2 mb-5">
+                                <div class="text-xs bg-red-50 text-red-700 px-3 py-1.5 rounded-lg inline-block font-bold uppercase border border-red-100">${c.badge}</div>
+                                ${c.extraBadge ? `<div class="text-xs bg-gray-100 text-gray-700 px-3 py-1.5 rounded-lg inline-block font-bold uppercase">${c.extraBadge}</div>` : ''}
+                            </div>
+                            <div class="mb-8 flex-grow text-sm text-gray-600 font-medium space-y-3 leading-relaxed">${c.listHtml}</div>
+                            <div class="bg-gray-50 rounded-2xl p-5 border border-gray-100 mb-6">
+                                <div class="flex items-center gap-3 text-gray-900 font-bold text-lg mb-2"><i data-lucide="calendar-days" class="w-5 h-5 text-red-500"></i> ${c.date}</div>
+                                <div class="flex items-start gap-3 text-gray-600 font-semibold text-sm"><i data-lucide="clock" class="w-5 h-5 text-red-500"></i><span>${c.time}</span></div>
+                            </div>
+                            <a href="https://wa.me/573046781679" target="_blank" class="mt-auto w-full flex justify-center items-center gap-2 bg-gradient-to-r from-red-600 to-red-500 text-white py-3.5 rounded-xl font-bold hover:shadow-lg transition-all">ESTUDIAR AHORA <i data-lucide="arrow-right" class="w-5 h-5"></i></a>
+                        </div>
+                    </div>`;
+                });
+                cGrid.innerHTML = cHTML;
+            }
+            if(typeof lucide !== 'undefined') lucide.createIcons();
+        };
+
         window.handleAdminSettings = async function(e) {
             e.preventDefault();
             const nu = document.getElementById('admin-edit-username').value;
@@ -1139,7 +1256,10 @@
             if(tutors.length === 0) { list.innerHTML = "<p class='text-sm text-gray-500 italic'>No hay tutores.</p>"; return; }
             
             tutors.forEach(t => {
-                list.innerHTML += `<div class="flex justify-between bg-gray-50 p-3 rounded-xl border border-gray-100"><div><p class="font-bold text-gray-800 text-sm">${t.name}</p><p class="text-xs text-gray-500">Usuario: ${t.username} | Certs: ${t.canGenerateCertificates?'Sí':'No'}</p></div><div class="flex gap-2"><button onclick="window.editTutor(${t.id})" class="text-blue-500 p-1"><i data-lucide="pencil" class="w-4 h-4"></i></button><button onclick="window.deleteTutor(${t.id})" class="text-red-500 p-1"><i data-lucide="trash-2" class="w-4 h-4"></i></button></div></div>`;
+                let item = document.createElement('div');
+                item.className = 'flex justify-between bg-gray-50 p-3 rounded-xl border border-gray-100';
+                item.innerHTML = `<div><p class="font-bold text-gray-800 text-sm">${t.name}</p><p class="text-xs text-gray-500">Usuario: ${t.username} | Certs: ${t.canGenerateCertificates?'Sí':'No'}</p></div><div class="flex gap-2"><button onclick="window.editTutor(${t.id})" class="text-blue-500 p-1"><i data-lucide="pencil" class="w-4 h-4"></i></button><button onclick="window.deleteTutor(${t.id})" class="text-red-500 p-1"><i data-lucide="trash-2" class="w-4 h-4"></i></button></div>`;
+                list.appendChild(item);
             });
             if(typeof lucide !== 'undefined') lucide.createIcons({root: list});
         };
@@ -1354,15 +1474,39 @@
                 const iCol = isN ? 'text-gray-400' : 'text-red-500';
                 const sId = c.replace(/[^a-zA-Z0-9]/g, '');
                 
-                let html = cmap[c].map(s => {
-                    let btns = isAdmin ? "<button type='button' onclick='event.stopPropagation(); window.editStudent(" + s.id + ")' class='text-blue-500 bg-blue-50 p-2 rounded-lg hover:bg-blue-100' title='Editar'><i data-lucide='pencil' class='w-4 h-4'></i></button><button type='button' onclick='event.stopPropagation(); window.deleteStudent(" + s.id + ")' class='text-red-500 bg-red-50 p-2 rounded-lg hover:bg-red-100' title='Eliminar'><i data-lucide='trash-2' class='w-4 h-4'></i></button>" : "";
-                    return "<div onclick='window.selectStudentForAssignment(" + s.id + ")' class='flex items-center justify-between bg-white p-3 rounded-xl border border-gray-200 cursor-pointer hover:border-blue-400 transition-all group mb-3 last:mb-0'><div class='flex items-center gap-3'><div class='bg-blue-50 p-2.5 rounded-lg text-blue-600 group-hover:bg-blue-100'><i data-lucide='user' class='w-5 h-5'></i></div><div><p class='font-bold text-gray-800 text-sm group-hover:text-blue-700'>" + s.name + "</p><p class='text-xs text-gray-500 mt-0.5'>CC: " + (s.cedula||'N/A') + " | Usuario: " + s.username + "</p></div></div><div class='flex gap-2'>" + btns + "<div class='text-blue-600 bg-blue-100 p-2 rounded-lg' title='Seleccionar'><i data-lucide='mouse-pointer-click' class='w-4 h-4'></i></div></div></div>";
-                }).join('');
+                let htmlBlock = document.createElement('div');
+                
+                cmap[c].forEach(s => {
+                    let sDiv = document.createElement('div');
+                    sDiv.className = 'flex items-center justify-between bg-white p-3 rounded-xl border border-gray-200 cursor-pointer hover:border-blue-400 transition-all group mb-3 last:mb-0';
+                    sDiv.onclick = function() { window.selectStudentForAssignment(s.id); };
+                    
+                    let btns = isAdmin ? `<button type="button" onclick="event.stopPropagation(); window.editStudent(${s.id})" class="text-blue-500 bg-blue-50 p-2 rounded-lg hover:bg-blue-100" title="Editar"><i data-lucide="pencil" class="w-4 h-4"></i></button><button type="button" onclick="event.stopPropagation(); window.deleteStudent(${s.id})" class="text-red-500 bg-red-50 p-2 rounded-lg hover:bg-red-100" title="Eliminar"><i data-lucide="trash-2" class="w-4 h-4"></i></button>` : "";
+                    
+                    sDiv.innerHTML = `<div class="flex items-center gap-3"><div class="bg-blue-50 p-2.5 rounded-lg text-blue-600 group-hover:bg-blue-100"><i data-lucide="user" class="w-5 h-5"></i></div><div><p class="font-bold text-gray-800 text-sm group-hover:text-blue-700">${s.name}</p><p class="text-xs text-gray-500 mt-0.5">CC: ${s.cedula||'N/A'} | Usuario: ${s.username}</p></div></div><div class="flex gap-2">${btns}<div class="text-blue-600 bg-blue-100 p-2 rounded-lg" title="Seleccionar"><i data-lucide="mouse-pointer-click" class="w-4 h-4"></i></div></div>`;
+                    
+                    htmlBlock.appendChild(sDiv);
+                });
 
                 const expand = isS || window.expandedCourses.has(c);
                 const hCls = expand ? '' : 'hidden'; const rot = expand ? 'rotate(180deg)' : 'rotate(0deg)';
 
-                cont.innerHTML += "<div class='bg-gray-50 rounded-2xl border border-gray-200 overflow-hidden flex flex-col'><div onclick=\"window.toggleCourseAccordion('" + c + "')\" class='p-4 cursor-pointer flex justify-between'><h4 class='font-bold " + hCol + "'><i data-lucide='bookmark' class='inline w-4 h-4 " + iCol + "'></i> " + c + " <span class='text-xs text-gray-500'>(" + cmap[c].length + ")</span></h4><i data-lucide='chevron-down' id='course-icon-" + sId + "' style='transform: " + rot + "'></i></div><div id='course-list-" + sId + "' class='" + hCls + " p-4 border-t border-gray-200 bg-gray-50/50'>" + html + "</div></div>";
+                let wrp = document.createElement('div');
+                wrp.className = 'bg-gray-50 rounded-2xl border border-gray-200 overflow-hidden flex flex-col mt-4';
+                
+                let head = document.createElement('div');
+                head.className = 'p-4 cursor-pointer flex justify-between';
+                head.onclick = function() { window.toggleCourseAccordion(c); };
+                head.innerHTML = `<h4 class="font-bold ${hCol}"><i data-lucide="bookmark" class="inline w-4 h-4 ${iCol}"></i> ${c} <span class="text-xs text-gray-500">(${cmap[c].length})</span></h4><i data-lucide="chevron-down" id="course-icon-${sId}" style="transform: ${rot}"></i>`;
+                
+                let body = document.createElement('div');
+                body.id = `course-list-${sId}`;
+                body.className = `${hCls} p-4 border-t border-gray-200 bg-gray-50/50`;
+                body.appendChild(htmlBlock);
+                
+                wrp.appendChild(head);
+                wrp.appendChild(body);
+                cont.appendChild(wrp);
             }
             if(typeof lucide !== 'undefined') lucide.createIcons({root: cont});
         };
@@ -1499,18 +1643,18 @@
             if(!sid || (!radC?.checked && !radD?.checked)) { if(sec) sec.classList.add('hidden'); return; }
             if(sec) sec.classList.remove('hidden');
             const stu = window.db.users.find(u => u.id == parseInt(sid)); if(!stu || !lst) return;
-            lst.innerHTML = stu.certificados.length ? stu.certificados.map(c => `
-                <div class="flex items-center justify-between bg-white border border-gray-200 p-3 rounded-xl shadow-sm">
-                    <div class="flex items-center gap-3">
-                        <i data-lucide="award" class="w-5 h-5 text-red-500"></i>
-                        <div><p class="font-bold text-sm text-gray-800 leading-tight">${c.docType||"Certificado"}: ${c.course}</p><p class="text-[10px] text-gray-500 font-medium">Lic: ${c.license} | ${c.date}</p></div>
-                    </div>
-                    <div class="flex gap-2">
-                        <button type="button" onclick="window.editCertificateModal(${stu.id}, ${c.id})" class="text-blue-500 bg-blue-50 p-1.5 rounded-lg"><i data-lucide="pencil" class="w-4 h-4"></i></button>
-                        <button type="button" onclick="window.openCertificateView(${stu.id}, ${c.id})" class="text-gray-500 bg-gray-100 p-1.5 rounded-lg"><i data-lucide="eye" class="w-4 h-4"></i></button>
-                        <button type="button" onclick="window.deleteCertificate(${stu.id}, ${c.id})" class="text-red-500 bg-red-50 p-1.5 rounded-lg"><i data-lucide="trash-2" class="w-4 h-4"></i></button>
-                    </div>
-                </div>`).join('') : "<p class='text-sm italic'>Sin documentos</p>";
+            
+            lst.innerHTML = '';
+            if(stu.certificados.length === 0) {
+                lst.innerHTML = "<p class='text-sm italic'>Sin documentos</p>";
+            } else {
+                stu.certificados.forEach(c => {
+                    let d = document.createElement('div');
+                    d.className = 'flex items-center justify-between bg-white border border-gray-200 p-3 rounded-xl shadow-sm';
+                    d.innerHTML = `<div class="flex items-center gap-3"><i data-lucide="award" class="w-5 h-5 text-red-500"></i><div><p class="font-bold text-sm text-gray-800 leading-tight">${c.docType||"Certificado"}: ${c.course}</p><p class="text-[10px] text-gray-500 font-medium">Lic: ${c.license} | ${c.date}</p></div></div><div class="flex gap-2"><button type="button" onclick="window.editCertificateModal(${stu.id}, ${c.id})" class="text-blue-500 bg-blue-50 p-1.5 rounded-lg"><i data-lucide="pencil" class="w-4 h-4"></i></button><button type="button" onclick="window.openCertificateView(${stu.id}, ${c.id})" class="text-gray-500 bg-gray-100 p-1.5 rounded-lg"><i data-lucide="eye" class="w-4 h-4"></i></button><button type="button" onclick="window.deleteCertificate(${stu.id}, ${c.id})" class="text-red-500 bg-red-50 p-1.5 rounded-lg"><i data-lucide="trash-2" class="w-4 h-4"></i></button></div>`;
+                    lst.appendChild(d);
+                });
+            }
             if(typeof lucide !== 'undefined') lucide.createIcons({root: lst});
         };
 
@@ -1521,20 +1665,18 @@
             if(!sid || !document.querySelector('input[value="grade"]').checked) { if(sec) sec.classList.add('hidden'); return; }
             if(sec) sec.classList.remove('hidden');
             const stu = window.db.users.find(u => u.id == parseInt(sid)); if(!stu || !lst) return;
-            lst.innerHTML = stu.calificaciones.length ? stu.calificaciones.map(c => `
-                <div class="flex items-center justify-between bg-white border border-gray-200 p-3 rounded-xl shadow-sm">
-                    <div class="flex items-center gap-3">
-                        <i data-lucide="star" class="w-5 h-5 text-yellow-500"></i>
-                        <div>
-                            <p class="font-bold text-sm text-gray-800 leading-tight">${c.area} <span class="text-xs font-semibold text-gray-500 ml-1">(Período ${c.period||1})</span></p>
-                            <p class="text-xs text-gray-600 mt-0.5">${c.evalType||'General'} • <span class="font-black ${c.nota>=3?'text-green-600':'text-red-600'}">Nota: ${c.nota}</span></p>
-                        </div>
-                    </div>
-                    <div class="flex gap-2">
-                        <button type="button" onclick="window.editGradeModal(${stu.id}, ${c.id})" class="text-blue-500 bg-blue-50 p-1.5 rounded-lg"><i data-lucide="pencil" class="w-4 h-4"></i></button>
-                        <button type="button" onclick="window.deleteGrade(${stu.id}, ${c.id})" class="text-red-500 bg-red-50 p-1.5 rounded-lg"><i data-lucide="trash-2" class="w-4 h-4"></i></button>
-                    </div>
-                </div>`).join('') : "<p class='text-sm italic'>Sin notas</p>";
+            
+            lst.innerHTML = '';
+            if(stu.calificaciones.length === 0) {
+                lst.innerHTML = "<p class='text-sm italic'>Sin notas</p>";
+            } else {
+                stu.calificaciones.forEach(c => {
+                    let d = document.createElement('div');
+                    d.className = 'flex items-center justify-between bg-white border border-gray-200 p-3 rounded-xl shadow-sm';
+                    d.innerHTML = `<div class="flex items-center gap-3"><i data-lucide="star" class="w-5 h-5 text-yellow-500"></i><div><p class="font-bold text-sm text-gray-800 leading-tight">${c.area} <span class="text-xs font-semibold text-gray-500 ml-1">(Período ${c.period||1})</span></p><p class="text-xs text-gray-600 mt-0.5">${c.evalType||'General'} • <span class="font-black ${c.nota>=3?'text-green-600':'text-red-600'}">Nota: ${c.nota}</span></p></div></div><div class="flex gap-2"><button type="button" onclick="window.editGradeModal(${stu.id}, ${c.id})" class="text-blue-500 bg-blue-50 p-1.5 rounded-lg"><i data-lucide="pencil" class="w-4 h-4"></i></button><button type="button" onclick="window.deleteGrade(${stu.id}, ${c.id})" class="text-red-500 bg-red-50 p-1.5 rounded-lg"><i data-lucide="trash-2" class="w-4 h-4"></i></button></div>`;
+                    lst.appendChild(d);
+                });
+            }
             if(typeof lucide !== 'undefined') lucide.createIcons({root: lst});
         };
 
@@ -1588,12 +1730,19 @@
         window.renderStudentData = function() {
             document.getElementById('student-greeting-name').innerText = window.currentUser.name.split(' ')[0];
             const cLst = document.getElementById('student-courses-list');
-            if(cLst) cLst.innerHTML = window.currentUser.cursos.length ? window.currentUser.cursos.map(c => `
-                <li class="flex items-center gap-3 p-3 bg-gray-50 rounded-xl border border-gray-100">
-                    <div class="bg-white p-2 rounded-lg text-funetec-main shadow-sm"><i data-lucide="book-check" class="w-4 h-4"></i></div>
-                    <div><span class="font-bold text-gray-800 block">${c.name}</span><span class="text-xs text-gray-500">${c.duration}</span></div>
-                    <span class="ml-auto text-xs px-2 py-1 rounded-md font-bold ${c.status==='Activo'?'bg-green-100 text-green-700':'bg-gray-200 text-gray-700'}">${c.status}</span>
-                </li>`).join('') : "<li class='text-sm italic p-3'>Sin cursos</li>";
+            if(cLst) {
+                cLst.innerHTML = '';
+                if(window.currentUser.cursos.length === 0) {
+                    cLst.innerHTML = "<li class='text-sm italic p-3'>Sin cursos</li>";
+                } else {
+                    window.currentUser.cursos.forEach(c => {
+                        let li = document.createElement('li');
+                        li.className = 'flex items-center gap-3 p-3 bg-gray-50 rounded-xl border border-gray-100';
+                        li.innerHTML = `<div class="bg-white p-2 rounded-lg text-funetec-main shadow-sm"><i data-lucide="book-check" class="w-4 h-4"></i></div><div><span class="font-bold text-gray-800 block">${c.name}</span><span class="text-xs text-gray-500">${c.duration}</span></div><span class="ml-auto text-xs px-2 py-1 rounded-md font-bold ${c.status==='Activo'?'bg-green-100 text-green-700':'bg-gray-200 text-gray-700'}">${c.status}</span>`;
+                        cLst.appendChild(li);
+                    });
+                }
+            }
 
             const gLst = document.getElementById('student-grades-list');
             if(gLst) {
@@ -1614,16 +1763,10 @@
                     let html = '';
                     for (const [sub, data] of Object.entries(subjects)) {
                         const finalAvg = (data.totalAcc / data.totalCount).toFixed(1);
-                        html += `<tr class="bg-gray-50 border-b border-gray-200">
-                            <td class="p-4 font-bold text-gray-900 border-r border-gray-100">${sub}</td>
-                            <td class="p-4 text-center font-black ${finalAvg >= 3 ? 'text-green-600' : 'text-red-600'} text-lg">${finalAvg}</td>
-                        </tr>`;
+                        html += `<tr class="bg-gray-50 border-b border-gray-200"><td class="p-4 font-bold text-gray-900 border-r border-gray-100">${sub}</td><td class="p-4 text-center font-black ${finalAvg >= 3 ? 'text-green-600' : 'text-red-600'} text-lg">${finalAvg}</td></tr>`;
                         for(const [p, pData] of Object.entries(data.periods)) {
                             const pAvg = (pData.acc / pData.count).toFixed(1);
-                            html += `<tr class="border-b border-gray-100 text-sm">
-                                <td class="p-3 pl-8 text-gray-600 border-r border-gray-100 flex items-center gap-2"><i data-lucide="corner-down-right" class="w-4 h-4 text-gray-300"></i> Período ${p} <span class="text-[10px] bg-gray-100 px-2 py-0.5 rounded text-gray-500">${pData.count} notas</span></td>
-                                <td class="p-3 text-center font-bold text-gray-700">${pAvg}</td>
-                            </tr>`;
+                            html += `<tr class="border-b border-gray-100 text-sm"><td class="p-3 pl-8 text-gray-600 border-r border-gray-100 flex items-center gap-2"><i data-lucide="corner-down-right" class="w-4 h-4 text-gray-300"></i> Período ${p} <span class="text-[10px] bg-gray-100 px-2 py-0.5 rounded text-gray-500">${pData.count} notas</span></td><td class="p-3 text-center font-bold text-gray-700">${pAvg}</td></tr>`;
                         }
                     }
                     gLst.innerHTML = html;
@@ -1631,17 +1774,19 @@
             }
 
             const dLst = document.getElementById('student-certs-list');
-            if(dLst) dLst.innerHTML = window.currentUser.certificados.length ? window.currentUser.certificados.map(c => `
-                <div class="bg-gray-50 rounded-2xl p-5 border border-gray-200 flex flex-col justify-between group hover:border-red-300 transition-all">
-                    <div>
-                        <i data-lucide="award" class="w-8 h-8 text-funetec-main mb-3"></i>
-                        <h4 class="font-bold text-gray-900 leading-tight mb-1">${c.docType||"Certificado"}: ${c.course}</h4><p class="text-[10px] text-gray-500 font-bold uppercase tracking-wider mb-4">Fecha: ${c.date}</p>
-                    </div>
-                    <div class="flex gap-2 mt-auto">
-                        <button onclick="window.openCertificateView(${window.currentUser.id}, ${c.id})" class="flex-1 bg-white border border-gray-200 text-gray-700 font-bold py-2.5 rounded-xl text-xs hover:bg-red-50 hover:text-red-600"><i data-lucide="eye" class="inline w-4 h-4"></i> Ver</button>
-                        <button onclick="window.openCertificateView(${window.currentUser.id}, ${c.id}); setTimeout(()=>window.print(), 500);" class="flex-1 bg-gradient-to-r from-red-700 to-red-600 text-white font-bold py-2.5 rounded-xl text-xs hover:bg-red-800"><i data-lucide="download" class="inline w-4 h-4"></i> Descargar</button>
-                    </div>
-                </div>`).join('') : "<div class='col-span-full text-sm italic p-3'>Sin documentos</div>";
+            if(dLst) {
+                dLst.innerHTML = '';
+                if(window.currentUser.certificados.length === 0) {
+                    dLst.innerHTML = "<div class='col-span-full text-sm italic p-3'>Sin documentos</div>";
+                } else {
+                    window.currentUser.certificados.forEach(c => {
+                        let d = document.createElement('div');
+                        d.className = 'bg-gray-50 rounded-2xl p-5 border border-gray-200 flex flex-col justify-between group hover:border-red-300 transition-all';
+                        d.innerHTML = `<div><i data-lucide="award" class="w-8 h-8 text-funetec-main mb-3"></i><h4 class="font-bold text-gray-900 leading-tight mb-1">${c.docType||"Certificado"}: ${c.course}</h4><p class="text-[10px] text-gray-500 font-bold uppercase tracking-wider mb-4">Fecha: ${c.date}</p></div><div class="flex gap-2 mt-auto"><button onclick="window.openCertificateView(${window.currentUser.id}, ${c.id})" class="flex-1 bg-white border border-gray-200 text-gray-700 font-bold py-2.5 rounded-xl text-xs hover:bg-red-50 hover:text-red-600"><i data-lucide="eye" class="inline w-4 h-4"></i> Ver</button><button onclick="window.openCertificateView(${window.currentUser.id}, ${c.id}); setTimeout(()=>window.print(), 500);" class="flex-1 bg-gradient-to-r from-red-700 to-red-600 text-white font-bold py-2.5 rounded-xl text-xs hover:bg-red-800"><i data-lucide="download" class="inline w-4 h-4"></i> Descargar</button></div>`;
+                        dLst.appendChild(d);
+                    });
+                }
+            }
             if(typeof lucide !== 'undefined') lucide.createIcons();
         };
 
@@ -1700,35 +1845,21 @@
                 let html = '';
                 for (const [sub, data] of Object.entries(subjects)) {
                     const finalAvg = (data.totalAcc / data.totalCount).toFixed(1);
-                    html += `<tr class="bg-gray-100 border-b border-gray-300">
-                        <td class="py-2.5 px-4 font-bold text-gray-900 uppercase" colspan="3">${sub}</td>
-                        <td class="py-2.5 px-4 text-center font-black text-gray-900 bg-gray-200">${finalAvg}</td>
-                    </tr>`;
+                    html += `<tr class="bg-gray-100 border-b border-gray-300"><td class="py-2.5 px-4 font-bold text-gray-900 uppercase" colspan="3">${sub}</td><td class="py-2.5 px-4 text-center font-black text-gray-900 bg-gray-200">${finalAvg}</td></tr>`;
                     
                     for(const [p, evals] of Object.entries(data.periods)) {
                         let pSum = 0;
                         evals.forEach(ev => {
                             pSum += parseFloat(ev.nota);
-                            html += `<tr class="border-b border-gray-100 text-xs bg-white">
-                                <td class="py-2 px-4 pl-10 text-gray-600">Período ${p}</td>
-                                <td class="py-2 px-4 text-gray-600 font-semibold">${ev.evalType || 'General'}</td>
-                                <td class="py-2 px-4 text-gray-400 italic">Evaluación académica</td>
-                                <td class="py-2 px-4 text-center font-semibold text-gray-800">${ev.nota}</td>
-                            </tr>`;
+                            html += `<tr class="border-b border-gray-100 text-xs bg-white"><td class="py-2 px-4 pl-10 text-gray-600">Período ${p}</td><td class="py-2 px-4 text-gray-600 font-semibold">${ev.evalType || 'General'}</td><td class="py-2 px-4 text-gray-400 italic">Evaluación académica</td><td class="py-2 px-4 text-center font-semibold text-gray-800">${ev.nota}</td></tr>`;
                         });
                         const pAvg = (pSum / evals.length).toFixed(1);
-                        html += `<tr class="border-b border-gray-300 text-xs bg-gray-50/80">
-                            <td class="py-2 px-4 pl-10 font-bold text-gray-700" colspan="3">Promedio Período ${p}</td>
-                            <td class="py-2 px-4 text-center font-bold text-gray-800">${pAvg}</td>
-                        </tr>`;
+                        html += `<tr class="border-b border-gray-300 text-xs bg-gray-50/80"><td class="py-2 px-4 pl-10 font-bold text-gray-700" colspan="3">Promedio Período ${p}</td><td class="py-2 px-4 text-center font-bold text-gray-800">${pAvg}</td></tr>`;
                     }
                 }
                 
                 const generalAvg = (totalSum / totalEvals).toFixed(1);
-                html += `<tr class="bg-[#AF172B] text-white">
-                        <td class="py-4 px-4 font-black text-right tracking-widest" colspan="3">PROMEDIO GENERAL ACUMULADO</td>
-                        <td class="py-4 px-4 text-center font-black text-xl">${generalAvg}</td>
-                    </tr>`;
+                html += `<tr class="bg-[#AF172B] text-white"><td class="py-4 px-4 font-black text-right tracking-widest" colspan="3">PROMEDIO GENERAL ACUMULADO</td><td class="py-4 px-4 text-center font-black text-xl">${generalAvg}</td></tr>`;
 
                 tbody.innerHTML = html;
             }
@@ -1747,7 +1878,7 @@
         };
 
         // ===================================
-        // DEVELOPER TOOLS
+        // DEVELOPER TOOLS Y CMS
         // ===================================
 
         window.handleDevSettings = async function(e) {
@@ -1832,19 +1963,130 @@
             if(sortedRecent.length === 0) {
                 listContainer.innerHTML = "<p class='text-sm text-gray-500 italic'>No hay usuarios registrados recientemente.</p>";
             } else {
-                let html = "";
+                listContainer.innerHTML = '';
                 sortedRecent.forEach(u => {
+                    let item = document.createElement('div');
+                    item.className = 'flex items-center justify-between bg-gray-50 p-3 rounded-xl border border-gray-100';
                     const colorBg = u.role === 'tutor' ? 'bg-purple-100 text-purple-600' : 'bg-blue-100 text-blue-600';
                     const iconName = u.role === 'tutor' ? 'user-round' : 'graduation-cap';
                     const roleName = u.role === 'tutor' ? 'Tutor Docente' : 'Estudiante';
                     const dateStr = new Date(u.id).toLocaleDateString();
-                    
-                    html += "<div class='flex items-center justify-between bg-gray-50 p-3 rounded-xl border border-gray-100'><div class='flex items-center gap-3'><div class='" + colorBg + " p-2 rounded-lg'><i data-lucide='" + iconName + "' class='w-4 h-4'></i></div><div><p class='font-bold text-sm text-gray-800'>" + u.name + "</p><p class='text-xs text-gray-500'>Rol: <span class='font-semibold'>" + roleName + "</span> | Usuario: " + u.username + "</p></div></div><div class='text-xs font-bold text-gray-400 bg-white px-2 py-1 rounded shadow-sm border border-gray-200'>" + dateStr + "</div></div>";
+                    item.innerHTML = `<div class="flex items-center gap-3"><div class="${colorBg} p-2 rounded-lg"><i data-lucide="${iconName}" class="w-4 h-4"></i></div><div><p class="font-bold text-sm text-gray-800">${u.name}</p><p class="text-xs text-gray-500">Rol: <span class="font-semibold">${roleName}</span> | Usuario: ${u.username}</p></div></div><div class="text-xs font-bold text-gray-400 bg-white px-2 py-1 rounded shadow-sm border border-gray-200">${dateStr}</div>`;
+                    listContainer.appendChild(item);
                 });
-                listContainer.innerHTML = html;
             }
             if(typeof lucide !== 'undefined') lucide.createIcons({root: listContainer});
         };
+
+        window.renderDevCMS = function() {
+            const conf = window.db.landing;
+            if(!conf) return;
+            
+            document.getElementById('cms-hero-title').value = conf.heroTitle || '';
+            document.getElementById('cms-hero-subtitle').value = conf.heroSubtitle || '';
+
+            const pList = document.getElementById('cms-programas-list');
+            if(pList) {
+                pList.innerHTML = '';
+                if (conf.programas.length === 0) {
+                    pList.innerHTML = "<p class='text-xs italic text-gray-500'>No hay programas configurados</p>";
+                } else {
+                    conf.programas.forEach(p => {
+                        let div = document.createElement('div');
+                        div.className = 'flex items-center justify-between bg-white border border-gray-200 p-2 rounded-lg shadow-sm';
+                        
+                        let cleanTitle = p.title.replace(/<[^>]*>?/gm, ' ');
+                        div.innerHTML = `<div class="flex items-center gap-2 overflow-hidden"><i data-lucide="${p.icon}" class="w-4 h-4 text-gray-500 flex-shrink-0"></i><p class="text-xs font-bold text-gray-700 truncate whitespace-nowrap">${cleanTitle}</p></div><button type="button" onclick="window.deleteCMSProgram(${p.id})" class="text-red-500 hover:bg-red-50 p-1.5 rounded"><i data-lucide="trash-2" class="w-3.5 h-3.5"></i></button>`;
+                        pList.appendChild(div);
+                    });
+                }
+            }
+
+            const cList = document.getElementById('cms-cursos-list');
+            if(cList) {
+                cList.innerHTML = '';
+                if (conf.cursos.length === 0) {
+                    cList.innerHTML = "<p class='text-xs italic text-gray-500'>No hay cursos configurados</p>";
+                } else {
+                    conf.cursos.forEach(c => {
+                        let div = document.createElement('div');
+                        div.className = 'flex items-center justify-between bg-white border border-gray-200 p-2 rounded-lg shadow-sm';
+                        div.innerHTML = `<div class="flex items-center gap-2 overflow-hidden"><div class="w-6 h-6 bg-gray-200 rounded shrink-0 overflow-hidden"><img src="${c.image}" class="w-full h-full object-cover"></div><p class="text-xs font-bold text-gray-700 truncate whitespace-nowrap">${c.title} - ${c.price}</p></div><button type="button" onclick="window.deleteCMSCourse(${c.id})" class="text-red-500 hover:bg-red-50 p-1.5 rounded"><i data-lucide="trash-2" class="w-3.5 h-3.5"></i></button>`;
+                        cList.appendChild(div);
+                    });
+                }
+            }
+            if(typeof lucide !== 'undefined') lucide.createIcons();
+        };
+
+        window.saveCMSLanding = async function() {
+            if(!auth.currentUser) return;
+            const t = document.getElementById('cms-hero-title').value;
+            const s = document.getElementById('cms-hero-subtitle').value;
+            window.db.landing.heroTitle = t;
+            window.db.landing.heroSubtitle = s;
+            try {
+                await setDoc(getLandingDocRef(), window.db.landing, { merge: true });
+                window.showToast("Textos guardados correctamente");
+            } catch(e) { console.error(e); window.showToast("Error guardando CMS", "error"); }
+        };
+
+        window.deleteCMSProgram = async function(id) {
+            if(!auth.currentUser || !confirm("¿Seguro que deseas eliminar este programa?")) return;
+            window.db.landing.programas = window.db.landing.programas.filter(p => p.id !== id);
+            try {
+                await setDoc(getLandingDocRef(), { programas: window.db.landing.programas }, { merge: true });
+                window.showToast("Programa eliminado");
+            } catch(e) { console.error(e); window.showToast("Error eliminando", "error"); }
+        };
+
+        window.deleteCMSCourse = async function(id) {
+            if(!auth.currentUser || !confirm("¿Seguro que deseas eliminar este curso?")) return;
+            window.db.landing.cursos = window.db.landing.cursos.filter(c => c.id !== id);
+            try {
+                await setDoc(getLandingDocRef(), { cursos: window.db.landing.cursos }, { merge: true });
+                window.showToast("Curso eliminado");
+            } catch(e) { console.error(e); window.showToast("Error eliminando", "error"); }
+        };
+
+        window.addCMSProgram = async function(e) {
+            e.preventDefault();
+            if(!auth.currentUser) return;
+            const title = document.getElementById('cms-prog-title').value;
+            const image = document.getElementById('cms-prog-img').value;
+            const icon = document.getElementById('cms-prog-icon').value;
+            const infoHtml = document.getElementById('cms-prog-html').value;
+            
+            const newProg = { id: Date.now(), title, image, icon, infoHtml };
+            window.db.landing.programas.push(newProg);
+            try {
+                await setDoc(getLandingDocRef(), { programas: window.db.landing.programas }, { merge: true });
+                window.showToast("Programa añadido");
+                e.target.reset();
+            } catch(err) { console.error(err); window.showToast("Error guardando", "error"); }
+        };
+
+        window.addCMSCourse = async function(e) {
+            e.preventDefault();
+            if(!auth.currentUser) return;
+            const title = document.getElementById('cms-cur-title').value;
+            const price = document.getElementById('cms-cur-price').value;
+            const badge = document.getElementById('cms-cur-badge1').value;
+            const extraBadge = document.getElementById('cms-cur-badge2').value;
+            const date = document.getElementById('cms-cur-date').value;
+            const time = document.getElementById('cms-cur-time').value;
+            const image = document.getElementById('cms-cur-img').value;
+            const listHtml = document.getElementById('cms-cur-html').value;
+
+            const newCur = { id: Date.now(), title, price, badge, extraBadge, date, time, image, listHtml };
+            window.db.landing.cursos.push(newCur);
+            try {
+                await setDoc(getLandingDocRef(), { cursos: window.db.landing.cursos }, { merge: true });
+                window.showToast("Curso añadido");
+                e.target.reset();
+            } catch(err) { console.error(err); window.showToast("Error guardando", "error"); }
+        };
+
     </script>
 </body>
 </html>
