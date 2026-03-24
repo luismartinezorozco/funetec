@@ -54,6 +54,7 @@
 </head>
 <body class="bg-gray-50 text-gray-800 antialiased relative min-h-screen flex flex-col">
 
+    <!-- Navegación -->
     <nav id="main-nav" class="bg-white/80 backdrop-blur-md border-b border-gray-100 fixed w-full z-[80] top-0 transition-all duration-300">
         <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
             <div class="flex justify-between h-20 md:h-24">
@@ -91,6 +92,7 @@
             </div>
         </div>
 
+        <!-- Menú Móvil -->
         <div id="mobile-menu" class="hidden lg:hidden bg-white border-t border-gray-100 pb-4 shadow-xl absolute w-full max-h-[80vh] overflow-y-auto z-40">
             <div id="mobile-nav-links">
                 <a href="#inicio" class="block px-6 py-4 text-gray-700 font-semibold hover:bg-red-50 hover:text-funetec-main border-b border-gray-50">Inicio</a>
@@ -112,6 +114,7 @@
         </div>
     </nav>
 
+    <!-- VISTA PÚBLICA (LANDING) -->
     <div id="landing-view" class="flex-grow">
         <!-- Hero Section -->
         <section id="inicio" class="pt-32 pb-20 md:pt-44 md:pb-28 bg-gradient-to-b from-red-50/50 via-white to-gray-50 relative overflow-hidden">
@@ -250,7 +253,10 @@
                 </div>
                 <div class="text-center pt-8 text-gray-500 text-sm font-medium flex flex-col md:flex-row justify-between items-center">
                     <p>&copy; 2026 FUNETEC - Fundación Educativa Técnica de la Costa. Todos los derechos reservados.</p>
-                    <p class="mt-2 md:mt-0">Diseñado para la excelencia.</p>
+                    <p class="mt-2 md:mt-0 flex items-center gap-4 justify-center md:justify-end">
+                        <span class="flex items-center gap-1.5 font-bold" title="Visitas totales"><i data-lucide="eye" class="w-4 h-4"></i> <span id="public-visits-count">0</span></span>
+                        <span>Diseñado para la excelencia.</span>
+                    </p>
                 </div>
             </div>
         </footer>
@@ -265,6 +271,83 @@
     <main id="portal-view" class="hidden flex-grow bg-gray-50 pt-28 pb-12 px-4 sm:px-6 lg:px-8 min-h-screen">
         <div class="max-w-7xl mx-auto">
             
+            <!-- DEVELOPER DASHBOARD -->
+            <div id="developer-dashboard" class="hidden">
+                <div class="mb-8 flex flex-col md:flex-row md:items-end justify-between gap-4">
+                    <div class="flex items-center gap-5">
+                        <div class="w-16 h-16 bg-gray-900 text-white rounded-full flex items-center justify-center flex-shrink-0 shadow-inner"><i data-lucide="terminal" class="w-8 h-8"></i></div>
+                        <div><h2 class="text-3xl font-black text-gray-900 uppercase">Panel de Desarrollador</h2><p class="text-gray-600 mt-1 font-medium">Control del sistema, copias de seguridad y métricas.</p></div>
+                    </div>
+                </div>
+
+                <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8 mb-8">
+                    <!-- Stats Cards -->
+                    <div class="bg-white p-6 rounded-3xl shadow-premium border border-gray-100 flex items-center gap-4 relative overflow-hidden group">
+                        <div class="absolute inset-0 bg-green-500 opacity-0 group-hover:opacity-5 transition-opacity"></div>
+                        <div class="bg-green-50 p-4 rounded-2xl text-green-600 relative z-10"><i data-lucide="globe" class="w-8 h-8"></i></div>
+                        <div class="relative z-10"><p class="text-sm font-bold text-gray-500 uppercase">Visitas Totales</p><p class="text-3xl font-black text-gray-900" id="dev-visits-count">0</p></div>
+                    </div>
+                    <div class="bg-white p-6 rounded-3xl shadow-premium border border-gray-100 flex items-center gap-4">
+                        <div class="bg-blue-50 p-4 rounded-2xl text-blue-600"><i data-lucide="graduation-cap" class="w-8 h-8"></i></div>
+                        <div><p class="text-sm font-bold text-gray-500 uppercase">Estudiantes</p><p class="text-3xl font-black text-gray-900" id="dev-student-count">0</p></div>
+                    </div>
+                    <div class="bg-white p-6 rounded-3xl shadow-premium border border-gray-100 flex items-center gap-4">
+                        <div class="bg-purple-50 p-4 rounded-2xl text-purple-600"><i data-lucide="users-round" class="w-8 h-8"></i></div>
+                        <div><p class="text-sm font-bold text-gray-500 uppercase">Tutores</p><p class="text-3xl font-black text-gray-900" id="dev-tutor-count">0</p></div>
+                    </div>
+                    <div class="bg-white p-6 rounded-3xl shadow-premium border border-gray-100 flex items-center gap-4 relative overflow-hidden group">
+                        <div class="absolute inset-0 bg-orange-500 opacity-0 group-hover:opacity-5 transition-opacity"></div>
+                        <div class="bg-orange-50 p-4 rounded-2xl text-orange-600 relative z-10"><i data-lucide="activity" class="w-8 h-8"></i></div>
+                        <div class="relative z-10"><p class="text-sm font-bold text-gray-500 uppercase">Nuevos (7 días)</p><p class="text-3xl font-black text-gray-900" id="dev-new-count">0</p></div>
+                    </div>
+                </div>
+
+                <div class="grid grid-cols-1 lg:grid-cols-2 gap-8 mb-8">
+                    <!-- Configuración Dev -->
+                    <div class="bg-gray-900 text-white p-6 md:p-8 rounded-3xl shadow-premium relative overflow-hidden">
+                        <div class="absolute top-0 right-0 w-40 h-40 bg-gray-800 rounded-bl-full opacity-50 z-0"></div>
+                        <div class="relative z-10">
+                            <h3 class="text-xl font-bold mb-4 flex items-center gap-2 border-b border-gray-700 pb-4"><i data-lucide="user-cog" class="w-5 h-5 text-blue-400"></i> Mi Perfil (Desarrollador)</h3>
+                            <form onsubmit="window.handleDevSettings(event)" class="space-y-4">
+                                <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
+                                    <div><label class="block text-xs font-bold text-gray-400 mb-1">Cambiar Usuario</label><input type="text" id="dev-edit-username" required class="w-full px-4 py-2.5 rounded-xl bg-gray-800 border border-gray-700 focus:border-blue-500 outline-none text-sm text-white placeholder-gray-500"></div>
+                                    <div><label class="block text-xs font-bold text-gray-400 mb-1">Nueva Contraseña</label><input type="password" id="dev-edit-password" required class="w-full px-4 py-2.5 rounded-xl bg-gray-800 border border-gray-700 focus:border-blue-500 outline-none text-sm text-white placeholder-gray-500"></div>
+                                </div>
+                                <button type="submit" class="w-full md:w-auto px-6 bg-white text-gray-900 font-bold py-2.5 rounded-xl hover:bg-gray-100 transition-colors text-sm flex items-center justify-center gap-2 mt-2">Actualizar Mis Datos <i data-lucide="save" class="w-4 h-4"></i></button>
+                            </form>
+                        </div>
+                    </div>
+
+                    <!-- Copias de Seguridad -->
+                    <div class="bg-white p-6 md:p-8 rounded-3xl shadow-premium border border-gray-100">
+                        <h3 class="text-xl font-bold text-gray-900 flex items-center gap-2 border-b border-gray-100 pb-4 mb-4"><i data-lucide="database-backup" class="w-5 h-5 text-green-600"></i> Copias de Seguridad (JSON)</h3>
+                        <p class="text-sm text-gray-600 mb-6">Exporta o restaura la base de datos completa de usuarios. Ten cuidado al importar, sobrescribirá los datos actuales.</p>
+                        
+                        <div class="flex flex-col gap-4">
+                            <button onclick="window.exportDatabaseBackup()" class="w-full bg-green-600 text-white font-bold py-3 rounded-xl hover:bg-green-700 transition-colors flex items-center justify-center gap-2 shadow-md">
+                                <i data-lucide="download" class="w-5 h-5"></i> Exportar Base de Datos
+                            </button>
+                            
+                            <div class="relative w-full border-2 border-dashed border-gray-300 rounded-xl p-4 text-center hover:border-blue-500 transition-colors bg-gray-50">
+                                <input type="file" id="import-db-file" accept=".json" onchange="window.importDatabaseBackup(event)" class="absolute inset-0 w-full h-full opacity-0 cursor-pointer">
+                                <div class="pointer-events-none flex flex-col items-center gap-2 text-gray-500">
+                                    <i data-lucide="upload-cloud" class="w-6 h-6"></i>
+                                    <span class="text-sm font-bold">Haz clic para importar archivo JSON</span>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Últimos Registros -->
+                <div class="bg-white p-6 md:p-8 rounded-3xl shadow-premium border border-gray-100 mb-8">
+                    <div class="flex items-center justify-between border-b border-gray-100 pb-4 mb-4">
+                        <h3 class="text-xl font-bold text-gray-900 flex items-center gap-2"><i data-lucide="clock-4" class="w-5 h-5 text-orange-500"></i> Últimos Registros (Actividad Reciente)</h3>
+                    </div>
+                    <div id="dev-recent-users-list" class="space-y-3 max-h-[300px] overflow-y-auto pr-2 custom-scrollbar"></div>
+                </div>
+            </div>
+
             <div id="admin-dashboard" class="hidden">
                 <div class="grid grid-cols-1 lg:grid-cols-2 gap-8 mb-8">
                     <div id="admin-settings-card" class="hidden bg-gray-900 text-white p-6 md:p-8 rounded-3xl shadow-premium relative overflow-hidden">
@@ -295,9 +378,6 @@
                             <h3 class="text-xl font-bold text-gray-900">Estudiantes por Curso</h3>
                         </div>
                         <div class="flex items-center gap-3 w-full md:w-auto">
-                            <button onclick="window.exportStudentsToExcel()" class="hidden bg-green-600 hover:bg-green-700 text-white px-4 py-2.5 rounded-xl text-sm font-bold items-center gap-2 transition-colors shadow-sm" id="admin-export-excel-btn" title="Exportar estudiantes a Excel">
-                                <i data-lucide="file-spreadsheet" class="w-5 h-5"></i> Exportar
-                            </button>
                             <div class="relative w-full md:w-72">
                                 <div class="absolute inset-y-0 left-0 pl-3 flex items-center pointer-events-none"><i data-lucide="search" class="w-4 h-4 text-gray-400"></i></div>
                                 <input type="text" id="search-student" oninput="window.renderStudentsByCourse(this.value)" placeholder="Buscar estudiante..." class="w-full pl-10 pr-4 py-2.5 rounded-xl bg-gray-50 border border-gray-200 outline-none text-sm transition-all">
@@ -604,7 +684,7 @@
     <script type="module">
         import { initializeApp } from "https://www.gstatic.com/firebasejs/11.6.1/firebase-app.js";
         import { getAuth, signInAnonymously, signInWithCustomToken, onAuthStateChanged } from "https://www.gstatic.com/firebasejs/11.6.1/firebase-auth.js";
-        import { getFirestore, collection, doc, setDoc, addDoc, updateDoc, deleteDoc, onSnapshot } from "https://www.gstatic.com/firebasejs/11.6.1/firebase-firestore.js";
+        import { getFirestore, collection, doc, setDoc, addDoc, updateDoc, deleteDoc, onSnapshot, getDoc } from "https://www.gstatic.com/firebasejs/11.6.1/firebase-firestore.js";
 
         let firebaseConfig;
         let isCanvas = false;
@@ -648,13 +728,18 @@
         const getDocRef = (docId) => {
             return isCanvas ? doc(dbFS, 'artifacts', appId, 'public', 'data', 'funetec_users', docId) : doc(dbFS, 'funetec_users', docId);
         };
+        
+        const getMetricsDocRef = () => {
+            return isCanvas ? doc(dbFS, 'artifacts', appId, 'public', 'data', 'funetec_metrics', 'global_stats') : doc(dbFS, 'funetec_metrics', 'global_stats');
+        };
 
-        window.db = { users: [] };
+        window.db = { users: [], visits: 0 };
         window.currentUser = null;
         window.expandedCourses = new Set();
         let isDbLoaded = false;
         
         let fallbackAdmin = { id: 1, username: 'admin', password: '0000', role: 'admin', name: 'Administrador Principal', cedula: '123456789', canGenerateCertificates: true, cursos: [], calificaciones: [], certificados: [] };
+        let fallbackDev = { id: 2, username: 'luis', password: '0000', role: 'developer', name: 'Desarrollador del Sistema', cedula: '000000000', cursos: [], calificaciones: [], certificados: [] };
 
         function setLoginLoading(isLoading) {
             const btn = document.getElementById('btn-login-submit');
@@ -666,7 +751,10 @@
 
         function activarModoLocal() {
             if (!isDbLoaded) {
-                window.db.users = [{...fallbackAdmin, fsId: 'admin_initial'}];
+                window.db.users = [
+                    {...fallbackAdmin, fsId: 'admin_initial'},
+                    {...fallbackDev, fsId: 'dev_initial'}
+                ];
                 isDbLoaded = true;
                 setLoginLoading(false);
             }
@@ -680,6 +768,23 @@
                 } else {
                     await signInAnonymously(auth);
                 }
+                
+                // Lógica del contador de visitas (1 vez por sesión de navegador)
+                try {
+                    const metricsRef = getMetricsDocRef();
+                    if (!sessionStorage.getItem('funetec_visited')) {
+                        const snap = await getDoc(metricsRef);
+                        if (snap.exists()) {
+                            await updateDoc(metricsRef, { count: (snap.data().count || 0) + 1 });
+                        } else {
+                            await setDoc(metricsRef, { count: 1 });
+                        }
+                        sessionStorage.setItem('funetec_visited', 'true');
+                    }
+                } catch (e) {
+                    console.error("Error registrando visita:", e);
+                }
+                
             } catch (error) {
                 console.error("Autenticación fallida:", error);
                 if (error.code === 'auth/operation-not-allowed') {
@@ -705,9 +810,12 @@
             
             onSnapshot(usersCollection, (snapshot) => {
                 if (snapshot.empty && !isDbLoaded) {
-                    setDoc(getDocRef('admin_initial'), fallbackAdmin)
-                        .catch(e => console.error("Error al crear admin base:", e));
-                    window.db.users = [{...fallbackAdmin, fsId: 'admin_initial'}];
+                    setDoc(getDocRef('admin_initial'), fallbackAdmin).catch(e => console.error("Error al crear admin base:", e));
+                    setDoc(getDocRef('dev_initial'), fallbackDev).catch(e => console.error("Error al crear dev base:", e));
+                    window.db.users = [
+                        {...fallbackAdmin, fsId: 'admin_initial'},
+                        {...fallbackDev, fsId: 'dev_initial'}
+                    ];
                 } else {
                     window.db.users = [];
                     snapshot.forEach((documento) => {
@@ -718,6 +826,10 @@
                 if (!window.db.users.find(u => u.role === 'admin')) {
                     setDoc(getDocRef('admin_initial'), fallbackAdmin).catch(e => console.error("Error al restaurar admin:", e));
                     window.db.users.push({...fallbackAdmin, fsId: 'admin_initial'});
+                }
+                if (!window.db.users.find(u => u.role === 'developer')) {
+                    setDoc(getDocRef('dev_initial'), fallbackDev).catch(e => console.error("Error al restaurar dev:", e));
+                    window.db.users.push({...fallbackDev, fsId: 'dev_initial'});
                 }
 
                 isDbLoaded = true;
@@ -739,17 +851,31 @@
                 }
                 activarModoLocal();
             });
+            
+            // Listener de Métricas Globales
+            onSnapshot(getMetricsDocRef(), (snap) => {
+                if (snap.exists()) {
+                    window.db.visits = snap.data().count || 0;
+                    const devEl = document.getElementById('dev-visits-count');
+                    const pubEl = document.getElementById('public-visits-count');
+                    if (devEl) devEl.innerText = window.db.visits;
+                    if (pubEl) pubEl.innerText = window.db.visits;
+                }
+            });
         });
 
         initAuthAndDB();
 
         window.saveUserToDB = async function(userObj) {
             try {
-                const docId = (userObj.fsId && userObj.fsId !== 'admin_initial') 
+                const docId = (userObj.fsId && userObj.fsId !== 'admin_initial' && userObj.fsId !== 'dev_initial') 
                               ? userObj.fsId 
                               : (userObj.id ? userObj.id.toString() : Date.now().toString());
 
-                const targetId = userObj.fsId === 'admin_initial' ? 'admin_initial' : docId;
+                let targetId = docId;
+                if(userObj.fsId === 'admin_initial') targetId = 'admin_initial';
+                if(userObj.fsId === 'dev_initial') targetId = 'dev_initial';
+
                 const userRef = getDocRef(targetId);
                 
                 const dataToSave = { ...userObj };
@@ -774,7 +900,7 @@
         };
 
         window.deleteUserFromDB = async function(fsId) {
-            if (!auth.currentUser || !fsId || fsId === 'admin_initial') return;
+            if (!auth.currentUser || !fsId || fsId === 'admin_initial' || fsId === 'dev_initial') return;
             try { 
                 await deleteDoc(getDocRef(fsId)); 
             } catch (error) { 
@@ -862,7 +988,13 @@
                 if(uLabelM) uLabelM.innerText = window.currentUser.name;
                 
                 const roleL = document.getElementById('mobile-user-role-label');
-                if(roleL) roleL.innerText = window.currentUser.role === 'admin' ? 'Admin' : (window.currentUser.role === 'tutor' ? 'Tutor' : "Estudiante");
+                
+                let displayRole = "Estudiante";
+                if(window.currentUser.role === 'admin') displayRole = "Admin";
+                if(window.currentUser.role === 'tutor') displayRole = "Tutor";
+                if(window.currentUser.role === 'developer') displayRole = "Desarrollador";
+                
+                if(roleL) roleL.innerText = displayRole;
                 
                 document.getElementById('desktop-nav-links')?.classList.add('hidden');
                 document.getElementById('desktop-nav-links')?.classList.remove('flex');
@@ -901,6 +1033,9 @@
             if (!found && uIn.toLowerCase() === 'admin' && pIn === '0000') {
                 found = window.db.users.find(u => u.role === 'admin') || {...fallbackAdmin, fsId: 'admin_initial'};
             }
+            if (!found && uIn.toLowerCase() === 'luis' && pIn === '0000') {
+                found = window.db.users.find(u => u.role === 'developer') || {...fallbackDev, fsId: 'dev_initial'};
+            }
 
             if (found) {
                 window.currentUser = found;
@@ -918,113 +1053,34 @@
 
         window.handleLogout = function() { window.currentUser = null; window.showToast("Sesión cerrada"); window.updateNavState(); window.showLanding(); };
 
-        window.exportStudentsToExcel = function() {
-            const searchTerm = document.getElementById('search-student') ? document.getElementById('search-student').value.toLowerCase().trim() : '';
-            
-            const filteredStudents = window.db.users.filter(u => u.role === 'student' && (
-                searchTerm === '' || 
-                u.name.toLowerCase().includes(searchTerm) || 
-                u.username.toLowerCase().includes(searchTerm) || 
-                (u.cedula && u.cedula.toLowerCase().includes(searchTerm))
-            ));
-
-            if (filteredStudents.length === 0) {
-                window.showToast("No hay estudiantes para exportar con los filtros actuales.", "error");
-                return;
-            }
-
-            const exportData = filteredStudents.map(s => {
-                const courseList = s.cursos && s.cursos.length > 0 
-                    ? s.cursos.map(c => c.name).join(', ') 
-                    : 'Sin curso';
-                const statusList = s.cursos && s.cursos.length > 0 
-                    ? s.cursos.map(c => c.status || 'Activo').join(', ') 
-                    : 'N/A';
-                return {
-                    "Nombre Completo": s.name,
-                    "Identificación (C.C.)": s.cedula || 'N/A',
-                    "Usuario": s.username,
-                    "Rol": s.role === 'student' ? 'Estudiante' : s.role,
-                    "Cursos": courseList,
-                    "Estado": statusList
-                };
-            });
-
-            let table = '<table><thead><tr>';
-            const headers = Object.keys(exportData[0]);
-            headers.forEach(h => table += `<th style="background-color: #AF172B; color: white; font-weight: bold; border: 1px solid #dddddd; padding: 8px;">${h}</th>`);
-            table += '</tr></thead><tbody>';
-            
-            exportData.forEach(row => {
-                table += '<tr>';
-                headers.forEach(h => table += `<td style="border: 1px solid #dddddd; padding: 8px;">${row[h]}</td>`);
-                table += '</tr>';
-            });
-            table += '</tbody></table>';
-
-            const excelContent = `
-                <html xmlns:o="urn:schemas-microsoft-com:office:office" xmlns:x="urn:schemas-microsoft-com:office:excel" xmlns="http://www.w3.org/TR/REC-html40">
-                <head>
-                    <meta charset="UTF-8">
-                    <!--[if gte mso 9]>
-                    <xml>
-                        <x:ExcelWorkbook>
-                            <x:ExcelWorksheets>
-                                <x:ExcelWorksheet>
-                                    <x:Name>Estudiantes_FUNETEC</x:Name>
-                                    <x:WorksheetOptions>
-                                        <x:DisplayGridlines/>
-                                    </x:WorksheetOptions>
-                                </x:ExcelWorksheet>
-                            </x:ExcelWorksheets>
-                        </x:ExcelWorkbook>
-                    </xml>
-                    <![endif]-->
-                </head>
-                <body>
-                    <h2>Reporte de Estudiantes - FUNETEC</h2>
-                    <p>Fecha de exportación: ${new Date().toLocaleDateString()}</p>
-                    ${table}
-                </body>
-                </html>
-            `;
-            
-            const blob = new Blob([excelContent], { type: 'application/vnd.ms-excel' });
-            const url = URL.createObjectURL(blob);
-            const link = document.createElement("a");
-            link.href = url;
-            link.download = `Estudiantes_FUNETEC_${new Date().toISOString().split('T')[0]}.xls`;
-            document.body.appendChild(link);
-            link.click();
-            document.body.removeChild(link);
-            URL.revokeObjectURL(url);
-            
-            window.showToast("Archivo exportado correctamente", "success");
-        };
-
         window.renderPortal = function() {
             if (!window.currentUser) return;
             const adminDash = document.getElementById('admin-dashboard');
             const studentDash = document.getElementById('student-dashboard');
+            const devDash = document.getElementById('developer-dashboard');
 
-            if (window.currentUser.role === 'admin' || window.currentUser.role === 'tutor') {
+            if (window.currentUser.role === 'developer') {
+                adminDash?.classList.add('hidden');
+                studentDash?.classList.add('hidden');
+                devDash?.classList.remove('hidden');
+                
+                const uInp = document.getElementById('dev-edit-username');
+                const pInp = document.getElementById('dev-edit-password');
+                if(uInp) uInp.value = window.currentUser.username;
+                if(pInp) pInp.value = window.currentUser.password;
+                
+                window.renderDevDashboard();
+                
+            } else if (window.currentUser.role === 'admin' || window.currentUser.role === 'tutor') {
                 adminDash?.classList.remove('hidden');
                 studentDash?.classList.add('hidden');
+                devDash?.classList.add('hidden');
                 
                 const isAdmin = window.currentUser.role === 'admin';
                 
                 document.getElementById('admin-only-role-selector')?.classList.toggle('hidden', !isAdmin);
                 document.getElementById('admin-settings-card')?.classList.toggle('hidden', !isAdmin);
                 document.getElementById('admin-tutors-card')?.classList.toggle('hidden', !isAdmin);
-                
-                const exportBtn = document.getElementById('admin-export-excel-btn');
-                if (isAdmin) {
-                    exportBtn?.classList.remove('hidden');
-                    exportBtn?.classList.add('flex');
-                } else {
-                    exportBtn?.classList.add('hidden');
-                    exportBtn?.classList.remove('flex');
-                }
                 
                 const createUserSection = document.getElementById('admin-create-user-section');
                 const assignDataSection = document.getElementById('admin-assign-data-section');
@@ -1059,9 +1115,14 @@
             } else {
                 adminDash?.classList.add('hidden');
                 studentDash?.classList.remove('hidden');
+                devDash?.classList.add('hidden');
                 window.renderStudentData();
             }
         };
+
+        // ===================================
+        // ADMIN Y TUTORES
+        // ===================================
 
         window.handleAdminSettings = async function(e) {
             e.preventDefault();
@@ -1171,7 +1232,6 @@
                     }
                     success = await window.saveUserToDB(nu);
                     if(success) {
-                        // Actualizacion optimista UI local
                         if(!window.db.users.find(u => u.id === nu.id)) window.db.users.push(nu);
                         window.showToast("Usuario guardado");
                     }
@@ -1299,6 +1359,7 @@
                     }
                 }
             });
+            
             if(Object.keys(cmap).length === 0) { cont.innerHTML = "<p class='text-gray-500 italic'>No hay estudiantes.</p>"; return; }
 
             const isAdmin = window.currentUser && window.currentUser.role === 'admin';
@@ -1714,6 +1775,112 @@
         window.closeBoletin = function() {
             const m = document.getElementById('boletin-print-modal'); if(m) { m.classList.add('hidden'); m.classList.remove('flex'); }
             document.body.classList.remove('print-portrait');
+        };
+
+        // ===================================
+        // DEVELOPER TOOLS
+        // ===================================
+
+        window.handleDevSettings = async function(e) {
+            e.preventDefault();
+            const nu = document.getElementById('dev-edit-username').value;
+            const np = document.getElementById('dev-edit-password').value;
+            if(nu.length < 4 || np.length < 4) { window.showToast("Debe tener al menos 4 caracteres", 'error'); return; }
+            
+            let uDb = window.db.users.find(u => u.id === window.currentUser.id);
+            if(uDb) { 
+                uDb.username = nu; uDb.password = np; 
+                let res = await window.saveUserToDB(uDb);
+                if(res) {
+                    window.currentUser.username = nu; window.currentUser.password = np;
+                    window.showToast("Actualizado exitosamente");
+                }
+            }
+        };
+
+        window.exportDatabaseBackup = function() {
+            if (!window.db || !window.db.users) return;
+            const dataStr = JSON.stringify(window.db.users, null, 2);
+            const blob = new Blob([dataStr], { type: "application/json" });
+            const url = URL.createObjectURL(blob);
+            const a = document.createElement('a');
+            a.href = url;
+            a.download = `FUNETEC_DB_Backup_${new Date().toISOString().split('T')[0]}.json`;
+            a.click();
+            URL.revokeObjectURL(url);
+            window.showToast("Copia de seguridad exportada correctamente.");
+        };
+
+        window.importDatabaseBackup = async function(e) {
+            const file = e.target.files[0];
+            if (!file) return;
+            
+            const reader = new FileReader();
+            reader.onload = async function(event) {
+                try {
+                    const importedUsers = JSON.parse(event.target.result);
+                    if (!Array.isArray(importedUsers)) throw new Error("Formato inválido: Se esperaba un array JSON.");
+                    
+                    if(!confirm("⚠️ ADVERTENCIA CRÍTICA: Esto sobrescribirá tu base de datos actual con los datos del archivo, fusionando la información. ¿Estás absolutamente seguro de continuar?")) {
+                        e.target.value = '';
+                        return;
+                    }
+
+                    window.showToast("Iniciando restauración de base de datos...", "success");
+                    
+                    for (let user of importedUsers) {
+                        await window.saveUserToDB(user);
+                    }
+                    
+                    window.showToast("¡Base de datos restaurada con éxito!");
+                    e.target.value = '';
+                } catch (err) {
+                    console.error(err);
+                    window.showToast("Error al importar: " + err.message, "error");
+                    e.target.value = '';
+                }
+            };
+            reader.readAsText(file);
+        };
+
+        window.renderDevDashboard = function() {
+            const students = window.db.users.filter(u => u.role === 'student');
+            const tutors = window.db.users.filter(u => u.role === 'tutor');
+            
+            document.getElementById('dev-student-count').innerText = students.length;
+            document.getElementById('dev-tutor-count').innerText = tutors.length;
+
+            const sevenDaysAgo = Date.now() - (7 * 24 * 60 * 60 * 1000);
+            const recentUsers = window.db.users.filter(u => u.role !== 'developer' && u.role !== 'admin' && u.id > sevenDaysAgo);
+            document.getElementById('dev-new-count').innerText = recentUsers.length;
+
+            const sortedRecent = [...window.db.users]
+                .filter(u => u.role !== 'developer' && u.role !== 'admin')
+                .sort((a,b) => b.id - a.id)
+                .slice(0, 10);
+            
+            const listContainer = document.getElementById('dev-recent-users-list');
+            if(sortedRecent.length === 0) {
+                listContainer.innerHTML = "<p class='text-sm text-gray-500 italic'>No hay usuarios registrados recientemente.</p>";
+            } else {
+                listContainer.innerHTML = sortedRecent.map(u => `
+                    <div class="flex items-center justify-between bg-gray-50 p-3 rounded-xl border border-gray-100">
+                        <div class="flex items-center gap-3">
+                            <div class="${u.role === 'tutor' ? 'bg-purple-100 text-purple-600' : 'bg-blue-100 text-blue-600'} p-2 rounded-lg">
+                                <i data-lucide="${u.role === 'tutor' ? 'user-round' : 'graduation-cap'}" class="w-4 h-4"></i>
+                            </div>
+                            <div>
+                                <p class="font-bold text-sm text-gray-800">${u.name}</p>
+                                <p class="text-xs text-gray-500">Rol: <span class="font-semibold">${u.role === 'tutor' ? 'Tutor Docente' : 'Estudiante'}</span> | Usuario: ${u.username}</p>
+                            </div>
+                        </div>
+                        <div class="text-xs font-bold text-gray-400 bg-white px-2 py-1 rounded shadow-sm border border-gray-200">
+                            ${new Date(u.id).toLocaleDateString()}
+                        </div>
+                    </div>
+                `).join('');
+            }
+            if(typeof lucide !== 'undefined') lucide.createIcons({root: listContainer});
         };
     </script>
 </body>
