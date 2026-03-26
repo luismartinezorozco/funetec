@@ -1775,7 +1775,10 @@
                             window.db.users.push({ ...documento.data(), fsId: documento.id });
                         });
 
-                        if (window.db.users.length === 0 && !isDbLoaded) {
+                        // Verificamos específicamente si el rol "admin" NO existe en la BD
+                        const hasAdmin = window.db.users.some(u => u.role === 'admin');
+
+                        if (!hasAdmin && !isDbLoaded) {
                             setDoc(doc(dbFS, 'artifacts', appId, 'public', 'data', 'funetec_users', 'admin_initial'), {
                                 id: 1, username: 'admin', password: '0000', role: 'admin', name: 'Administrador Principal', cedula: '123456789', canGenerateCertificates: true, cursos: [], calificaciones: [], certificados: []
                             });
