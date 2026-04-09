@@ -32,10 +32,24 @@
         .custom-scrollbar::-webkit-scrollbar-track { background: #f1f5f9; border-radius: 10px; }
         .custom-scrollbar::-webkit-scrollbar-thumb { background: #cbd5e1; border-radius: 10px; }
         .custom-scrollbar::-webkit-scrollbar-thumb:hover { background: #94a3b8; }
+        
+        /* Estilos para el modo de edición */
+        .editable-active {
+            outline: 2px dashed #FF2A2D !important;
+            outline-offset: 4px;
+            background-color: rgba(255, 42, 45, 0.05);
+            border-radius: 4px;
+            transition: all 0.2s;
+        }
+        .editable-active:hover {
+            background-color: rgba(255, 42, 45, 0.1);
+            cursor: text;
+        }
     </style>
 </head>
 <body class="bg-gray-50 text-gray-800 antialiased relative min-h-screen flex flex-col">
 
+    <!-- Navbar -->
     <nav id="main-nav" class="bg-white/80 backdrop-blur-md border-b border-gray-100 fixed w-full z-[80] top-0 transition-all duration-300">
         <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
             <div class="flex justify-between h-20 md:h-24">
@@ -46,7 +60,7 @@
                             <div class="w-3.5 h-7 bg-funetec-main rounded-t-sm"></div>
                             <div class="w-3.5 h-10 bg-funetec-light rounded-t-sm"></div>
                         </div>
-                        <span class="font-black text-xl tracking-widest text-gray-900 leading-none uppercase">FUNETEC</span>
+                        <span class="font-black text-xl tracking-widest text-gray-900 leading-none uppercase editable-text">FUNETEC</span>
                     </a>
                 </div>
                 <div class="hidden lg:flex items-center space-x-8">
@@ -65,8 +79,16 @@
                     <a href="https://verificacionfunetec.vercel.app" class="bg-gradient-to-r from-[#d60000] to-[#FF2A2D] text-white px-6 py-2.5 rounded-full font-bold hover:shadow-lg hover:-translate-y-0.5 transition-all flex items-center gap-2 text-sm ml-4">
                         <i data-lucide="shield-check" class="w-4 h-4 text-white"></i> Verificar Certificado
                     </a>
+                    <!-- BOTÓN ADMIN DESKTOP -->
+                    <button onclick="window.showPasswordModal()" class="text-gray-400 hover:text-gray-900 p-2 transition-colors ml-2" title="Panel de Administración">
+                        <i data-lucide="settings" class="w-5 h-5"></i>
+                    </button>
                 </div>
-                <div class="flex items-center lg:hidden">
+                <div class="flex items-center lg:hidden gap-2">
+                    <!-- BOTÓN ADMIN MOBILE -->
+                    <button onclick="window.showPasswordModal()" class="text-gray-400 hover:text-gray-900 p-2 transition-colors" title="Panel de Administración">
+                        <i data-lucide="settings" class="w-6 h-6"></i>
+                    </button>
                     <button id="mobile-menu-btn" class="text-gray-600 hover:text-funetec-main p-2">
                         <i data-lucide="menu" class="w-8 h-8"></i>
                     </button>
@@ -93,19 +115,24 @@
         </div>
     </nav>
 
+    <!-- Indicador de Modo Edición Activo -->
+    <div id="edit-mode-banner" class="hidden fixed top-24 left-1/2 -translate-x-1/2 z-[90] bg-yellow-400 text-yellow-900 px-6 py-2 rounded-full font-bold shadow-lg flex items-center gap-3 text-sm animate-bounce">
+        <i data-lucide="pencil" class="w-4 h-4"></i> MODO EDICIÓN ACTIVO <button onclick="window.toggleLiveEdit()" class="underline ml-2 hover:text-red-600">Guardar/Salir</button>
+    </div>
+
     <div id="landing-view" class="flex-grow">
         <!-- Hero Section -->
         <section id="inicio" class="pt-32 pb-20 md:pt-44 md:pb-28 bg-gradient-to-b from-red-50/50 via-white to-gray-50 relative overflow-hidden">
             <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10 flex flex-col lg:flex-row items-center gap-12 lg:gap-8">
                 <div class="lg:w-1/2 text-center lg:text-left">
-                    <div class="inline-flex items-center gap-2 py-1.5 px-4 rounded-full bg-white text-funetec-main font-bold text-sm mb-6 tracking-widest uppercase border border-red-100 shadow-sm">
+                    <div class="inline-flex items-center gap-2 py-1.5 px-4 rounded-full bg-white text-funetec-main font-bold text-sm mb-6 tracking-widest uppercase border border-red-100 shadow-sm editable-text">
                         <span class="w-2 h-2 rounded-full bg-funetec-main animate-pulse"></span> Calendario A - 2026
                     </div>
-                    <h1 class="text-4xl md:text-6xl lg:text-7xl font-black text-gray-900 leading-[1.1] mb-6 tracking-tight text-balance">El tiempo corre <br><span class="text-transparent bg-clip-text bg-gradient-to-r from-red-700 to-red-500">¿Aún estás pensando qué estudiar?</span></h1>
-                    <p class="text-lg md:text-xl text-gray-600 mb-10 max-w-lg mx-auto lg:mx-0 font-medium text-balance">Las matrículas están abiertas. Prepárate para tu futuro con nuestros programas de alta demanda laboral. ¡Te estamos esperando!</p>
+                    <h1 class="text-4xl md:text-6xl lg:text-7xl font-black text-gray-900 leading-[1.1] mb-6 tracking-tight text-balance editable-text">El tiempo corre <br><span class="text-transparent bg-clip-text bg-gradient-to-r from-red-700 to-red-500">¿Aún estás pensando qué estudiar?</span></h1>
+                    <p class="text-lg md:text-xl text-gray-600 mb-10 max-w-lg mx-auto lg:mx-0 font-medium text-balance editable-text">Las matrículas están abiertas. Prepárate para tu futuro con nuestros programas de alta demanda laboral. ¡Te estamos esperando!</p>
                     <div class="flex flex-col sm:flex-row gap-4 justify-center lg:justify-start">
-                        <a href="#programas" class="bg-gradient-to-r from-red-700 to-red-600 text-white px-8 py-4 rounded-full font-bold text-lg hover:shadow-lg hover:-translate-y-1 transition-all flex justify-center items-center gap-2">Ver Programas <i data-lucide="arrow-down" class="w-5 h-5"></i></a>
-                        <a href="#cursos" class="bg-white text-gray-800 border border-gray-200 px-8 py-4 rounded-full font-bold text-lg hover:bg-gray-50 hover:-translate-y-1 transition-all shadow-sm text-center">Cursos Cortos</a>
+                        <a href="#programas" class="bg-gradient-to-r from-red-700 to-red-600 text-white px-8 py-4 rounded-full font-bold text-lg hover:shadow-lg hover:-translate-y-1 transition-all flex justify-center items-center gap-2 editable-text">Ver Programas <i data-lucide="arrow-down" class="w-5 h-5 pointer-events-none"></i></a>
+                        <a href="#cursos" class="bg-white text-gray-800 border border-gray-200 px-8 py-4 rounded-full font-bold text-lg hover:bg-gray-50 hover:-translate-y-1 transition-all shadow-sm text-center editable-text">Cursos Cortos</a>
                     </div>
                 </div>
                 <div class="lg:w-1/2 relative w-full">
@@ -114,7 +141,7 @@
                         <div class="absolute inset-0 bg-gradient-to-t from-black/80 via-black/20 to-transparent"></div>
                         <div class="absolute bottom-0 left-0 right-0 p-8 text-white">
                             <div class="flex items-end space-x-1.5 h-8 mb-3"><div class="w-3 h-8 bg-funetec-dark rounded-sm"></div><div class="w-3 h-5 bg-funetec-main rounded-sm"></div><div class="w-3 h-8 bg-funetec-light rounded-sm"></div></div>
-                            <div class="font-bold text-2xl md:text-3xl leading-tight">Fundación Educativa Técnica de la Costa</div>
+                            <div class="font-bold text-2xl md:text-3xl leading-tight editable-text">Fundación Educativa Técnica de la Costa</div>
                         </div>
                     </div>
                 </div>
@@ -124,20 +151,23 @@
         <!-- Programas Técnicos -->
         <section id="programas" class="py-24 bg-gray-50 relative">
             <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-                <div class="text-center mb-20"><h2 class="text-funetec-main font-bold tracking-widest uppercase text-sm mb-3">Tu futuro empieza aquí</h2><h3 class="text-4xl md:text-5xl font-black tracking-tight text-gray-900 uppercase">Programas Técnicos</h3><div class="w-24 h-1.5 bg-gradient-to-r from-red-600 to-red-400 mx-auto mt-6 rounded-full"></div></div>
+                <div class="text-center mb-20">
+                    <h2 class="text-funetec-main font-bold tracking-widest uppercase text-sm mb-3 editable-text">Tu futuro empieza aquí</h2>
+                    <h3 class="text-4xl md:text-5xl font-black tracking-tight text-gray-900 uppercase editable-text">Programas Técnicos</h3>
+                    <div class="w-24 h-1.5 bg-gradient-to-r from-red-600 to-red-400 mx-auto mt-6 rounded-full"></div>
+                </div>
 
                 <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8 mb-16">
                     <!-- Tarjeta: Farmacia -->
                     <div class="bg-white rounded-3xl shadow-premium hover:shadow-premium-hover hover:-translate-y-2 transition-all relative overflow-hidden group flex flex-col border border-gray-100/50">
                         <div class="h-64 relative overflow-hidden bg-blue-900">
                             <img src="https://images.unsplash.com/photo-1587854692152-cbe660dbde88?ixlib=rb-4.0.3&auto=format&fit=crop&w=600&q=80" class="absolute inset-0 w-full h-full object-cover opacity-50 group-hover:opacity-40 transition-opacity duration-700" alt="Fondo Farmacia">
-                            <!-- Referencia base: scale-[1.28] y translate-y-1 -->
                             <img src="https://image2url.com/r2/default/images/1775745615976-dcb347de-c701-4c5f-bf72-ae20d14dca21.png" alt="Farmacia" class="w-full h-full object-contain object-bottom origin-bottom scale-[1.28] translate-y-1 drop-shadow-2xl group-hover:scale-[1.35] transition-transform duration-700 relative z-10">
                             <div class="absolute inset-0 bg-gradient-to-t from-gray-900/80 via-gray-900/20 to-transparent z-20 pointer-events-none"></div>
                         </div>
                         <div class="p-8 flex-grow flex flex-col relative bg-white">
-                            <h3 class="text-2xl font-black text-gray-900 leading-tight uppercase mb-6">Auxiliar en<br><span class="text-transparent bg-clip-text bg-gradient-to-r from-red-700 to-red-500">Servicios Farmacéuticos</span></h3>
-                            <button onclick="window.showCourseDetails('Auxiliar en Servicios Farmacéuticos')" class="mt-auto w-full flex justify-center items-center gap-2 bg-gradient-to-r from-red-600 to-red-500 text-white py-3.5 rounded-xl font-bold hover:shadow-lg transition-all">ESTUDIAR AHORA <i data-lucide="arrow-right" class="w-5 h-5"></i></button>
+                            <h3 class="text-2xl font-black text-gray-900 leading-tight uppercase mb-6 editable-text" data-course-ref="Auxiliar en Servicios Farmacéuticos">Auxiliar en<br><span class="text-transparent bg-clip-text bg-gradient-to-r from-red-700 to-red-500">Servicios Farmacéuticos</span></h3>
+                            <button onclick="window.showCourseDetails('Auxiliar en Servicios Farmacéuticos')" class="mt-auto w-full flex justify-center items-center gap-2 bg-gradient-to-r from-red-600 to-red-500 text-white py-3.5 rounded-xl font-bold hover:shadow-lg transition-all editable-text">ESTUDIAR AHORA <i data-lucide="arrow-right" class="w-5 h-5 pointer-events-none"></i></button>
                         </div>
                     </div>
 
@@ -145,13 +175,12 @@
                     <div class="bg-white rounded-3xl shadow-premium hover:shadow-premium-hover hover:-translate-y-2 transition-all relative overflow-hidden group flex flex-col border border-gray-100/50">
                         <div class="h-64 relative overflow-hidden bg-teal-900">
                             <img src="https://images.unsplash.com/photo-1519494026892-80bbd2d6fd0d?ixlib=rb-4.0.3&auto=format&fit=crop&w=600&q=80" class="absolute inset-0 w-full h-full object-cover opacity-50 group-hover:opacity-40 transition-opacity duration-700" alt="Fondo Administrativo">
-                            <!-- Alineado aumentando escala: scale-[1.42] y translate-y-3 -->
                             <img src="https://image2url.com/r2/default/images/1775745524150-e3153919-f337-403b-be90-c4670a4f7d87.png" alt="Admin" class="w-full h-full object-contain object-bottom origin-bottom scale-[1.42] translate-y-3 drop-shadow-2xl group-hover:scale-[1.48] transition-transform duration-700 relative z-10">
                             <div class="absolute inset-0 bg-gradient-to-t from-gray-900/80 via-gray-900/20 to-transparent z-20 pointer-events-none"></div>
                         </div>
                         <div class="p-8 flex-grow flex flex-col relative bg-white">
-                            <h3 class="text-2xl font-black text-gray-900 leading-tight uppercase mb-6">Auxiliar Administrativo<br><span class="text-transparent bg-clip-text bg-gradient-to-r from-red-700 to-red-500">En Salud</span></h3>
-                            <button onclick="window.showCourseDetails('Auxiliar Administrativo en Salud')" class="mt-auto w-full flex justify-center items-center gap-2 bg-gradient-to-r from-red-600 to-red-500 text-white py-3.5 rounded-xl font-bold hover:shadow-lg transition-all">ESTUDIAR AHORA <i data-lucide="arrow-right" class="w-5 h-5"></i></button>
+                            <h3 class="text-2xl font-black text-gray-900 leading-tight uppercase mb-6 editable-text" data-course-ref="Auxiliar Administrativo en Salud">Auxiliar Administrativo<br><span class="text-transparent bg-clip-text bg-gradient-to-r from-red-700 to-red-500">En Salud</span></h3>
+                            <button onclick="window.showCourseDetails('Auxiliar Administrativo en Salud')" class="mt-auto w-full flex justify-center items-center gap-2 bg-gradient-to-r from-red-600 to-red-500 text-white py-3.5 rounded-xl font-bold hover:shadow-lg transition-all editable-text">ESTUDIAR AHORA <i data-lucide="arrow-right" class="w-5 h-5 pointer-events-none"></i></button>
                         </div>
                     </div>
 
@@ -159,29 +188,28 @@
                     <div class="bg-white rounded-3xl shadow-premium hover:shadow-premium-hover hover:-translate-y-2 transition-all relative overflow-hidden group flex flex-col border border-gray-100/50">
                         <div class="h-64 relative overflow-hidden bg-rose-900">
                             <img src="https://images.unsplash.com/photo-1631815587646-b85a1bb027e1?ixlib=rb-4.0.3&auto=format&fit=crop&w=600&q=80" class="absolute inset-0 w-full h-full object-cover opacity-50 group-hover:opacity-40 transition-opacity duration-700" alt="Fondo Enfermería">
-                            <!-- Alineado aumentando escala: scale-[1.15] y translate-y-1 -->
                             <img src="https://image2url.com/r2/default/images/1775747694884-659acee1-1cf2-48c6-8f9c-9993102d4dbe.png" alt="Enfermería" class="w-full h-full object-contain object-bottom origin-bottom scale-[1.15] translate-y-1 drop-shadow-2xl group-hover:scale-[1.22] transition-transform duration-700 relative z-10">
                             <div class="absolute inset-0 bg-gradient-to-t from-gray-900/80 via-gray-900/20 to-transparent z-20 pointer-events-none"></div>
                         </div>
                         <div class="p-8 flex-grow flex flex-col relative bg-white">
-                            <h3 class="text-2xl font-black text-gray-900 leading-tight uppercase mb-6">Auxiliar en<br><span class="text-transparent bg-clip-text bg-gradient-to-r from-red-700 to-red-500">Enfermería</span></h3>
-                            <button onclick="window.showCourseDetails('Auxiliar en Enfermería')" class="mt-auto w-full flex justify-center items-center gap-2 bg-gradient-to-r from-red-600 to-red-500 text-white py-3.5 rounded-xl font-bold hover:shadow-lg transition-all">ESTUDIAR AHORA <i data-lucide="arrow-right" class="w-5 h-5"></i></button>
+                            <h3 class="text-2xl font-black text-gray-900 leading-tight uppercase mb-6 editable-text" data-course-ref="Auxiliar en Enfermería">Auxiliar en<br><span class="text-transparent bg-clip-text bg-gradient-to-r from-red-700 to-red-500">Enfermería</span></h3>
+                            <button onclick="window.showCourseDetails('Auxiliar en Enfermería')" class="mt-auto w-full flex justify-center items-center gap-2 bg-gradient-to-r from-red-600 to-red-500 text-white py-3.5 rounded-xl font-bold hover:shadow-lg transition-all editable-text">ESTUDIAR AHORA <i data-lucide="arrow-right" class="w-5 h-5 pointer-events-none"></i></button>
                         </div>
                     </div>
                 </div>
 
                 <div class="bg-white rounded-3xl shadow-premium p-8 md:p-12 border border-gray-100 mt-12">
                     <div class="text-center mb-10">
-                        <h3 class="text-2xl md:text-3xl font-black text-gray-900 uppercase">También te ofrecemos programas en:</h3>
-                        <p class="text-gray-500 font-medium mt-2">Toca cualquier programa para solicitar más información</p>
+                        <h3 class="text-2xl md:text-3xl font-black text-gray-900 uppercase editable-text">También te ofrecemos programas en:</h3>
+                        <p class="text-gray-500 font-medium mt-2 editable-text">Toca cualquier programa para solicitar más información</p>
                     </div>
-                    <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4">
-                        <button onclick="window.showCourseDetails('Técnico Peluquería y Belleza')" class="w-full text-left flex items-center justify-between bg-gray-50 p-4 sm:p-5 rounded-2xl border border-gray-200 hover:border-red-300 hover:shadow-md hover:-translate-y-1 transition-all group"><div class="flex items-center gap-4"><div class="bg-white p-3 rounded-xl text-red-500 shadow-sm group-hover:bg-red-600 group-hover:text-white transition-colors relative"><i data-lucide="scissors" class="w-6 h-6"></i></div><span class="font-bold text-gray-800 text-sm md:text-base group-hover:text-red-600">Técnico Peluquería y Belleza</span></div><i data-lucide="arrow-right" class="w-5 h-5 text-gray-400 group-hover:text-red-600 transition-transform group-hover:translate-x-1"></i></button>
-                        <button onclick="window.showCourseDetails('Auxiliar Contable')" class="w-full text-left flex items-center justify-between bg-gray-50 p-4 sm:p-5 rounded-2xl border border-gray-200 hover:border-red-300 hover:shadow-md hover:-translate-y-1 transition-all group"><div class="flex items-center gap-4"><div class="bg-white p-3 rounded-xl text-red-500 shadow-sm group-hover:bg-red-600 group-hover:text-white transition-colors"><i data-lucide="calculator" class="w-6 h-6"></i></div><span class="font-bold text-gray-800 text-sm md:text-base group-hover:text-red-600">Auxiliar Contable</span></div><i data-lucide="arrow-right" class="w-5 h-5 text-gray-400 group-hover:text-red-600 transition-transform group-hover:translate-x-1"></i></button>
-                        <button onclick="window.showCourseDetails('Auxiliar Administrativo')" class="w-full text-left flex items-center justify-between bg-gray-50 p-4 sm:p-5 rounded-2xl border border-gray-200 hover:border-red-300 hover:shadow-md hover:-translate-y-1 transition-all group"><div class="flex items-center gap-4"><div class="bg-white p-3 rounded-xl text-red-500 shadow-sm group-hover:bg-red-600 group-hover:text-white transition-colors"><i data-lucide="briefcase" class="w-6 h-6"></i></div><span class="font-bold text-gray-800 text-sm md:text-base group-hover:text-red-600">Auxiliar Administrativo</span></div><i data-lucide="arrow-right" class="w-5 h-5 text-gray-400 group-hover:text-red-600 transition-transform group-hover:translate-x-1"></i></button>
-                        <button onclick="window.showCourseDetails('Recursos Humanos')" class="w-full text-left flex items-center justify-between bg-gray-50 p-4 sm:p-5 rounded-2xl border border-gray-200 hover:border-red-300 hover:shadow-md hover:-translate-y-1 transition-all group"><div class="flex items-center gap-4"><div class="bg-white p-3 rounded-xl text-red-500 shadow-sm group-hover:bg-red-600 group-hover:text-white transition-colors"><i data-lucide="users" class="w-6 h-6"></i></div><span class="font-bold text-gray-800 text-sm md:text-base group-hover:text-red-600">Recursos Humanos</span></div><i data-lucide="arrow-right" class="w-5 h-5 text-gray-400 group-hover:text-red-600 transition-transform group-hover:translate-x-1"></i></button>
-                        <button onclick="window.showCourseDetails('Educación Primera Infancia')" class="w-full text-left flex items-center justify-between bg-gray-50 p-4 sm:p-5 rounded-2xl border border-gray-200 hover:border-red-300 hover:shadow-md hover:-translate-y-1 transition-all group"><div class="flex items-center gap-4"><div class="bg-white p-3 rounded-xl text-red-500 shadow-sm group-hover:bg-red-600 group-hover:text-white transition-colors"><i data-lucide="baby" class="w-6 h-6"></i></div><span class="font-bold text-gray-800 text-sm md:text-base group-hover:text-red-600">Educación Primera Infancia</span></div><i data-lucide="arrow-right" class="w-5 h-5 text-gray-400 group-hover:text-red-600 transition-transform group-hover:translate-x-1"></i></button>
-                        <button onclick="window.showCourseDetails('Cosmetología y Estética')" class="w-full text-left flex items-center justify-between bg-gray-50 p-4 sm:p-5 rounded-2xl border border-gray-200 hover:border-red-300 hover:shadow-md hover:-translate-y-1 transition-all group"><div class="flex items-center gap-4"><div class="bg-white p-3 rounded-xl text-red-500 shadow-sm group-hover:bg-red-600 group-hover:text-white transition-colors"><i data-lucide="sparkles" class="w-6 h-6"></i></div><span class="font-bold text-gray-800 text-sm md:text-base group-hover:text-red-600">Cosmetología y Estética</span></div><i data-lucide="arrow-right" class="w-5 h-5 text-gray-400 group-hover:text-red-600 transition-transform group-hover:translate-x-1"></i></button>
+                    <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4" id="other-programs-container">
+                        <button onclick="window.showCourseDetails('Técnico Peluquería y Belleza')" class="w-full text-left flex items-center justify-between bg-gray-50 p-4 sm:p-5 rounded-2xl border border-gray-200 hover:border-red-300 hover:shadow-md hover:-translate-y-1 transition-all group"><div class="flex items-center gap-4"><div class="bg-white p-3 rounded-xl text-red-500 shadow-sm group-hover:bg-red-600 group-hover:text-white transition-colors relative"><i data-lucide="scissors" class="w-6 h-6 pointer-events-none"></i></div><span class="font-bold text-gray-800 text-sm md:text-base group-hover:text-red-600 editable-text">Técnico Peluquería y Belleza</span></div><i data-lucide="arrow-right" class="w-5 h-5 text-gray-400 group-hover:text-red-600 transition-transform group-hover:translate-x-1 pointer-events-none"></i></button>
+                        <button onclick="window.showCourseDetails('Auxiliar Contable')" class="w-full text-left flex items-center justify-between bg-gray-50 p-4 sm:p-5 rounded-2xl border border-gray-200 hover:border-red-300 hover:shadow-md hover:-translate-y-1 transition-all group"><div class="flex items-center gap-4"><div class="bg-white p-3 rounded-xl text-red-500 shadow-sm group-hover:bg-red-600 group-hover:text-white transition-colors"><i data-lucide="calculator" class="w-6 h-6 pointer-events-none"></i></div><span class="font-bold text-gray-800 text-sm md:text-base group-hover:text-red-600 editable-text">Auxiliar Contable</span></div><i data-lucide="arrow-right" class="w-5 h-5 text-gray-400 group-hover:text-red-600 transition-transform group-hover:translate-x-1 pointer-events-none"></i></button>
+                        <button onclick="window.showCourseDetails('Auxiliar Administrativo')" class="w-full text-left flex items-center justify-between bg-gray-50 p-4 sm:p-5 rounded-2xl border border-gray-200 hover:border-red-300 hover:shadow-md hover:-translate-y-1 transition-all group"><div class="flex items-center gap-4"><div class="bg-white p-3 rounded-xl text-red-500 shadow-sm group-hover:bg-red-600 group-hover:text-white transition-colors"><i data-lucide="briefcase" class="w-6 h-6 pointer-events-none"></i></div><span class="font-bold text-gray-800 text-sm md:text-base group-hover:text-red-600 editable-text">Auxiliar Administrativo</span></div><i data-lucide="arrow-right" class="w-5 h-5 text-gray-400 group-hover:text-red-600 transition-transform group-hover:translate-x-1 pointer-events-none"></i></button>
+                        <button onclick="window.showCourseDetails('Recursos Humanos')" class="w-full text-left flex items-center justify-between bg-gray-50 p-4 sm:p-5 rounded-2xl border border-gray-200 hover:border-red-300 hover:shadow-md hover:-translate-y-1 transition-all group"><div class="flex items-center gap-4"><div class="bg-white p-3 rounded-xl text-red-500 shadow-sm group-hover:bg-red-600 group-hover:text-white transition-colors"><i data-lucide="users" class="w-6 h-6 pointer-events-none"></i></div><span class="font-bold text-gray-800 text-sm md:text-base group-hover:text-red-600 editable-text">Recursos Humanos</span></div><i data-lucide="arrow-right" class="w-5 h-5 text-gray-400 group-hover:text-red-600 transition-transform group-hover:translate-x-1 pointer-events-none"></i></button>
+                        <button onclick="window.showCourseDetails('Educación Primera Infancia')" class="w-full text-left flex items-center justify-between bg-gray-50 p-4 sm:p-5 rounded-2xl border border-gray-200 hover:border-red-300 hover:shadow-md hover:-translate-y-1 transition-all group"><div class="flex items-center gap-4"><div class="bg-white p-3 rounded-xl text-red-500 shadow-sm group-hover:bg-red-600 group-hover:text-white transition-colors"><i data-lucide="baby" class="w-6 h-6 pointer-events-none"></i></div><span class="font-bold text-gray-800 text-sm md:text-base group-hover:text-red-600 editable-text">Educación Primera Infancia</span></div><i data-lucide="arrow-right" class="w-5 h-5 text-gray-400 group-hover:text-red-600 transition-transform group-hover:translate-x-1 pointer-events-none"></i></button>
+                        <button onclick="window.showCourseDetails('Cosmetología y Estética')" class="w-full text-left flex items-center justify-between bg-gray-50 p-4 sm:p-5 rounded-2xl border border-gray-200 hover:border-red-300 hover:shadow-md hover:-translate-y-1 transition-all group"><div class="flex items-center gap-4"><div class="bg-white p-3 rounded-xl text-red-500 shadow-sm group-hover:bg-red-600 group-hover:text-white transition-colors"><i data-lucide="sparkles" class="w-6 h-6 pointer-events-none"></i></div><span class="font-bold text-gray-800 text-sm md:text-base group-hover:text-red-600 editable-text">Cosmetología y Estética</span></div><i data-lucide="arrow-right" class="w-5 h-5 text-gray-400 group-hover:text-red-600 transition-transform group-hover:translate-x-1 pointer-events-none"></i></button>
                     </div>
                 </div>
             </div>
@@ -191,10 +219,10 @@
         <section id="cursos" class="py-24 bg-white relative">
             <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
                 <div class="text-center mb-16">
-                    <div class="inline-flex items-center gap-2 bg-red-50 border border-red-100 text-red-600 px-5 py-2 rounded-full font-bold text-sm uppercase tracking-widest mb-5 shadow-sm">
+                    <div class="inline-flex items-center gap-2 bg-red-50 border border-red-100 text-red-600 px-5 py-2 rounded-full font-bold text-sm uppercase tracking-widest mb-5 shadow-sm editable-text">
                         <span class="relative flex h-3 w-3"><span class="animate-ping absolute inline-flex h-full w-full rounded-full bg-red-400 opacity-75"></span><span class="relative inline-flex rounded-full h-3 w-3 bg-red-600"></span></span>¡Inician esta semana!
                     </div>
-                    <h3 class="text-4xl md:text-5xl font-black text-gray-900 uppercase">Cursos Cortos</h3>
+                    <h3 class="text-4xl md:text-5xl font-black text-gray-900 uppercase editable-text">Cursos Cortos</h3>
                     <div class="w-24 h-1.5 bg-gradient-to-r from-red-600 to-red-400 mx-auto mt-6 rounded-full"></div>
                 </div>
 
@@ -203,23 +231,23 @@
                         <div class="h-60 relative overflow-hidden bg-gray-200">
                             <img src="https://images.unsplash.com/photo-1516549655169-df83a0774514?ixlib=rb-4.0.3&auto=format&fit=crop&w=600&q=80" alt="RCP" class="w-full h-full object-cover group-hover:scale-110 transition duration-700">
                             <div class="absolute inset-0 bg-gradient-to-t from-gray-900/60 to-transparent"></div>
-                            <div class="absolute top-5 right-5 bg-white/95 backdrop-blur px-5 py-2 rounded-full text-gray-900 font-black shadow-lg text-lg">$120.000</div>
+                            <div class="absolute top-5 right-5 bg-white/95 backdrop-blur px-5 py-2 rounded-full text-gray-900 font-black shadow-lg text-lg editable-text">$120.000</div>
                         </div>
                         <div class="p-8 flex-grow flex flex-col">
-                            <h3 class="text-2xl font-black text-gray-900 uppercase mb-3">Curso 5 en 1</h3>
-                            <div class="text-xs bg-red-50 text-red-700 px-3 py-1.5 rounded-lg inline-block mb-5 font-bold w-max uppercase border border-red-100">Presencial Teórico-Práctico</div>
+                            <h3 class="text-2xl font-black text-gray-900 uppercase mb-3 editable-text" data-course-ref="Curso 5 en 1">Curso 5 en 1</h3>
+                            <div class="text-xs bg-red-50 text-red-700 px-3 py-1.5 rounded-lg inline-block mb-5 font-bold w-max uppercase border border-red-100 editable-text">Presencial Teórico-Práctico</div>
                             <ul class="space-y-3 mb-8 flex-grow font-medium text-gray-600 text-sm">
-                                <li class="flex items-start gap-3"><i data-lucide="check-circle-2" class="w-5 h-5 text-green-500"></i> BLS</li>
-                                <li class="flex items-start gap-3"><i data-lucide="check-circle-2" class="w-5 h-5 text-green-500"></i> ACLS</li>
-                                <li class="flex items-start gap-3"><i data-lucide="check-circle-2" class="w-5 h-5 text-green-500"></i> Violencia de Género</li>
-                                <li class="flex items-start gap-3"><i data-lucide="check-circle-2" class="w-5 h-5 text-green-500"></i> Sustancias Químicas</li>
-                                <li class="flex items-start gap-3"><i data-lucide="check-circle-2" class="w-5 h-5 text-green-500"></i> Gestión de Duelo</li>
+                                <li class="flex items-start gap-3"><i data-lucide="check-circle-2" class="w-5 h-5 text-green-500"></i> <span class="editable-text">BLS</span></li>
+                                <li class="flex items-start gap-3"><i data-lucide="check-circle-2" class="w-5 h-5 text-green-500"></i> <span class="editable-text">ACLS</span></li>
+                                <li class="flex items-start gap-3"><i data-lucide="check-circle-2" class="w-5 h-5 text-green-500"></i> <span class="editable-text">Violencia de Género</span></li>
+                                <li class="flex items-start gap-3"><i data-lucide="check-circle-2" class="w-5 h-5 text-green-500"></i> <span class="editable-text">Sustancias Químicas</span></li>
+                                <li class="flex items-start gap-3"><i data-lucide="check-circle-2" class="w-5 h-5 text-green-500"></i> <span class="editable-text">Gestión de Duelo</span></li>
                             </ul>
                             <div class="bg-gray-50 rounded-2xl p-5 border border-gray-100 mb-6">
-                                <div class="flex items-center gap-3 text-gray-900 font-bold text-lg mb-2"><i data-lucide="calendar-days" class="w-5 h-5 text-red-500"></i> 16 - MARZO - 2026</div>
-                                <div class="flex items-center gap-3 text-gray-600 font-semibold"><i data-lucide="clock" class="w-5 h-5 text-red-500"></i> 8:00 AM</div>
+                                <div class="flex items-center gap-3 text-gray-900 font-bold text-lg mb-2"><i data-lucide="calendar-days" class="w-5 h-5 text-red-500"></i> <span class="editable-text">16 - MARZO - 2026</span></div>
+                                <div class="flex items-center gap-3 text-gray-600 font-semibold"><i data-lucide="clock" class="w-5 h-5 text-red-500"></i> <span class="editable-text">8:00 AM</span></div>
                             </div>
-                            <button onclick="window.showCourseDetails('Curso 5 en 1')" class="mt-auto w-full flex justify-center items-center gap-2 bg-gradient-to-r from-red-600 to-red-500 text-white py-3.5 rounded-xl font-bold hover:shadow-lg transition-all">ESTUDIAR AHORA <i data-lucide="arrow-right" class="w-5 h-5"></i></button>
+                            <button onclick="window.showCourseDetails('Curso 5 en 1')" class="mt-auto w-full flex justify-center items-center gap-2 bg-gradient-to-r from-red-600 to-red-500 text-white py-3.5 rounded-xl font-bold hover:shadow-lg transition-all editable-text">ESTUDIAR AHORA <i data-lucide="arrow-right" class="w-5 h-5 pointer-events-none"></i></button>
                         </div>
                     </div>
                     
@@ -227,20 +255,20 @@
                         <div class="h-60 relative overflow-hidden bg-gray-200">
                             <img src="https://images.unsplash.com/photo-1604654894610-df63bc536371?ixlib=rb-4.0.3&auto=format&fit=crop&w=600&q=80" alt="Uñas acrílicas" class="w-full h-full object-cover group-hover:scale-110 transition duration-700">
                             <div class="absolute inset-0 bg-gradient-to-t from-gray-900/60 to-transparent"></div>
-                            <div class="absolute top-5 right-5 bg-white/95 backdrop-blur px-5 py-2 rounded-full text-gray-900 font-black shadow-lg text-lg">$200.000</div>
+                            <div class="absolute top-5 right-5 bg-white/95 backdrop-blur px-5 py-2 rounded-full text-gray-900 font-black shadow-lg text-lg editable-text">$200.000</div>
                         </div>
                         <div class="p-8 flex-grow flex flex-col">
-                            <h3 class="text-2xl font-black text-gray-900 uppercase mb-3">Uñas Acrílicas</h3>
+                            <h3 class="text-2xl font-black text-gray-900 uppercase mb-3 editable-text" data-course-ref="Uñas Acrílicas">Uñas Acrílicas</h3>
                             <div class="flex flex-wrap gap-2 mb-5">
-                                <div class="text-xs bg-red-50 text-red-700 px-3 py-1.5 rounded-lg inline-block font-bold uppercase border border-red-100">Curso Corto</div>
-                                <div class="text-xs bg-gray-100 text-gray-700 px-3 py-1.5 rounded-lg inline-block font-bold uppercase">Duración: 2 Meses</div>
+                                <div class="text-xs bg-red-50 text-red-700 px-3 py-1.5 rounded-lg inline-block font-bold uppercase border border-red-100 editable-text">Curso Corto</div>
+                                <div class="text-xs bg-gray-100 text-gray-700 px-3 py-1.5 rounded-lg inline-block font-bold uppercase editable-text">Duración: 2 Meses</div>
                             </div>
-                            <p class="text-gray-600 font-medium mb-8 flex-grow text-sm leading-relaxed">Aprende las técnicas más actualizadas para la aplicación, esculpido y diseño de uñas acrílicas. Prepárate para emprender.</p>
+                            <p class="text-gray-600 font-medium mb-8 flex-grow text-sm leading-relaxed editable-text">Aprende las técnicas más actualizadas para la aplicación, esculpido y diseño de uñas acrílicas. Prepárate para emprender.</p>
                             <div class="bg-gray-50 rounded-2xl p-5 border border-gray-100 mb-6">
-                                <div class="flex items-center gap-3 text-gray-900 font-bold mb-2"><i data-lucide="calendar-days" class="w-5 h-5 text-red-500"></i> Inicio: 17 de Marzo</div>
-                                <div class="flex items-start gap-3 text-gray-600 font-semibold text-sm"><i data-lucide="clock" class="w-5 h-5 text-red-500"></i><span>Martes y Jueves<br>8:00am - 12:00pm</span></div>
+                                <div class="flex items-center gap-3 text-gray-900 font-bold mb-2"><i data-lucide="calendar-days" class="w-5 h-5 text-red-500"></i> <span class="editable-text">Inicio: 17 de Marzo</span></div>
+                                <div class="flex items-start gap-3 text-gray-600 font-semibold text-sm"><i data-lucide="clock" class="w-5 h-5 text-red-500"></i><span class="editable-text">Martes y Jueves<br>8:00am - 12:00pm</span></div>
                             </div>
-                            <button onclick="window.showCourseDetails('Uñas Acrílicas')" class="mt-auto w-full flex justify-center items-center gap-2 bg-gradient-to-r from-red-600 to-red-500 text-white py-3.5 rounded-xl font-bold hover:shadow-lg transition-all">ESTUDIAR AHORA <i data-lucide="arrow-right" class="w-5 h-5"></i></button>
+                            <button onclick="window.showCourseDetails('Uñas Acrílicas')" class="mt-auto w-full flex justify-center items-center gap-2 bg-gradient-to-r from-red-600 to-red-500 text-white py-3.5 rounded-xl font-bold hover:shadow-lg transition-all editable-text">ESTUDIAR AHORA <i data-lucide="arrow-right" class="w-5 h-5 pointer-events-none"></i></button>
                         </div>
                     </div>
                     
@@ -248,19 +276,19 @@
                         <div class="h-60 relative overflow-hidden bg-gray-200">
                             <img src="https://images.unsplash.com/photo-1584308666744-24d5c474f2ae?ixlib=rb-4.0.3&auto=format&fit=crop&w=600&q=80" alt="Inyectología" class="w-full h-full object-cover group-hover:scale-110 transition duration-700">
                             <div class="absolute inset-0 bg-gradient-to-t from-gray-900/60 to-transparent"></div>
-                            <div class="absolute top-5 right-5 bg-white/95 backdrop-blur px-5 py-2 rounded-full text-gray-900 font-black shadow-lg text-lg">$120.000</div>
+                            <div class="absolute top-5 right-5 bg-white/95 backdrop-blur px-5 py-2 rounded-full text-gray-900 font-black shadow-lg text-lg editable-text">$120.000</div>
                         </div>
                         <div class="p-8 flex-grow flex flex-col">
-                            <h3 class="text-2xl font-black text-gray-900 uppercase mb-3 leading-tight">Inyectología y Venopunción</h3>
-                            <div class="text-xs bg-red-50 text-red-700 px-3 py-1.5 rounded-lg inline-block mb-5 font-bold uppercase w-max border border-red-100">Curso Corto</div>
+                            <h3 class="text-2xl font-black text-gray-900 uppercase mb-3 leading-tight editable-text" data-course-ref="Inyectología y Venopunción">Inyectología y Venopunción</h3>
+                            <div class="text-xs bg-red-50 text-red-700 px-3 py-1.5 rounded-lg inline-block mb-5 font-bold uppercase w-max border border-red-100 editable-text">Curso Corto</div>
                             <div class="bg-yellow-50 border border-yellow-200 text-yellow-800 p-4 rounded-2xl mb-8 font-bold flex items-center gap-3 text-sm flex-grow shadow-sm">
-                                <i data-lucide="package-check" class="w-6 h-6 flex-shrink-0 text-yellow-600"></i>INCLUYE MATERIAL COMPLETO
+                                <i data-lucide="package-check" class="w-6 h-6 flex-shrink-0 text-yellow-600"></i><span class="editable-text">INCLUYE MATERIAL COMPLETO</span>
                             </div>
                             <div class="bg-gray-50 rounded-2xl p-5 border border-gray-100 mb-6">
-                                <div class="flex items-center gap-3 text-gray-900 font-bold text-lg mb-2"><i data-lucide="calendar-days" class="w-5 h-5 text-red-500"></i> 20 - MARZO - 2026</div>
-                                <div class="flex items-center gap-3 text-gray-600 font-semibold"><i data-lucide="clock" class="w-5 h-5 text-red-500"></i> 8:00 AM</div>
+                                <div class="flex items-center gap-3 text-gray-900 font-bold text-lg mb-2"><i data-lucide="calendar-days" class="w-5 h-5 text-red-500"></i> <span class="editable-text">20 - MARZO - 2026</span></div>
+                                <div class="flex items-center gap-3 text-gray-600 font-semibold"><i data-lucide="clock" class="w-5 h-5 text-red-500"></i> <span class="editable-text">8:00 AM</span></div>
                             </div>
-                            <button onclick="window.showCourseDetails('Inyectología y Venopunción')" class="mt-auto w-full flex justify-center items-center gap-2 bg-gradient-to-r from-red-600 to-red-500 text-white py-3.5 rounded-xl font-bold hover:shadow-lg transition-all">ESTUDIAR AHORA <i data-lucide="arrow-right" class="w-5 h-5"></i></button>
+                            <button onclick="window.showCourseDetails('Inyectología y Venopunción')" class="mt-auto w-full flex justify-center items-center gap-2 bg-gradient-to-r from-red-600 to-red-500 text-white py-3.5 rounded-xl font-bold hover:shadow-lg transition-all editable-text">ESTUDIAR AHORA <i data-lucide="arrow-right" class="w-5 h-5 pointer-events-none"></i></button>
                         </div>
                     </div>
                 </div>
@@ -272,17 +300,17 @@
             <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
                 <div class="bg-white rounded-3xl shadow-premium overflow-hidden border border-gray-100 flex flex-col lg:flex-row">
                     <div class="lg:w-1/3 p-8 md:p-12 flex flex-col justify-center bg-gradient-to-br from-red-50 to-white">
-                        <h3 class="text-3xl font-black text-gray-900 mb-4 uppercase">Visítanos</h3>
-                        <p class="text-gray-600 mb-8 text-balance">Nuestras instalaciones están listas para recibirte. Acércate y conoce nuestro campus de formación.</p>
+                        <h3 class="text-3xl font-black text-gray-900 mb-4 uppercase editable-text">Visítanos</h3>
+                        <p class="text-gray-600 mb-8 text-balance editable-text">Nuestras instalaciones están listas para recibirte. Acércate y conoce nuestro campus de formación.</p>
                         <div class="flex items-start gap-4 mb-6">
                             <div class="bg-white p-3 rounded-xl shadow-sm text-red-500 border border-gray-100"><i data-lucide="map-pin" class="w-6 h-6"></i></div>
                             <div>
-                                <p class="text-sm text-gray-500 font-bold uppercase tracking-wider">Dirección Principal</p>
-                                <p class="text-lg font-bold text-gray-900 mt-1">Calle 47 #18-24</p>
-                                <p class="text-gray-600">La Cordialidad<br>Barranquilla, Atlántico</p>
+                                <p class="text-sm text-gray-500 font-bold uppercase tracking-wider editable-text">Dirección Principal</p>
+                                <p class="text-lg font-bold text-gray-900 mt-1 editable-text">Calle 47 #18-24</p>
+                                <p class="text-gray-600 editable-text">La Cordialidad<br>Barranquilla, Atlántico</p>
                             </div>
                         </div>
-                        <a href="https://www.google.com/maps/search/?api=1&query=Calle+47+%2318-24,+Barranquilla,+Colombia" class="text-red-600 font-bold hover:text-red-800 transition-colors flex items-center gap-2 mt-4 w-max">Abrir en Google Maps <i data-lucide="external-link" class="w-4 h-4"></i></a>
+                        <a href="https://www.google.com/maps/search/?api=1&query=Calle+47+%2318-24,+Barranquilla,+Colombia" class="text-red-600 font-bold hover:text-red-800 transition-colors flex items-center gap-2 mt-4 w-max editable-text">Abrir en Google Maps <i data-lucide="external-link" class="w-4 h-4 pointer-events-none"></i></a>
                     </div>
                     <div class="lg:w-2/3 h-[400px] lg:h-auto w-full relative">
                         <iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3916.940248236162!2d-74.8016485!3d10.9654152!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x8ef42d6c1c6c1c11%3A0x1c1c1c1c1c1c1c1c!2sCl.%2047%20%2318-24%2C%20Barranquilla%2C%20Atl%C3%A1ntico%2C%20Colombia!5e0!3m2!1ses!2s!4v1700000000000!5m2!1ses!2s" class="absolute inset-0 w-full h-full border-0" allowfullscreen="" loading="lazy" referrerpolicy="no-referrer-when-downgrade"></iframe>
@@ -300,43 +328,43 @@
                         <div class="inline-block mb-6">
                             <div class="flex items-center gap-3">
                                 <div class="flex items-end space-x-1.5 h-8 mb-1"><div class="w-3 h-8 bg-funetec-dark rounded-t-sm"></div><div class="w-3 h-5 bg-funetec-main rounded-t-sm"></div><div class="w-3 h-8 bg-funetec-light rounded-t-sm"></div></div>
-                                <span class="font-black text-2xl tracking-widest text-white leading-none uppercase">FUNETEC</span>
+                                <span class="font-black text-2xl tracking-widest text-white leading-none uppercase editable-text">FUNETEC</span>
                             </div>
                         </div>
-                        <p class="text-gray-400 mb-8 font-medium leading-relaxed">Formando los profesionales técnicos que la región necesita. Educación de calidad, práctica y orientada al futuro.</p>
+                        <p class="text-gray-400 mb-8 font-medium leading-relaxed editable-text">Formando los profesionales técnicos que la región necesita. Educación de calidad, práctica y orientada al futuro.</p>
                         <div class="flex space-x-4 items-center">
                             <a href="https://www.instagram.com/FUNETEC_BQ" class="bg-gradient-to-tr from-[#f09433] via-[#dc2743] to-[#bc1888] p-3.5 rounded-full shadow-lg hover:scale-110 transition-all">
                                 <svg class="w-5 h-5 text-white" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><rect width="20" height="20" x="2" y="2" rx="5" ry="5"/><path d="M16 11.37A4 4 0 1 1 12.63 8 4 4 0 0 1 16 11.37z"/><line x1="17.5" x2="17.51" y1="6.5" y2="6.5"/></svg>
                             </a>
-                            <a href="https://www.instagram.com/FUNETEC_BQ" class="text-gray-300 font-bold hover:text-white transition-colors">@FUNETEC_BQ</a>
+                            <a href="https://www.instagram.com/FUNETEC_BQ" class="text-gray-300 font-bold hover:text-white transition-colors editable-text">@FUNETEC_BQ</a>
                         </div>
                     </div>
                     <div>
-                        <h4 class="text-lg font-bold mb-6 text-white uppercase tracking-wider">Contáctanos</h4>
+                        <h4 class="text-lg font-bold mb-6 text-white uppercase tracking-wider editable-text">Contáctanos</h4>
                         <ul class="space-y-6">
                             <li class="flex items-start gap-4 group">
                                 <div class="bg-gray-800 p-3 rounded-xl text-red-500 group-hover:bg-red-500 group-hover:text-white transition-colors"><i data-lucide="map-pin" class="w-5 h-5"></i></div>
-                                <span class="text-gray-300 font-medium mt-1.5 leading-relaxed">Calle 47 #18-24 La Cordialidad<br>Barranquilla, Colombia</span>
+                                <span class="text-gray-300 font-medium mt-1.5 leading-relaxed editable-text">Calle 47 #18-24 La Cordialidad<br>Barranquilla, Colombia</span>
                             </li>
                             <li class="flex items-start gap-4 group">
                                 <div class="bg-gray-800 p-3 rounded-xl text-[#25D366] group-hover:bg-[#25D366] group-hover:text-white transition-colors">
                                     <svg class="w-5 h-5" fill="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51a12.8 12.8 0 0 0-.57-.01c-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 0 1-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 0 1-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 0 1 2.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0 0 12.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 0 0 5.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 0 0-3.48-8.413Z"/></svg>
                                 </div>
                                 <div class="flex flex-col text-gray-300 font-medium mt-1 space-y-1">
-                                    <a href="https://wa.me/573006988876" class="hover:text-white transition">300 698 8876</a>
-                                    <a href="https://wa.me/573046781679" class="hover:text-white transition">304 678 1679</a>
+                                    <a href="https://wa.me/573006988876" class="hover:text-white transition editable-text">300 698 8876</a>
+                                    <a href="https://wa.me/573046781679" class="hover:text-white transition editable-text">304 678 1679</a>
                                 </div>
                             </li>
                             <li class="flex items-center gap-4 group">
                                 <div class="bg-gray-800 p-3 rounded-xl text-red-500 group-hover:bg-red-500 group-hover:text-white transition-colors"><i data-lucide="mail" class="w-5 h-5"></i></div>
-                                <a href="mailto:funetec2022@gmail.com" class="text-gray-300 font-medium hover:text-white transition break-all">funetec2022@gmail.com</a>
+                                <a href="mailto:funetec2022@gmail.com" class="text-gray-300 font-medium hover:text-white transition break-all editable-text">funetec2022@gmail.com</a>
                             </li>
                         </ul>
                     </div>
                 </div>
                 <div class="text-center pt-8 text-gray-500 text-sm font-medium flex flex-col md:flex-row justify-between items-center">
-                    <p>&copy; 2026 FUNETEC - Fundación Educativa Técnica de la Costa. Todos los derechos reservados.</p>
-                    <p class="mt-2 md:mt-0">Diseñado para la excelencia.</p>
+                    <p class="editable-text">&copy; 2026 FUNETEC - Fundación Educativa Técnica de la Costa. Todos los derechos reservados.</p>
+                    <p class="mt-2 md:mt-0 editable-text">Diseñado para la excelencia.</p>
                 </div>
             </div>
         </footer>
@@ -345,7 +373,7 @@
     <!-- VISTA DE DETALLES DEL CURSO -->
     <div id="course-details-view" class="hidden flex-grow bg-gray-50 pt-28 pb-20 min-h-screen z-40 relative">
         <div class="max-w-5xl mx-auto px-4 sm:px-6 lg:px-8">
-            <button onclick="window.showLanding()" class="flex items-center gap-2 text-gray-500 hover:text-red-600 font-bold mb-8 transition-colors"><i data-lucide="arrow-left" class="w-5 h-5"></i> Volver a inicio</button>
+            <button onclick="window.showLanding()" class="flex items-center gap-2 text-gray-500 hover:text-red-600 font-bold mb-8 transition-colors"><i data-lucide="arrow-left" class="w-5 h-5 pointer-events-none"></i> Volver a inicio</button>
             <div class="bg-white rounded-3xl shadow-premium overflow-hidden border border-gray-100">
                 <div class="h-64 md:h-96 w-full relative bg-gray-900">
                     <img id="detail-bg-img" src="" class="absolute inset-0 w-full h-full object-cover">
@@ -382,7 +410,7 @@
 
                     <div class="text-center pt-8 border-t border-gray-100 flex flex-col items-center">
                         <a id="detail-whatsapp-btn" href="#" class="inline-flex justify-center items-center gap-3 bg-[#25D366] text-white px-10 py-5 rounded-full font-black text-xl hover:bg-[#20bd5a] hover:shadow-[0_10px_30px_rgba(37,211,102,0.3)] hover:-translate-y-1 transition-all uppercase tracking-wider w-full md:w-auto">
-                            <svg class="w-6 h-6 text-white" fill="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51a12.8 12.8 0 0 0-.57-.01c-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 0 1-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 0 1-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 0 1 2.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0 0 12.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 0 0 5.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 0 0-3.48-8.413Z"/></svg> Quiero empezar con ustedes
+                            <svg class="w-6 h-6 text-white pointer-events-none" fill="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51a12.8 12.8 0 0 0-.57-.01c-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 0 1-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 0 1-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 0 1 2.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0 0 12.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 0 0 5.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 0 0-3.48-8.413Z"/></svg> Quiero empezar con ustedes
                         </a>
                         <p class="text-gray-500 text-sm font-medium mt-4 flex items-center gap-2"><i data-lucide="info" class="w-4 h-4"></i> Serás redirigido a WhatsApp para hablar con un asesor y concretar tu matrícula.</p>
                     </div>
@@ -392,12 +420,126 @@
     </div>
 
     <a href="https://wa.me/573046781679" id="whatsapp-float" class="fixed bottom-8 right-8 bg-[#25D366] text-white p-4 rounded-full shadow-[0_10px_30px_rgba(37,211,102,0.4)] hover:bg-[#20bd5a] hover:scale-110 transition-all duration-300 z-50 flex items-center justify-center group animate-whatsapp-pulse hover:animate-none">
-        <svg class="w-8 h-8 text-white" fill="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51a12.8 12.8 0 0 0-.57-.01c-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 0 1-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 0 1-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 0 1 2.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0 0 12.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 0 0 5.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 0 0-3.48-8.413Z"/></svg>
+        <svg class="w-8 h-8 text-white pointer-events-none" fill="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51a12.8 12.8 0 0 0-.57-.01c-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 0 1-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 0 1-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 0 1 2.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0 0 12.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 0 0 5.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 0 0-3.48-8.413Z"/></svg>
         <span class="absolute right-[115%] bg-white text-gray-800 text-sm font-bold px-4 py-2 rounded-xl shadow-lg opacity-0 group-hover:opacity-100 transition-opacity duration-300 whitespace-nowrap pointer-events-none origin-right scale-95 group-hover:scale-100">¡Escríbenos!</span>
     </a>
 
-    <!-- Lógica de Navegación y Datos -->
+    <!-- MODAL DE CONTRASEÑA -->
+    <div id="password-modal" class="hidden fixed inset-0 z-[100] bg-gray-900/60 backdrop-blur-sm flex items-center justify-center p-4">
+        <div class="bg-white rounded-3xl shadow-2xl w-full max-w-sm p-8 transform transition-all">
+            <div class="text-center mb-6">
+                <div class="bg-gray-100 w-16 h-16 rounded-full flex items-center justify-center mx-auto mb-4">
+                    <i data-lucide="lock" class="w-8 h-8 text-gray-600"></i>
+                </div>
+                <h3 class="text-2xl font-black text-gray-900">Acceso Admin</h3>
+                <p class="text-sm text-gray-500 mt-1">Ingresa la contraseña para editar.</p>
+            </div>
+            <div class="space-y-4">
+                <div>
+                    <input type="password" id="admin-pass-input" placeholder="Contraseña..." class="w-full bg-gray-50 border border-gray-200 rounded-xl px-4 py-3 focus:outline-none focus:ring-2 focus:ring-red-500 focus:border-transparent transition-all">
+                    <p id="pass-error" class="text-red-500 text-xs font-bold mt-2 hidden">Contraseña incorrecta.</p>
+                </div>
+                <button onclick="window.verifyPassword()" class="w-full bg-gray-900 text-white font-bold py-3 rounded-xl hover:bg-gray-800 transition-colors">Ingresar al Panel</button>
+                <button onclick="window.closePasswordModal()" class="w-full text-gray-500 font-semibold py-2 hover:text-gray-900 transition-colors">Cancelar</button>
+            </div>
+        </div>
+    </div>
+
+    <!-- PANEL DE ADMINISTRACIÓN (Base de Datos) -->
+    <div id="admin-modal" class="hidden fixed inset-0 z-[100] bg-gray-100 flex flex-col h-screen">
+        <!-- Admin Header -->
+        <div class="bg-white border-b border-gray-200 px-6 py-4 flex justify-between items-center shadow-sm z-10">
+            <div class="flex items-center gap-3">
+                <i data-lucide="layout-dashboard" class="text-funetec-main w-6 h-6"></i>
+                <h2 class="text-xl font-black text-gray-900 uppercase tracking-wide">Panel de Administración</h2>
+            </div>
+            <div class="flex items-center gap-4">
+                <button onclick="window.toggleLiveEdit(); document.getElementById('admin-modal').classList.add('hidden');" class="bg-yellow-400 text-yellow-900 hover:bg-yellow-500 px-5 py-2.5 rounded-xl font-bold flex items-center gap-2 transition-colors shadow-sm text-sm">
+                    <i data-lucide="pencil" class="w-4 h-4"></i> Activar Edición Rápida en Página
+                </button>
+                <button onclick="window.closeAdminPanel()" class="bg-gray-200 text-gray-700 hover:bg-gray-300 px-4 py-2.5 rounded-xl font-bold transition-colors text-sm">Cerrar Panel</button>
+            </div>
+        </div>
+        
+        <!-- Admin Layout -->
+        <div class="flex flex-grow overflow-hidden">
+            <!-- Sidebar: Lista de Cursos -->
+            <div class="w-1/3 max-w-sm bg-white border-r border-gray-200 overflow-y-auto custom-scrollbar flex flex-col">
+                <div class="p-5 border-b border-gray-100 bg-gray-50/50 sticky top-0">
+                    <h3 class="font-bold text-gray-800 text-sm uppercase tracking-wider mb-1">Base de Datos</h3>
+                    <p class="text-xs text-gray-500">Selecciona un curso para editar su información y valores.</p>
+                </div>
+                <div id="admin-course-list" class="p-3 space-y-1">
+                    <!-- Dynamic List -->
+                </div>
+            </div>
+            
+            <!-- Main Content: Formulario de Edición -->
+            <div class="flex-grow bg-gray-50 overflow-y-auto custom-scrollbar p-8">
+                <div id="admin-editor-placeholder" class="h-full flex flex-col items-center justify-center text-gray-400">
+                    <i data-lucide="database" class="w-16 h-16 mb-4 opacity-50"></i>
+                    <p class="font-semibold text-lg">Selecciona un curso de la lista para editar.</p>
+                </div>
+                
+                <div id="admin-editor-form" class="hidden max-w-3xl mx-auto bg-white rounded-2xl shadow-sm border border-gray-200 p-8">
+                    <div class="flex justify-between items-start mb-6 border-b border-gray-100 pb-6">
+                        <div>
+                            <h3 class="text-2xl font-black text-gray-900" id="editor-display-title">Editando Curso</h3>
+                            <p class="text-sm text-gray-500 mt-1">Los cambios se aplicarán a la vista detallada.</p>
+                        </div>
+                        <button onclick="window.saveCourseEdits()" class="bg-green-500 hover:bg-green-600 text-white px-6 py-2.5 rounded-xl font-bold flex items-center gap-2 transition-colors shadow-sm">
+                            <i data-lucide="save" class="w-4 h-4"></i> Guardar Cambios
+                        </button>
+                    </div>
+
+                    <input type="hidden" id="editor-course-key">
+
+                    <div class="grid grid-cols-1 md:grid-cols-2 gap-6 mb-6">
+                        <div>
+                            <label class="block text-sm font-bold text-gray-700 mb-2">Categoría (Ej: Programa Técnico)</label>
+                            <input type="text" id="editor-category" class="w-full bg-gray-50 border border-gray-200 rounded-xl px-4 py-2.5 focus:outline-none focus:ring-2 focus:ring-red-500">
+                        </div>
+                        <div>
+                            <label class="block text-sm font-bold text-gray-700 mb-2">Duración (Ej: 3 Semestres)</label>
+                            <input type="text" id="editor-duration" class="w-full bg-gray-50 border border-gray-200 rounded-xl px-4 py-2.5 focus:outline-none focus:ring-2 focus:ring-red-500">
+                        </div>
+                    </div>
+
+                    <div class="mb-6">
+                        <label class="block text-sm font-bold text-gray-700 mb-2">Valor de Inversión (Precio)</label>
+                        <input type="text" id="editor-price" class="w-full bg-gray-50 border border-gray-200 rounded-xl px-4 py-2.5 focus:outline-none focus:ring-2 focus:ring-red-500">
+                    </div>
+
+                    <div class="mb-6">
+                        <label class="block text-sm font-bold text-gray-700 mb-2">URL Imagen Principal (PNG Transparente preferible)</label>
+                        <input type="text" id="editor-img" class="w-full bg-gray-50 border border-gray-200 rounded-xl px-4 py-2.5 focus:outline-none focus:ring-2 focus:ring-red-500 font-mono text-sm">
+                    </div>
+                    
+                    <div class="mb-6">
+                        <label class="block text-sm font-bold text-gray-700 mb-2">URL Imagen de Fondo (Banner/Clínica)</label>
+                        <input type="text" id="editor-bgimg" class="w-full bg-gray-50 border border-gray-200 rounded-xl px-4 py-2.5 focus:outline-none focus:ring-2 focus:ring-red-500 font-mono text-sm">
+                    </div>
+
+                    <div>
+                        <label class="block text-sm font-bold text-gray-700 mb-2">Plan de Estudio (Un módulo por línea)</label>
+                        <textarea id="editor-modules" rows="6" class="w-full bg-gray-50 border border-gray-200 rounded-xl px-4 py-3 focus:outline-none focus:ring-2 focus:ring-red-500 custom-scrollbar resize-none"></textarea>
+                    </div>
+                </div>
+            </div>
+        </div>
+        
+        <!-- Notificación Toast en Admin -->
+        <div id="admin-toast" class="fixed bottom-6 left-1/2 -translate-x-1/2 bg-gray-900 text-white px-6 py-3 rounded-full font-bold shadow-2xl opacity-0 pointer-events-none transition-opacity duration-300 z-50 flex items-center gap-2">
+            <i data-lucide="check-circle" class="w-5 h-5 text-green-400"></i> <span id="toast-msg">Guardado</span>
+        </div>
+    </div>
+
+    <!-- Lógica de Navegación, Datos y Administración -->
     <script>
+        // Configuración Admin
+        const ADMIN_PASS = "admin123";
+        let isLiveEditMode = false;
+
         // Base de datos de Cursos para vista detallada
         window.courseData = {
             "Auxiliar en Servicios Farmacéuticos": {
@@ -502,9 +644,12 @@
             }
         };
 
+        // ====== FUNCIONES PRINCIPALES DE VISTA ======
         window.showCourseDetails = function(courseName) {
+            // Prevenir clic si estamos en modo edición
+            if(isLiveEditMode) return;
+
             document.getElementById('landing-view')?.classList.add('hidden');
-            
             const detailView = document.getElementById('course-details-view');
             if (detailView) detailView.classList.remove('hidden');
             
@@ -517,10 +662,7 @@
             const titleEl = document.getElementById('detail-title'); if(titleEl) titleEl.innerText = displayTitle;
             
             const bgImgEl = document.getElementById('detail-bg-img');
-            
-            if(bgImgEl) {
-                bgImgEl.src = data.bgImg || data.img;
-            }
+            if(bgImgEl) bgImgEl.src = data.bgImg || data.img;
 
             const durEl = document.getElementById('detail-duration'); if(durEl) durEl.innerText = data.duration;
             const priceEl = document.getElementById('detail-price'); if(priceEl) priceEl.innerText = data.price;
@@ -550,7 +692,128 @@
             window.scrollTo(0,0);
         };
 
-        // Toda manipulación inicial del DOM encapsulada en DOMContentLoaded
+        // ====== FUNCIONES DEL PANEL ADMIN ======
+        
+        window.showPasswordModal = function() {
+            document.getElementById('password-modal').classList.remove('hidden');
+            document.getElementById('pass-error').classList.add('hidden');
+            document.getElementById('admin-pass-input').value = '';
+            document.getElementById('admin-pass-input').focus();
+        };
+
+        window.closePasswordModal = function() {
+            document.getElementById('password-modal').classList.add('hidden');
+        };
+
+        window.verifyPassword = function() {
+            const pass = document.getElementById('admin-pass-input').value;
+            if (pass === ADMIN_PASS) {
+                window.closePasswordModal();
+                window.openAdminPanel();
+            } else {
+                document.getElementById('pass-error').classList.remove('hidden');
+            }
+        };
+
+        window.openAdminPanel = function() {
+            document.getElementById('admin-modal').classList.remove('hidden');
+            renderAdminCourseList();
+        };
+
+        window.closeAdminPanel = function() {
+            document.getElementById('admin-modal').classList.add('hidden');
+        };
+
+        function renderAdminCourseList() {
+            const listContainer = document.getElementById('admin-course-list');
+            listContainer.innerHTML = '';
+            
+            Object.keys(window.courseData).forEach(key => {
+                if(key === "General") return; // Skip general fallback
+                const btn = document.createElement('button');
+                btn.className = "w-full text-left px-4 py-3 rounded-xl hover:bg-gray-100 transition-colors font-semibold text-gray-700 text-sm flex items-center justify-between group";
+                btn.innerHTML = `<span class="truncate pr-2">${key}</span> <i data-lucide="chevron-right" class="w-4 h-4 text-gray-400 group-hover:text-red-500"></i>`;
+                btn.onclick = () => loadCourseIntoAdmin(key);
+                listContainer.appendChild(btn);
+            });
+            if (typeof lucide !== 'undefined') lucide.createIcons({root: listContainer});
+        }
+
+        function loadCourseIntoAdmin(key) {
+            const data = window.courseData[key];
+            document.getElementById('admin-editor-placeholder').classList.add('hidden');
+            document.getElementById('admin-editor-form').classList.remove('hidden');
+            
+            document.getElementById('editor-display-title').innerText = key;
+            document.getElementById('editor-course-key').value = key;
+            
+            document.getElementById('editor-category').value = data.category || '';
+            document.getElementById('editor-duration').value = data.duration || '';
+            document.getElementById('editor-price').value = data.price || '';
+            document.getElementById('editor-img').value = data.img || '';
+            document.getElementById('editor-bgimg').value = data.bgImg || data.img || '';
+            document.getElementById('editor-modules').value = data.modules ? data.modules.join('\n') : '';
+        }
+
+        window.saveCourseEdits = function() {
+            const key = document.getElementById('editor-course-key').value;
+            if(!key || !window.courseData[key]) return;
+
+            // Update memory database
+            window.courseData[key].category = document.getElementById('editor-category').value;
+            window.courseData[key].duration = document.getElementById('editor-duration').value;
+            window.courseData[key].price = document.getElementById('editor-price').value;
+            window.courseData[key].img = document.getElementById('editor-img').value;
+            window.courseData[key].bgImg = document.getElementById('editor-bgimg').value;
+            
+            const modulesRaw = document.getElementById('editor-modules').value;
+            window.courseData[key].modules = modulesRaw.split('\n').map(m => m.trim()).filter(m => m !== '');
+
+            showAdminToast(`Los datos de "${key}" se han actualizado correctamente.`);
+        };
+
+        function showAdminToast(msg) {
+            const toast = document.getElementById('admin-toast');
+            document.getElementById('toast-msg').innerText = msg;
+            toast.classList.remove('opacity-0');
+            setTimeout(() => {
+                toast.classList.add('opacity-0');
+            }, 3000);
+        }
+
+        // ====== EDICIÓN RÁPIDA DE TEXTOS EN LA PÁGINA (LIVE EDIT) ======
+        window.toggleLiveEdit = function() {
+            isLiveEditMode = !isLiveEditMode;
+            const elements = document.querySelectorAll('.editable-text');
+            const banner = document.getElementById('edit-mode-banner');
+
+            if(isLiveEditMode) {
+                banner.classList.remove('hidden');
+                elements.forEach(el => {
+                    el.contentEditable = "true";
+                    el.classList.add('editable-active');
+                    // Prevenir comportamiento default en botones para no navegar al editar
+                    if(el.tagName === 'A' || el.tagName === 'BUTTON' || el.closest('button') || el.closest('a')) {
+                        el.dataset.origHref = el.getAttribute('href');
+                        el.removeAttribute('href'); 
+                    }
+                });
+                showAdminToast("Modo de edición en página activado. Puedes hacer clic en los textos para escribir.");
+            } else {
+                banner.classList.add('hidden');
+                elements.forEach(el => {
+                    el.contentEditable = "false";
+                    el.classList.remove('editable-active');
+                    // Restaurar links
+                    if(el.dataset.origHref) {
+                        el.setAttribute('href', el.dataset.origHref);
+                    }
+                });
+                showAdminToast("Cambios visuales guardados en la sesión actual.");
+            }
+        };
+
+        // ====== INICIALIZACIÓN ======
         document.addEventListener('DOMContentLoaded', () => {
             if (typeof lucide !== 'undefined') lucide.createIcons();
 
@@ -570,6 +833,13 @@
                     nav.classList.toggle('shadow-md', window.scrollY > 20);
                     nav.classList.toggle('bg-white/95', window.scrollY > 20);
                     nav.classList.toggle('bg-white/80', window.scrollY <= 20);
+                }
+            });
+
+            // Permitir 'Enter' en el modal de contraseña
+            document.getElementById('admin-pass-input')?.addEventListener('keypress', function (e) {
+                if (e.key === 'Enter') {
+                    window.verifyPassword();
                 }
             });
         });
