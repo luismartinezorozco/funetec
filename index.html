@@ -426,7 +426,7 @@
 
     <!-- MODAL DE CONTRASEÑA -->
     <div id="password-modal" class="hidden fixed inset-0 z-[100] bg-gray-900/60 backdrop-blur-sm flex items-center justify-center p-4">
-        <div class="bg-white rounded-3xl shadow-2xl w-full max-w-sm p-8 transform transition-all">
+        <div class="bg-white rounded-3xl shadow-2xl w-full max-sm p-8 transform transition-all">
             <div class="text-center mb-6">
                 <div class="bg-gray-100 w-16 h-16 rounded-full flex items-center justify-center mx-auto mb-4">
                     <i data-lucide="lock" class="w-8 h-8 text-gray-600"></i>
@@ -511,12 +511,12 @@
                     </div>
 
                     <div class="mb-6">
-                        <label class="block text-sm font-bold text-gray-700 mb-2">URL Imagen Principal (PNG Transparente preferible)</label>
+                        <label class="block text-sm font-bold text-gray-700 mb-2">URL Imagen Principal</label>
                         <input type="text" id="editor-img" class="w-full bg-gray-50 border border-gray-200 rounded-xl px-4 py-2.5 focus:outline-none focus:ring-2 focus:ring-red-500 font-mono text-sm">
                     </div>
                     
                     <div class="mb-6">
-                        <label class="block text-sm font-bold text-gray-700 mb-2">URL Imagen de Fondo (Banner/Clínica)</label>
+                        <label class="block text-sm font-bold text-gray-700 mb-2">URL Imagen de Fondo</label>
                         <input type="text" id="editor-bgimg" class="w-full bg-gray-50 border border-gray-200 rounded-xl px-4 py-2.5 focus:outline-none focus:ring-2 focus:ring-red-500 font-mono text-sm">
                     </div>
 
@@ -534,142 +534,139 @@
         </div>
     </div>
 
-    <!-- Lógica de Navegación, Datos y Administración -->
-    <script>
-        // Configuración Admin
+    <!-- Lógica Principal y Conexión Firebase (Modular) -->
+    <script type="module">
+        import { initializeApp } from "https://www.gstatic.com/firebasejs/11.6.1/firebase-app.js";
+        import { getAuth, signInAnonymously, onAuthStateChanged } from "https://www.gstatic.com/firebasejs/11.6.1/firebase-auth.js";
+        import { initializeFirestore, memoryLocalCache, doc, setDoc, getDoc, collection, getDocs } from "https://www.gstatic.com/firebasejs/11.6.1/firebase-firestore.js";
+
+        // Configuración Firebase
+        const firebaseConfig = {
+            apiKey: "AIzaSyAhI2vtJ9Pb-n0cI5FBmtFK04w025qPAFY",
+            authDomain: "edicionfunetecpag.firebaseapp.com",
+            projectId: "edicionfunetecpag",
+            storageBucket: "edicionfunetecpag.firebasestorage.app",
+            messagingSenderId: "1097634211265",
+            appId: "1:1097634211265:web:0eceffc9584d39ad807b40"
+        };
+
+        // Inicialización
+        const app = initializeApp(firebaseConfig);
+        const auth = getAuth(app);
+        
+        // Configuración robusta de Firestore para evitar errores de red en entornos sandbox
+        const db = initializeFirestore(app, {
+            localCache: memoryLocalCache(),
+            experimentalForceLongPolling: true // Forzar long polling ayuda a saltar bloqueos de websockets
+        });
+
         const ADMIN_PASS = "admin123";
         let isLiveEditMode = false;
 
-        // Base de datos de Cursos para vista detallada
+        // Estructura de datos inicial por defecto
         window.courseData = {
             "Auxiliar en Servicios Farmacéuticos": {
-                category: "Programa Técnico",
-                img: "https://image2url.com/r2/default/images/1775745615976-dcb347de-c701-4c5f-bf72-ae20d14dca21.png",
-                bgImg: "https://images.unsplash.com/photo-1587854692152-cbe660dbde88?ixlib=rb-4.0.3&auto=format&fit=crop&w=1200&q=80",
-                bgColor: "bg-blue-900",
-                imgClass: "scale-[1.28] translate-y-1",
-                duration: "3 Semestres",
-                price: "$150.000 COP / Mensualidad",
-                modules: ["Anatomía y Fisiología", "Farmacología General", "Dispensación de Medicamentos", "Legislación Farmacéutica", "Atención al Cliente", "Prácticas Formativas"]
+                category: "Programa Técnico", img: "https://image2url.com/r2/default/images/1775745615976-dcb347de-c701-4c5f-bf72-ae20d14dca21.png", bgImg: "https://images.unsplash.com/photo-1587854692152-cbe660dbde88?ixlib=rb-4.0.3&auto=format&fit=crop&w=1200&q=80", bgColor: "bg-blue-900", imgClass: "scale-[1.28] translate-y-1", duration: "3 Semestres", price: "$150.000 COP / Mensualidad", modules: ["Anatomía y Fisiología", "Farmacología General", "Dispensación de Medicamentos", "Legislación Farmacéutica", "Atención al Cliente", "Prácticas Formativas"]
             },
             "Auxiliar Administrativo en Salud": {
-                category: "Programa Técnico",
-                img: "https://image2url.com/r2/default/images/1775745524150-e3153919-f337-403b-be90-c4670a4f7d87.png",
-                bgImg: "https://images.unsplash.com/photo-1519494026892-80bbd2d6fd0d?ixlib=rb-4.0.3&auto=format&fit=crop&w=1200&q=80",
-                bgColor: "bg-teal-900",
-                imgClass: "scale-[1.42] translate-y-3",
-                duration: "3 Semestres",
-                price: "$150.000 COP / Mensualidad",
-                modules: ["Admisión al Usuario", "Facturación en Salud", "Legislación en Salud", "Manejo de Software Médico", "Atención y Servicio al Cliente"]
+                category: "Programa Técnico", img: "https://image2url.com/r2/default/images/1775745524150-e3153919-f337-403b-be90-c4670a4f7d87.png", bgImg: "https://images.unsplash.com/photo-1519494026892-80bbd2d6fd0d?ixlib=rb-4.0.3&auto=format&fit=crop&w=1200&q=80", bgColor: "bg-teal-900", imgClass: "scale-[1.42] translate-y-3", duration: "3 Semestres", price: "$150.000 COP / Mensualidad", modules: ["Admisión al Usuario", "Facturación en Salud", "Legislación en Salud", "Manejo de Software Médico", "Atención y Servicio al Cliente"]
             },
             "Auxiliar en Enfermería": {
-                category: "Programa Técnico",
-                img: "https://image2url.com/r2/default/images/1775747694884-659acee1-1cf2-48c6-8f9c-9993102d4dbe.png",
-                bgImg: "https://images.unsplash.com/photo-1631815587646-b85a1bb027e1?ixlib=rb-4.0.3&auto=format&fit=crop&w=1200&q=80",
-                bgColor: "bg-rose-900",
-                imgClass: "scale-[1.15] translate-y-1",
-                duration: "3 Semestres",
-                price: "$160.000 COP / Mensualidad",
-                modules: ["Cuidados Básicos", "Administración de Medicamentos", "Primeros Auxilios", "Salud Pública", "Enfermería Médico-Quirúrgica", "Prácticas Clínicas"]
+                category: "Programa Técnico", img: "https://image2url.com/r2/default/images/1775747694884-659acee1-1cf2-48c6-8f9c-9993102d4dbe.png", bgImg: "https://images.unsplash.com/photo-1631815587646-b85a1bb027e1?ixlib=rb-4.0.3&auto=format&fit=crop&w=1200&q=80", bgColor: "bg-rose-900", imgClass: "scale-[1.15] translate-y-1", duration: "3 Semestres", price: "$160.000 COP / Mensualidad", modules: ["Cuidados Básicos", "Administración de Medicamentos", "Primeros Auxilios", "Salud Pública", "Enfermería Médico-Quirúrgica", "Prácticas Clínicas"]
             },
             "Técnico Peluquería y Belleza": {
-                category: "Programa Técnico",
-                img: "https://images.unsplash.com/photo-1522337660859-02fbefca4702?ixlib=rb-4.0.3&auto=format&fit=crop&w=1200&q=80",
-                duration: "3 Semestres",
-                price: "$130.000 COP / Mensualidad",
-                modules: ["Corte y Barbería", "Colorimetría", "Peinados y Maquillaje", "Tratamientos Capilares", "Bioseguridad", "Emprendimiento"]
+                category: "Programa Técnico", img: "https://images.unsplash.com/photo-1522337660859-02fbefca4702?ixlib=rb-4.0.3&auto=format&fit=crop&w=1200&q=80", duration: "3 Semestres", price: "$130.000 COP / Mensualidad", modules: ["Corte y Barbería", "Colorimetría", "Peinados y Maquillaje", "Tratamientos Capilares", "Bioseguridad", "Emprendimiento"]
             },
             "Auxiliar Contable": {
-                category: "Programa Técnico",
-                img: "https://images.unsplash.com/photo-1554224155-8d04cb21cd6c?ixlib=rb-4.0.3&auto=format&fit=crop&w=1200&q=80",
-                duration: "3 Semestres",
-                price: "$130.000 COP / Mensualidad",
-                modules: ["Contabilidad Básica", "Legislación Tributaria", "Software Contable", "Nómina y Prestaciones", "Análisis Financiero"]
+                category: "Programa Técnico", img: "https://images.unsplash.com/photo-1554224155-8d04cb21cd6c?ixlib=rb-4.0.3&auto=format&fit=crop&w=1200&q=80", duration: "3 Semestres", price: "$130.000 COP / Mensualidad", modules: ["Contabilidad Básica", "Legislación Tributaria", "Software Contable", "Nómina y Prestaciones", "Análisis Financiero"]
             },
             "Auxiliar Administrativo": {
-                category: "Programa Técnico",
-                img: "https://images.unsplash.com/photo-1497215728101-856f4ea42174?ixlib=rb-4.0.3&auto=format&fit=crop&w=1200&q=80",
-                duration: "3 Semestres",
-                price: "$130.000 COP / Mensualidad",
-                modules: ["Gestión Documental", "Servicio al Cliente", "Herramientas Ofimáticas", "Redacción de Documentos", "Organización de Eventos"]
+                category: "Programa Técnico", img: "https://images.unsplash.com/photo-1497215728101-856f4ea42174?ixlib=rb-4.0.3&auto=format&fit=crop&w=1200&q=80", duration: "3 Semestres", price: "$130.000 COP / Mensualidad", modules: ["Gestión Documental", "Servicio al Cliente", "Herramientas Ofimáticas", "Redacción de Documentos", "Organización de Eventos"]
             },
             "Recursos Humanos": {
-                category: "Programa Técnico",
-                img: "https://images.unsplash.com/photo-1521737604893-d14cc237f11d?ixlib=rb-4.0.3&auto=format&fit=crop&w=1200&q=80",
-                duration: "3 Semestres",
-                price: "$130.000 COP / Mensualidad",
-                modules: ["Selección de Personal", "Contratación y Nómina", "Seguridad y Salud en el Trabajo", "Clima Organizacional", "Legislación Laboral"]
+                category: "Programa Técnico", img: "https://images.unsplash.com/photo-1521737604893-d14cc237f11d?ixlib=rb-4.0.3&auto=format&fit=crop&w=1200&q=80", duration: "3 Semestres", price: "$130.000 COP / Mensualidad", modules: ["Selección de Personal", "Contratación y Nómina", "Seguridad y Salud en el Trabajo", "Clima Organizacional", "Legislación Laboral"]
             },
             "Educación Primera Infancia": {
-                category: "Programa Técnico",
-                img: "https://images.unsplash.com/photo-1503454537195-1dcabb73ffb9?ixlib=rb-4.0.3&auto=format&fit=crop&w=1200&q=80",
-                duration: "3 Semestres",
-                price: "$130.000 COP / Mensualidad",
-                modules: ["Psicología Infantil", "Didáctica y Pedagogía", "Nutrición y Cuidado", "Expresión Artística", "Estimulación Temprana"]
+                category: "Programa Técnico", img: "https://images.unsplash.com/photo-1503454537195-1dcabb73ffb9?ixlib=rb-4.0.3&auto=format&fit=crop&w=1200&q=80", duration: "3 Semestres", price: "$130.000 COP / Mensualidad", modules: ["Psicología Infantil", "Didáctica y Pedagogía", "Nutrición y Cuidado", "Expresión Artística", "Estimulación Temprana"]
             },
             "Cosmetología y Estética": {
-                category: "Programa Técnico",
-                img: "https://images.unsplash.com/photo-1616394584738-fc6e612e71b9?ixlib=rb-4.0.3&auto=format&fit=crop&w=1200&q=80",
-                duration: "3 Semestres",
-                price: "$150.000 COP / Mensualidad",
-                modules: ["Cuidado Facial", "Tratamientos Corporales", "Masoterapia", "Aparatología Estética", "Bioseguridad", "Maquillaje Profesional"]
+                category: "Programa Técnico", img: "https://images.unsplash.com/photo-1616394584738-fc6e612e71b9?ixlib=rb-4.0.3&auto=format&fit=crop&w=1200&q=80", duration: "3 Semestres", price: "$150.000 COP / Mensualidad", modules: ["Cuidado Facial", "Tratamientos Corporales", "Masoterapia", "Aparatología Estética", "Bioseguridad", "Maquillaje Profesional"]
             },
             "Curso 5 en 1": {
-                category: "Curso Corto Intensivo",
-                img: "https://images.unsplash.com/photo-1516549655169-df83a0774514?ixlib=rb-4.0.3&auto=format&fit=crop&w=1200&q=80",
-                duration: "1 Jornada Intensiva",
-                price: "$120.000 COP / Pago Único",
-                modules: ["Soporte Vital Básico (BLS)", "Soporte Vital Avanzado (ACLS)", "Violencia de Género", "Sustancias Químicas", "Gestión de Duelo"]
+                category: "Curso Corto Intensivo", img: "https://images.unsplash.com/photo-1516549655169-df83a0774514?ixlib=rb-4.0.3&auto=format&fit=crop&w=1200&q=80", duration: "1 Jornada Intensiva", price: "$120.000 COP / Pago Único", modules: ["Soporte Vital Básico (BLS)", "Soporte Vital Avanzado (ACLS)", "Violencia de Género", "Sustancias Químicas", "Gestión de Duelo"]
             },
             "Uñas Acrílicas": {
-                category: "Curso Corto",
-                img: "https://images.unsplash.com/photo-1604654894610-df63bc536371?ixlib=rb-4.0.3&auto=format&fit=crop&w=1200&q=80",
-                duration: "2 Meses",
-                price: "$200.000 COP / Pago Total",
-                modules: ["Preparación de la Uña", "Manejo del Acrílico", "Estructuras y Formas", "Decoración Básica y Avanzada", "Mantenimiento y Retiro"]
+                category: "Curso Corto", img: "https://images.unsplash.com/photo-1604654894610-df63bc536371?ixlib=rb-4.0.3&auto=format&fit=crop&w=1200&q=80", duration: "2 Meses", price: "$200.000 COP / Pago Total", modules: ["Preparación de la Uña", "Manejo del Acrílico", "Estructuras y Formas", "Decoración Básica y Avanzada", "Mantenimiento y Retiro"]
             },
             "Inyectología y Venopunción": {
-                category: "Curso Corto",
-                img: "https://images.unsplash.com/photo-1584308666744-24d5c474f2ae?ixlib=rb-4.0.3&auto=format&fit=crop&w=1200&q=80",
-                duration: "1 Mes",
-                price: "$120.000 COP / Pago Único",
-                modules: ["Anatomía Básica", "Técnicas de Inyección", "Venopunción y Canalización", "Bioseguridad", "Manejo de Residuos"]
+                category: "Curso Corto", img: "https://images.unsplash.com/photo-1584308666744-24d5c474f2ae?ixlib=rb-4.0.3&auto=format&fit=crop&w=1200&q=80", duration: "1 Mes", price: "$120.000 COP / Pago Único", modules: ["Anatomía Básica", "Técnicas de Inyección", "Venopunción y Canalización", "Bioseguridad", "Manejo de Residuos"]
             },
             "General": {
-                category: "Programa Educativo",
-                img: "https://images.unsplash.com/photo-1576267423445-b2e0074d68a4?ixlib=rb-4.0.3&auto=format&fit=crop&w=1200&q=80",
-                duration: "Varía según el programa",
-                price: "Consultar con nuestro asesor",
-                modules: ["Módulo Introductorio", "Fundamentos Básicos", "Profundización", "Práctica Profesional"]
+                category: "Programa Educativo", img: "https://images.unsplash.com/photo-1576267423445-b2e0074d68a4?ixlib=rb-4.0.3&auto=format&fit=crop&w=1200&q=80", duration: "Varía según el programa", price: "Consultar con nuestro asesor", modules: ["Módulo Introductorio", "Fundamentos Básicos", "Profundización", "Práctica Profesional"]
             }
         };
 
-        // ====== FUNCIONES PRINCIPALES DE VISTA ======
-        window.showCourseDetails = function(courseName) {
-            // Prevenir clic si estamos en modo edición
-            if(isLiveEditMode) return;
+        // ====== AUTENTICACIÓN Y CARGA DE DATOS FIREBASE ======
+        async function loadFirebaseData() {
+            try {
+                // Solo cargar si estamos "online" según el SDK
+                // 1. Cargar textos editados de la landing page
+                const pageDoc = await getDoc(doc(db, "pageContent", "main"));
+                if (pageDoc.exists()) {
+                    const savedContent = pageDoc.data();
+                    document.querySelectorAll('.editable-text').forEach((el, index) => {
+                        if (savedContent[index]) {
+                            el.innerHTML = savedContent[index];
+                        }
+                    });
+                    if (typeof lucide !== 'undefined') lucide.createIcons();
+                }
 
+                // 2. Cargar Base de datos de Cursos
+                const coursesSnap = await getDocs(collection(db, "courses"));
+                if (!coursesSnap.empty) {
+                    coursesSnap.forEach(docSnap => {
+                        window.courseData[docSnap.id] = { ...window.courseData[docSnap.id], ...docSnap.data() };
+                    });
+                } else {
+                    // Poblado inicial
+                    for (const [key, data] of Object.entries(window.courseData)) {
+                        if(key !== "General") {
+                            await setDoc(doc(db, "courses", key), data);
+                        }
+                    }
+                }
+            } catch(e) {
+                console.warn("Firebase falló al cargar, usando datos locales:", e);
+            }
+        }
+
+        // Suscribirse al estado de auth para cargar datos
+        onAuthStateChanged(auth, (user) => {
+            if (user) {
+                loadFirebaseData();
+            } else {
+                signInAnonymously(auth).catch(e => console.error("Error signing in anonymously:", e));
+            }
+        });
+
+        // ====== NAVEGACIÓN Y VISTAS ======
+        window.showCourseDetails = function(courseName) {
+            if(isLiveEditMode) return;
             document.getElementById('landing-view')?.classList.add('hidden');
             const detailView = document.getElementById('course-details-view');
             if (detailView) detailView.classList.remove('hidden');
-            
             window.scrollTo(0,0);
-
             const data = window.courseData[courseName] || window.courseData["General"];
             const displayTitle = window.courseData[courseName] ? courseName : "Todos nuestros programas";
-            
             const catEl = document.getElementById('detail-category'); if(catEl) catEl.innerText = data.category;
             const titleEl = document.getElementById('detail-title'); if(titleEl) titleEl.innerText = displayTitle;
-            
-            const bgImgEl = document.getElementById('detail-bg-img');
-            if(bgImgEl) bgImgEl.src = data.bgImg || data.img;
-
+            const bgImgEl = document.getElementById('detail-bg-img'); if(bgImgEl) bgImgEl.src = data.bgImg || data.img;
             const durEl = document.getElementById('detail-duration'); if(durEl) durEl.innerText = data.duration;
             const priceEl = document.getElementById('detail-price'); if(priceEl) priceEl.innerText = data.price;
-            
             const modUl = document.getElementById('detail-modules');
             if(modUl) {
-                modUl.innerHTML = data.modules.map(m => `
+                modUl.innerHTML = (data.modules || []).map(m => `
                     <li class="flex items-start gap-3 bg-white p-4 rounded-xl shadow-sm border border-gray-100">
                         <i data-lucide="check-circle-2" class="w-6 h-6 text-green-500 flex-shrink-0 mt-0.5"></i>
                         <span class="font-bold text-gray-800">${m}</span>
@@ -677,7 +674,6 @@
                 `).join('');
                 if (typeof lucide !== 'undefined') lucide.createIcons({root: modUl});
             }
-
             const wpBtn = document.getElementById('detail-whatsapp-btn');
             if (wpBtn) {
                 const textMsg = encodeURIComponent(`Hola FUNETEC, quiero empezar con ustedes y me gustaría matricularme en: ${displayTitle}`);
@@ -688,15 +684,12 @@
         window.showLanding = function() {
             document.getElementById('landing-view')?.classList.remove('hidden');
             document.getElementById('course-details-view')?.classList.add('hidden');
-            document.getElementById('whatsapp-float')?.classList.remove('hidden');
             window.scrollTo(0,0);
         };
 
-        // ====== FUNCIONES DEL PANEL ADMIN ======
-        
+        // ====== PANEL ADMIN ======
         window.showPasswordModal = function() {
             document.getElementById('password-modal').classList.remove('hidden');
-            document.getElementById('pass-error').classList.add('hidden');
             document.getElementById('admin-pass-input').value = '';
             document.getElementById('admin-pass-input').focus();
         };
@@ -727,9 +720,8 @@
         function renderAdminCourseList() {
             const listContainer = document.getElementById('admin-course-list');
             listContainer.innerHTML = '';
-            
             Object.keys(window.courseData).forEach(key => {
-                if(key === "General") return; // Skip general fallback
+                if(key === "General") return;
                 const btn = document.createElement('button');
                 btn.className = "w-full text-left px-4 py-3 rounded-xl hover:bg-gray-100 transition-colors font-semibold text-gray-700 text-sm flex items-center justify-between group";
                 btn.innerHTML = `<span class="truncate pr-2">${key}</span> <i data-lucide="chevron-right" class="w-4 h-4 text-gray-400 group-hover:text-red-500"></i>`;
@@ -743,10 +735,8 @@
             const data = window.courseData[key];
             document.getElementById('admin-editor-placeholder').classList.add('hidden');
             document.getElementById('admin-editor-form').classList.remove('hidden');
-            
             document.getElementById('editor-display-title').innerText = key;
             document.getElementById('editor-course-key').value = key;
-            
             document.getElementById('editor-category').value = data.category || '';
             document.getElementById('editor-duration').value = data.duration || '';
             document.getElementById('editor-price').value = data.price || '';
@@ -755,92 +745,66 @@
             document.getElementById('editor-modules').value = data.modules ? data.modules.join('\n') : '';
         }
 
-        window.saveCourseEdits = function() {
+        window.saveCourseEdits = async function() {
             const key = document.getElementById('editor-course-key').value;
             if(!key || !window.courseData[key]) return;
-
-            // Update memory database
+            const modulesRaw = document.getElementById('editor-modules').value;
             window.courseData[key].category = document.getElementById('editor-category').value;
             window.courseData[key].duration = document.getElementById('editor-duration').value;
             window.courseData[key].price = document.getElementById('editor-price').value;
             window.courseData[key].img = document.getElementById('editor-img').value;
             window.courseData[key].bgImg = document.getElementById('editor-bgimg').value;
-            
-            const modulesRaw = document.getElementById('editor-modules').value;
             window.courseData[key].modules = modulesRaw.split('\n').map(m => m.trim()).filter(m => m !== '');
-
-            showAdminToast(`Los datos de "${key}" se han actualizado correctamente.`);
+            try {
+                await setDoc(doc(db, "courses", key), window.courseData[key]);
+                showAdminToast("¡Guardado en la Nube!");
+            } catch(e) {
+                showAdminToast("Error al guardar.");
+            }
         };
 
         function showAdminToast(msg) {
             const toast = document.getElementById('admin-toast');
             document.getElementById('toast-msg').innerText = msg;
             toast.classList.remove('opacity-0');
-            setTimeout(() => {
-                toast.classList.add('opacity-0');
-            }, 3000);
+            setTimeout(() => toast.classList.add('opacity-0'), 3000);
         }
 
-        // ====== EDICIÓN RÁPIDA DE TEXTOS EN LA PÁGINA (LIVE EDIT) ======
-        window.toggleLiveEdit = function() {
+        window.toggleLiveEdit = async function() {
             isLiveEditMode = !isLiveEditMode;
             const elements = document.querySelectorAll('.editable-text');
             const banner = document.getElementById('edit-mode-banner');
-
             if(isLiveEditMode) {
                 banner.classList.remove('hidden');
                 elements.forEach(el => {
                     el.contentEditable = "true";
                     el.classList.add('editable-active');
-                    // Prevenir comportamiento default en botones para no navegar al editar
-                    if(el.tagName === 'A' || el.tagName === 'BUTTON' || el.closest('button') || el.closest('a')) {
-                        el.dataset.origHref = el.getAttribute('href');
-                        el.removeAttribute('href'); 
-                    }
                 });
-                showAdminToast("Modo de edición en página activado. Puedes hacer clic en los textos para escribir.");
             } else {
                 banner.classList.add('hidden');
-                elements.forEach(el => {
+                const contentToSave = {};
+                elements.forEach((el, index) => {
                     el.contentEditable = "false";
                     el.classList.remove('editable-active');
-                    // Restaurar links
-                    if(el.dataset.origHref) {
-                        el.setAttribute('href', el.dataset.origHref);
-                    }
+                    contentToSave[index] = el.innerHTML;
                 });
-                showAdminToast("Cambios visuales guardados en la sesión actual.");
+                try {
+                    await setDoc(doc(db, "pageContent", "main"), contentToSave);
+                    showAdminToast("Página guardada.");
+                } catch(e) {
+                    showAdminToast("Error guardando página.");
+                }
             }
         };
 
-        // ====== INICIALIZACIÓN ======
         document.addEventListener('DOMContentLoaded', () => {
             if (typeof lucide !== 'undefined') lucide.createIcons();
-
             const btnMenu = document.getElementById('mobile-menu-btn');
             const menuMobile = document.getElementById('mobile-menu');
-            
-            if (btnMenu && menuMobile) {
-                btnMenu.addEventListener('click', () => menuMobile.classList.toggle('hidden'));
-                menuMobile.querySelectorAll('a[href^="#"]').forEach(link => {
-                    link.addEventListener('click', () => menuMobile.classList.add('hidden'));
-                });
-            }
-
+            if (btnMenu && menuMobile) btnMenu.addEventListener('click', () => menuMobile.classList.toggle('hidden'));
             window.addEventListener('scroll', () => {
                 const nav = document.getElementById('main-nav');
-                if (nav) {
-                    nav.classList.toggle('shadow-md', window.scrollY > 20);
-                    nav.classList.toggle('bg-white/95', window.scrollY > 20);
-                    nav.classList.toggle('bg-white/80', window.scrollY <= 20);
-                }
-            });
-
-            // Permitir 'Enter' en el modal de contraseña
-            document.getElementById('admin-pass-input')?.addEventListener('keypress', function (e) {
-                if (e.key === 'Enter') {
-                    window.verifyPassword();
-                }
+                if (nav) nav.classList.toggle('shadow-md', window.scrollY > 20);
             });
         });
     </script>
