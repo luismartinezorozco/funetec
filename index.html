@@ -162,8 +162,8 @@
                     <div class="bg-white rounded-3xl shadow-premium hover:shadow-premium-hover hover:-translate-y-2 transition-all relative overflow-hidden group flex flex-col border border-gray-100/50">
                         <div class="h-64 relative overflow-hidden bg-blue-900">
                             <img src="https://images.unsplash.com/photo-1587854692152-cbe660dbde88?ixlib=rb-4.0.3&auto=format&fit=crop&w=600&q=80" class="absolute inset-0 w-full h-full object-cover opacity-50 group-hover:opacity-40 transition-opacity duration-700" alt="Fondo Farmacia">
-                            <!-- Corregido el scale y el translate-y para ocultar el borde inferior transparente sin exagerar el zoom -->
-                            <img src="https://image2url.com/r2/default/images/1775745615976-dcb347de-c701-4c5f-bf72-ae20d14dca21.png" alt="Farmacia" class="w-full h-full object-contain object-bottom origin-bottom scale-[1.15] translate-y-6 drop-shadow-2xl group-hover:scale-[1.20] transition-transform duration-700 relative z-10">
+                            <!-- Imagen ajustada para alinear la cabeza -->
+                            <img src="https://image2url.com/r2/default/images/1775745615976-dcb347de-c701-4c5f-bf72-ae20d14dca21.png" alt="Farmacia" class="w-full h-full object-contain object-bottom origin-bottom scale-[1.25] translate-y-3 drop-shadow-2xl group-hover:scale-[1.30] transition-transform duration-700 relative z-10">
                             <div class="absolute inset-0 bg-gradient-to-t from-gray-900/80 via-gray-900/20 to-transparent z-20 pointer-events-none"></div>
                         </div>
                         <div class="p-8 flex-grow flex flex-col relative bg-white">
@@ -176,8 +176,8 @@
                     <div class="bg-white rounded-3xl shadow-premium hover:shadow-premium-hover hover:-translate-y-2 transition-all relative overflow-hidden group flex flex-col border border-gray-100/50">
                         <div class="h-64 relative overflow-hidden bg-teal-900">
                             <img src="https://images.unsplash.com/photo-1519494026892-80bbd2d6fd0d?ixlib=rb-4.0.3&auto=format&fit=crop&w=600&q=80" class="absolute inset-0 w-full h-full object-cover opacity-50 group-hover:opacity-40 transition-opacity duration-700" alt="Fondo Administrativo">
-                            <!-- Corregido el scale y el translate-y para ocultar el borde inferior transparente sin exagerar el zoom -->
-                            <img src="https://image2url.com/r2/default/images/1775745524150-e3153919-f337-403b-be90-c4670a4f7d87.png" alt="Admin" class="w-full h-full object-contain object-bottom origin-bottom scale-[1.20] translate-y-8 drop-shadow-2xl group-hover:scale-[1.25] transition-transform duration-700 relative z-10">
+                            <!-- Imagen ajustada para alinear la cabeza -->
+                            <img src="https://image2url.com/r2/default/images/1775745524150-e3153919-f337-403b-be90-c4670a4f7d87.png" alt="Admin" class="w-full h-full object-contain object-bottom origin-bottom scale-[1.25] translate-y-6 drop-shadow-2xl group-hover:scale-[1.30] transition-transform duration-700 relative z-10">
                             <div class="absolute inset-0 bg-gradient-to-t from-gray-900/80 via-gray-900/20 to-transparent z-20 pointer-events-none"></div>
                         </div>
                         <div class="p-8 flex-grow flex flex-col relative bg-white">
@@ -190,8 +190,8 @@
                     <div class="bg-white rounded-3xl shadow-premium hover:shadow-premium-hover hover:-translate-y-2 transition-all relative overflow-hidden group flex flex-col border border-gray-100/50">
                         <div class="h-64 relative overflow-hidden bg-rose-900">
                             <img src="https://images.unsplash.com/photo-1631815587646-b85a1bb027e1?ixlib=rb-4.0.3&auto=format&fit=crop&w=600&q=80" class="absolute inset-0 w-full h-full object-cover opacity-50 group-hover:opacity-40 transition-opacity duration-700" alt="Fondo Enfermería">
-                            <!-- Corregido el scale y el translate-y para ocultar el borde inferior transparente sin exagerar el zoom -->
-                            <img src="https://image2url.com/r2/default/images/1775747694884-659acee1-1cf2-48c6-8f9c-9993102d4dbe.png" alt="Enfermería" class="w-full h-full object-contain object-bottom origin-bottom scale-[1.10] translate-y-4 drop-shadow-2xl group-hover:scale-[1.15] transition-transform duration-700 relative z-10">
+                            <!-- Imagen ajustada para alinear la cabeza (más pequeña y más abajo) -->
+                            <img src="https://image2url.com/r2/default/images/1775747694884-659acee1-1cf2-48c6-8f9c-9993102d4dbe.png" alt="Enfermería" class="w-full h-full object-contain object-bottom origin-bottom scale-[1.12] translate-y-6 drop-shadow-2xl group-hover:scale-[1.17] transition-transform duration-700 relative z-10">
                             <div class="absolute inset-0 bg-gradient-to-t from-gray-900/80 via-gray-900/20 to-transparent z-20 pointer-events-none"></div>
                         </div>
                         <div class="p-8 flex-grow flex flex-col relative bg-white">
@@ -542,27 +542,29 @@
     <script type="module">
         import { initializeApp } from "https://www.gstatic.com/firebasejs/11.6.1/firebase-app.js";
         import { getAuth, signInAnonymously, onAuthStateChanged } from "https://www.gstatic.com/firebasejs/11.6.1/firebase-auth.js";
-        import { initializeFirestore, memoryLocalCache, doc, setDoc, getDoc, collection, getDocs } from "https://www.gstatic.com/firebasejs/11.6.1/firebase-firestore.js";
+        import { getFirestore, doc, setDoc, getDoc, collection, getDocs } from "https://www.gstatic.com/firebasejs/11.6.1/firebase-firestore.js";
 
-        // Configuración Firebase
+        // =======================================================================
+        // ¡ATENCIÓN! REEMPLAZA LAS SIGUIENTES LÍNEAS CON TUS CLAVES DE FIREBASE
+        // Si esto no coincide con tu proyecto, el botón se quedará "Guardando..."
+        // =======================================================================
         const firebaseConfig = {
             apiKey: "AIzaSyAhI2vtJ9Pb-n0cI5FBmtFK04w025qPAFY",
             authDomain: "edicionfunetecpag.firebaseapp.com",
+            databaseURL: "https://edicionfunetecpag-default-rtdb.firebaseio.com",
             projectId: "edicionfunetecpag",
             storageBucket: "edicionfunetecpag.firebasestorage.app",
             messagingSenderId: "1097634211265",
             appId: "1:1097634211265:web:0eceffc9584d39ad807b40"
         };
+        // =======================================================================
 
         // Inicialización
         const app = initializeApp(firebaseConfig);
         const auth = getAuth(app);
         
-        // Configuración robusta de Firestore para evitar errores de red en entornos sandbox
-        const db = initializeFirestore(app, {
-            localCache: memoryLocalCache(),
-            experimentalForceLongPolling: true // Forzar long polling ayuda a saltar bloqueos de websockets
-        });
+        // Conexión estándar a Firestore (sin forzar long polling para evitar cuelgues)
+        const db = getFirestore(app);
 
         const ADMIN_PASS = "admin123";
         let isLiveEditMode = false;
@@ -608,6 +610,12 @@
             "General": {
                 category: "Programa Educativo", img: "https://images.unsplash.com/photo-1576267423445-b2e0074d68a4?ixlib=rb-4.0.3&auto=format&fit=crop&w=1200&q=80", duration: "Varía según el programa", price: "Consultar con nuestro asesor", modules: ["Módulo Introductorio", "Fundamentos Básicos", "Profundización", "Práctica Profesional"]
             }
+        };
+
+        // ====== FUNCIÓN DE SEGURIDAD PARA EVITAR CUELGUES INFINITOS ======
+        const saveWithTimeout = (promise, ms = 8000) => {
+            const timeout = new Promise((_, reject) => setTimeout(() => reject(new Error("TIMEOUT_FIREBASE")), ms));
+            return Promise.race([promise, timeout]);
         };
 
         // ====== AUTENTICACIÓN Y CARGA DE DATOS FIREBASE ======
@@ -744,7 +752,7 @@
             document.getElementById('editor-modules').value = data.modules ? data.modules.join('\n') : '';
         }
 
-        // ====== FUNCIONES DE GUARDADO (Corregidas para visibilidad de feedback) ======
+        // ====== FUNCIONES DE GUARDADO ======
         window.saveCourseEdits = async function() {
             const key = document.getElementById('editor-course-key').value;
             if(!key || !window.courseData[key]) return;
@@ -763,12 +771,17 @@
             window.courseData[key].modules = modulesRaw.split('\n').map(m => m.trim()).filter(m => m !== '');
             
             try {
-                await setDoc(doc(db, "courses", key), window.courseData[key]);
+                // Usamos el sistema anti-cuelgues
+                await saveWithTimeout(setDoc(doc(db, "courses", key), window.courseData[key]));
                 showAdminToast("¡Curso guardado correctamente!", "success");
                 if(adminSaveText) adminSaveText.innerText = "Guardar Cambios";
             } catch(e) {
                 console.error("Error guardando curso:", e);
-                showAdminToast("Fallo de permisos o red", "error");
+                if (e.message === "TIMEOUT_FIREBASE") {
+                    showAdminToast("Conexión muy lenta. Revisa tu red.", "error");
+                } else {
+                    showAdminToast("Fallo de conexión o permisos.", "error");
+                }
                 if(adminSaveText) adminSaveText.innerText = "Reintentar";
             }
         };
@@ -847,11 +860,16 @@
                 });
                 
                 try {
-                    await setDoc(doc(db, "pageContent", "main"), contentToSave);
+                    // Usamos el sistema anti-cuelgues
+                    await saveWithTimeout(setDoc(doc(db, "pageContent", "main"), contentToSave));
                     showAdminToast("¡Textos guardados con éxito!", "success");
                 } catch(e) {
                     console.error("Fallo al guardar página en Firebase:", e);
-                    showAdminToast("Error: Revisa consola o permisos", "error");
+                    if (e.message === "TIMEOUT_FIREBASE") {
+                        showAdminToast("La red tardó demasiado.", "error");
+                    } else {
+                        showAdminToast("Error de conexión. Cambios no guardados.", "error");
+                    }
                 }
             }
         };
