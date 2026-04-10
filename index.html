@@ -490,8 +490,8 @@
                             <h3 class="text-2xl font-black text-gray-900" id="editor-display-title">Editando Curso</h3>
                             <p class="text-sm text-gray-500 mt-1">Los cambios se aplicarán a la vista detallada.</p>
                         </div>
-                        <button onclick="window.saveCourseEdits()" class="bg-green-500 hover:bg-green-600 text-white px-6 py-2.5 rounded-xl font-bold flex items-center gap-2 transition-colors shadow-sm">
-                            <i data-lucide="save" class="w-4 h-4"></i> Guardar Cambios
+                        <button id="admin-save-btn" onclick="window.saveCourseEdits()" class="bg-green-500 hover:bg-green-600 text-white px-6 py-2.5 rounded-xl font-bold flex items-center gap-2 transition-colors shadow-sm">
+                            <i data-lucide="save" class="w-4 h-4"></i> <span id="admin-save-text">Guardar Cambios</span>
                         </button>
                     </div>
 
@@ -532,8 +532,9 @@
         </div>
         
         <!-- Notificación Toast en Admin -->
-        <div id="admin-toast" class="fixed bottom-6 left-1/2 -translate-x-1/2 bg-gray-900 text-white px-6 py-3 rounded-full font-bold shadow-2xl opacity-0 pointer-events-none transition-opacity duration-300 z-50 flex items-center gap-2">
-            <i data-lucide="check-circle" class="w-5 h-5 text-green-400"></i> <span id="toast-msg">Guardado</span>
+        <div id="admin-toast" class="fixed top-24 right-6 bg-gray-900 text-white px-6 py-4 rounded-2xl font-bold shadow-2xl translate-x-[150%] transition-transform duration-300 z-[200] flex items-center gap-3">
+            <i data-lucide="info" class="w-6 h-6 text-blue-400" id="toast-icon"></i> 
+            <span id="toast-msg">Guardado</span>
         </div>
     </div>
 
@@ -612,13 +613,10 @@
         // ====== AUTENTICACIÓN Y CARGA DE DATOS FIREBASE ======
         async function loadFirebaseData() {
             try {
-                // Solo cargar si estamos "online" según el SDK
-                // 1. Cargar textos editados de la landing page
                 const pageDoc = await getDoc(doc(db, "pageContent", "main"));
                 if (pageDoc.exists()) {
                     const savedContent = pageDoc.data();
                     document.querySelectorAll('.editable-text').forEach((el, index) => {
-                        // toString previene errores de parseo de arrays vs objetos en firestore
                         if (savedContent[index.toString()]) {
                             el.innerHTML = savedContent[index.toString()];
                         }
@@ -626,14 +624,12 @@
                     if (typeof lucide !== 'undefined') lucide.createIcons();
                 }
 
-                // 2. Cargar Base de datos de Cursos
                 const coursesSnap = await getDocs(collection(db, "courses"));
                 if (!coursesSnap.empty) {
                     coursesSnap.forEach(docSnap => {
                         window.courseData[docSnap.id] = { ...window.courseData[docSnap.id], ...docSnap.data() };
                     });
                 } else {
-                    // Poblado inicial
                     for (const [key, data] of Object.entries(window.courseData)) {
                         if(key !== "General") {
                             await setDoc(doc(db, "courses", key), data);
@@ -645,7 +641,6 @@
             }
         }
 
-        // Suscribirse al estado de auth para cargar datos
         onAuthStateChanged(auth, (user) => {
             if (user) {
                 loadFirebaseData();
@@ -749,12 +744,15 @@
             document.getElementById('editor-modules').value = data.modules ? data.modules.join('\n') : '';
         }
 
+        // ====== FUNCIONES DE GUARDADO (Corregidas para visibilidad de feedback) ======
         window.saveCourseEdits = async function() {
             const key = document.getElementById('editor-course-key').value;
             if(!key || !window.courseData[key]) return;
             
-            const saveBtnText = document.getElementById('save-btn-text');
-            if(saveBtnText) saveBtnText.innerText = "Guardando...";
+            const adminSaveText = document.getElementById('admin-save-text');
+            if(adminSaveText) adminSaveText.innerText = "Guardando...";
+            
+            showAdminToast("Guardando cambios del curso...", "loading");
             
             const modulesRaw = document.getElementById('editor-modules').value;
             window.courseData[key].category = document.getElementById('editor-category').value;
@@ -763,22 +761,46 @@
             window.courseData[key].img = document.getElementById('editor-img').value;
             window.courseData[key].bgImg = document.getElementById('editor-bgimg').value;
             window.courseData[key].modules = modulesRaw.split('\n').map(m => m.trim()).filter(m => m !== '');
+            
             try {
                 await setDoc(doc(db, "courses", key), window.courseData[key]);
-                showAdminToast("¡Guardado en la Nube!");
-                if(saveBtnText) saveBtnText.innerText = "Guardar en la Nube";
+                showAdminToast("¡Curso guardado correctamente!", "success");
+                if(adminSaveText) adminSaveText.innerText = "Guardar Cambios";
             } catch(e) {
                 console.error("Error guardando curso:", e);
-                showAdminToast("Error. Revisa consola (F12).");
-                if(saveBtnText) saveBtnText.innerText = "Reintentar";
+                showAdminToast("Fallo de permisos o red", "error");
+                if(adminSaveText) adminSaveText.innerText = "Reintentar";
             }
         };
 
-        function showAdminToast(msg) {
+        function showAdminToast(msg, type = 'success') {
             const toast = document.getElementById('admin-toast');
+            const icon = document.getElementById('toast-icon');
             document.getElementById('toast-msg').innerText = msg;
-            toast.classList.remove('opacity-0');
-            setTimeout(() => toast.classList.add('opacity-0'), 3000);
+            
+            // Configurar estilos según el tipo de alerta
+            if (type === 'success') {
+                icon.setAttribute('data-lucide', 'check-circle');
+                icon.className = 'w-6 h-6 text-green-400';
+            } else if (type === 'loading') {
+                icon.setAttribute('data-lucide', 'loader-2');
+                icon.className = 'w-6 h-6 text-blue-400 animate-spin';
+            } else if (type === 'error') {
+                icon.setAttribute('data-lucide', 'x-circle');
+                icon.className = 'w-6 h-6 text-red-400';
+            }
+            
+            if (typeof lucide !== 'undefined') lucide.createIcons({root: toast});
+            
+            // Mostrar la notificación (deslizar hacia adentro)
+            toast.classList.remove('translate-x-[150%]');
+            
+            // Si no está "cargando", ocultar automáticamente después de 3 segundos
+            if (type !== 'loading') {
+                setTimeout(() => {
+                    toast.classList.add('translate-x-[150%]');
+                }, 3000);
+            }
         }
 
         function preventAccidentalClick(e) {
@@ -798,41 +820,38 @@
                 elements.forEach(el => {
                     el.contentEditable = "true";
                     el.classList.add('editable-active');
-                    // Prevenir navegación si el usuario hace clic para editar un enlace
                     if (el.tagName === 'A') {
                         el.dataset.origHref = el.getAttribute('href') || '';
                         el.removeAttribute('href');
                     }
                     el.addEventListener('click', preventAccidentalClick);
                 });
-                showAdminToast("Modo Edición Activado.");
+                showAdminToast("Modo Edición Activado.", "success");
             } else {
                 banner.classList.add('hidden');
                 const contentToSave = {};
-                showAdminToast("Guardando cambios en la nube...");
+                
+                showAdminToast("Guardando cambios en la nube...", "loading");
                 
                 elements.forEach((el, index) => {
                     el.contentEditable = "false";
                     el.classList.remove('editable-active');
                     
-                    // Restaurar enlaces
                     if (el.dataset.origHref !== undefined) {
                         if (el.dataset.origHref !== '') el.setAttribute('href', el.dataset.origHref);
                         delete el.dataset.origHref;
                     }
                     el.removeEventListener('click', preventAccidentalClick);
                     
-                    // Asegurar que el índice es texto (para Firebase Maps)
                     contentToSave[index.toString()] = el.innerHTML;
                 });
                 
                 try {
                     await setDoc(doc(db, "pageContent", "main"), contentToSave);
-                    showAdminToast("¡Página guardada con éxito!");
-                    console.log("Textos guardados correctamente:", contentToSave);
+                    showAdminToast("¡Textos guardados con éxito!", "success");
                 } catch(e) {
                     console.error("Fallo al guardar página en Firebase:", e);
-                    showAdminToast("Error de permisos. Revisa consola.");
+                    showAdminToast("Error: Revisa consola o permisos", "error");
                 }
             }
         };
