@@ -69,16 +69,8 @@
                     <a href="https://site2.q10.com/User/Login" target="_blank" class="bg-gray-900 text-white px-6 py-2.5 rounded-full font-bold hover:shadow-lg hover:bg-gray-800 hover:-translate-y-0.5 transition-all flex items-center gap-2 text-sm ml-3">
                         <i data-lucide="log-in" class="w-4 h-4 text-white"></i> Iniciar sesión Q10
                     </a>
-                    <!-- BOTÓN ADMIN DESKTOP -->
-                    <button onclick="window.showPasswordModal()" class="text-gray-400 hover:text-gray-900 p-2 transition-colors ml-2" title="Panel de Administración">
-                        <i data-lucide="settings" class="w-5 h-5"></i>
-                    </button>
                 </div>
                 <div class="flex items-center lg:hidden gap-2">
-                    <!-- BOTÓN ADMIN MOBILE -->
-                    <button onclick="window.showPasswordModal()" class="text-gray-400 hover:text-gray-900 p-2 transition-colors" title="Panel de Administración">
-                        <i data-lucide="settings" class="w-6 h-6"></i>
-                    </button>
                     <button id="mobile-menu-btn" class="text-gray-600 hover:text-funetec-main p-2">
                         <i data-lucide="menu" class="w-8 h-8"></i>
                     </button>
@@ -415,144 +407,9 @@
         <span class="absolute right-[115%] bg-white text-gray-800 text-sm font-bold px-4 py-2 rounded-xl shadow-lg opacity-0 group-hover:opacity-100 transition-opacity duration-300 whitespace-nowrap pointer-events-none origin-right scale-95 group-hover:scale-100">¡Escríbenos!</span>
     </a>
 
-    <!-- MODAL DE CONTRASEÑA -->
-    <div id="password-modal" class="hidden fixed inset-0 z-[100] bg-gray-900/60 backdrop-blur-sm flex items-center justify-center p-4">
-        <div class="bg-white rounded-3xl shadow-2xl w-full max-sm p-8 transform transition-all">
-            <div class="text-center mb-6">
-                <div class="bg-gray-100 w-16 h-16 rounded-full flex items-center justify-center mx-auto mb-4">
-                    <i data-lucide="lock" class="w-8 h-8 text-gray-600"></i>
-                </div>
-                <h3 class="text-2xl font-black text-gray-900">Acceso Admin</h3>
-                <p class="text-sm text-gray-500 mt-1">Ingresa la contraseña para editar cursos.</p>
-            </div>
-            <div class="space-y-4">
-                <div>
-                    <input type="password" id="admin-pass-input" placeholder="Contraseña..." class="w-full bg-gray-50 border border-gray-200 rounded-xl px-4 py-3 focus:outline-none focus:ring-2 focus:ring-red-500 focus:border-transparent transition-all">
-                    <p id="pass-error" class="text-red-500 text-xs font-bold mt-2 hidden">Contraseña incorrecta.</p>
-                </div>
-                <button onclick="window.verifyPassword()" class="w-full bg-gray-900 text-white font-bold py-3 rounded-xl hover:bg-gray-800 transition-colors">Ingresar al Panel</button>
-                <button onclick="window.closePasswordModal()" class="w-full text-gray-500 font-semibold py-2 hover:text-gray-900 transition-colors">Cancelar</button>
-            </div>
-        </div>
-    </div>
-
-    <!-- PANEL DE ADMINISTRACIÓN (Base de Datos) -->
-    <div id="admin-modal" class="hidden fixed inset-0 z-[100] bg-gray-100 flex flex-col h-screen">
-        <!-- Admin Header -->
-        <div class="bg-white border-b border-gray-200 px-6 py-4 flex justify-between items-center shadow-sm z-10">
-            <div class="flex items-center gap-3">
-                <i data-lucide="layout-dashboard" class="text-funetec-main w-6 h-6"></i>
-                <h2 class="text-xl font-black text-gray-900 uppercase tracking-wide">Panel de Administración</h2>
-            </div>
-            <div class="flex items-center gap-4">
-                <button onclick="window.closeAdminPanel()" class="bg-gray-200 text-gray-700 hover:bg-gray-300 px-4 py-2.5 rounded-xl font-bold transition-colors text-sm">Cerrar Panel</button>
-            </div>
-        </div>
-        
-        <!-- Admin Layout -->
-        <div class="flex flex-grow overflow-hidden">
-            <!-- Sidebar: Lista de Cursos -->
-            <div class="w-1/3 max-w-sm bg-white border-r border-gray-200 overflow-y-auto custom-scrollbar flex flex-col">
-                <div class="p-5 border-b border-gray-100 bg-gray-50/50 sticky top-0">
-                    <h3 class="font-bold text-gray-800 text-sm uppercase tracking-wider mb-1">Base de Datos</h3>
-                    <p class="text-xs text-gray-500">Selecciona un curso para editar su información y valores.</p>
-                </div>
-                <div id="admin-course-list" class="p-3 space-y-1">
-                    <!-- Dynamic List -->
-                </div>
-            </div>
-            
-            <!-- Main Content: Formulario de Edición -->
-            <div class="flex-grow bg-gray-50 overflow-y-auto custom-scrollbar p-8">
-                <div id="admin-editor-placeholder" class="h-full flex flex-col items-center justify-center text-gray-400">
-                    <i data-lucide="database" class="w-16 h-16 mb-4 opacity-50"></i>
-                    <p class="font-semibold text-lg">Selecciona un curso de la lista para editar.</p>
-                </div>
-                
-                <div id="admin-editor-form" class="hidden max-w-3xl mx-auto bg-white rounded-2xl shadow-sm border border-gray-200 p-8">
-                    <div class="flex justify-between items-start mb-6 border-b border-gray-100 pb-6">
-                        <div>
-                            <h3 class="text-2xl font-black text-gray-900" id="editor-display-title">Editando Curso</h3>
-                            <p class="text-sm text-gray-500 mt-1">Los cambios se aplicarán a la vista detallada.</p>
-                        </div>
-                        <button id="admin-save-btn" onclick="window.saveCourseEdits()" class="bg-green-500 hover:bg-green-600 text-white px-6 py-2.5 rounded-xl font-bold flex items-center gap-2 transition-colors shadow-sm">
-                            <i data-lucide="save" class="w-4 h-4"></i> <span id="admin-save-text">Guardar Cambios</span>
-                        </button>
-                    </div>
-
-                    <input type="hidden" id="editor-course-key">
-
-                    <div class="grid grid-cols-1 md:grid-cols-2 gap-6 mb-6">
-                        <div>
-                            <label class="block text-sm font-bold text-gray-700 mb-2">Categoría (Ej: Programa Técnico)</label>
-                            <input type="text" id="editor-category" class="w-full bg-gray-50 border border-gray-200 rounded-xl px-4 py-2.5 focus:outline-none focus:ring-2 focus:ring-red-500">
-                        </div>
-                        <div>
-                            <label class="block text-sm font-bold text-gray-700 mb-2">Duración (Ej: 3 Semestres)</label>
-                            <input type="text" id="editor-duration" class="w-full bg-gray-50 border border-gray-200 rounded-xl px-4 py-2.5 focus:outline-none focus:ring-2 focus:ring-red-500">
-                        </div>
-                    </div>
-
-                    <div class="mb-6">
-                        <label class="block text-sm font-bold text-gray-700 mb-2">Valor de Inversión (Precio)</label>
-                        <input type="text" id="editor-price" class="w-full bg-gray-50 border border-gray-200 rounded-xl px-4 py-2.5 focus:outline-none focus:ring-2 focus:ring-red-500">
-                    </div>
-
-                    <div class="mb-6">
-                        <label class="block text-sm font-bold text-gray-700 mb-2">URL Imagen Principal</label>
-                        <input type="text" id="editor-img" class="w-full bg-gray-50 border border-gray-200 rounded-xl px-4 py-2.5 focus:outline-none focus:ring-2 focus:ring-red-500 font-mono text-sm">
-                    </div>
-                    
-                    <div class="mb-6">
-                        <label class="block text-sm font-bold text-gray-700 mb-2">URL Imagen de Fondo</label>
-                        <input type="text" id="editor-bgimg" class="w-full bg-gray-50 border border-gray-200 rounded-xl px-4 py-2.5 focus:outline-none focus:ring-2 focus:ring-red-500 font-mono text-sm">
-                    </div>
-
-                    <div>
-                        <label class="block text-sm font-bold text-gray-700 mb-2">Plan de Estudio (Un módulo por línea)</label>
-                        <textarea id="editor-modules" rows="6" class="w-full bg-gray-50 border border-gray-200 rounded-xl px-4 py-3 focus:outline-none focus:ring-2 focus:ring-red-500 custom-scrollbar resize-none"></textarea>
-                    </div>
-                </div>
-            </div>
-        </div>
-        
-        <!-- Notificación Toast en Admin -->
-        <div id="admin-toast" class="fixed top-24 right-6 bg-gray-900 text-white px-6 py-4 rounded-2xl font-bold shadow-2xl translate-x-[150%] transition-transform duration-300 z-[200] flex items-center gap-3">
-            <i data-lucide="info" class="w-6 h-6 text-blue-400" id="toast-icon"></i> 
-            <span id="toast-msg">Guardado</span>
-        </div>
-    </div>
-
-    <!-- Lógica Principal y Conexión Firebase (Modular) -->
-    <script type="module">
-        import { initializeApp } from "https://www.gstatic.com/firebasejs/11.6.1/firebase-app.js";
-        import { getAuth, signInAnonymously, onAuthStateChanged } from "https://www.gstatic.com/firebasejs/11.6.1/firebase-auth.js";
-        import { getFirestore, doc, setDoc, getDoc, collection, getDocs } from "https://www.gstatic.com/firebasejs/11.6.1/firebase-firestore.js";
-
-        // =======================================================================
-        // Configuración de Firebase
-        // =======================================================================
-        const firebaseConfig = {
-            apiKey: "AIzaSyAhI2vtJ9Pb-n0cI5FBmtFK04w025qPAFY",
-            authDomain: "edicionfunetecpag.firebaseapp.com",
-            databaseURL: "https://edicionfunetecpag-default-rtdb.firebaseio.com",
-            projectId: "edicionfunetecpag",
-            storageBucket: "edicionfunetecpag.firebasestorage.app",
-            messagingSenderId: "1097634211265",
-            appId: "1:1097634211265:web:0eceffc9584d39ad807b40"
-        };
-        // =======================================================================
-
-        // Inicialización
-        const app = initializeApp(firebaseConfig);
-        const auth = getAuth(app);
-        
-        // Conexión estándar a Firestore
-        const db = getFirestore(app);
-
-        const ADMIN_PASS = "admin123";
-
-        // Estructura de datos inicial por defecto
+    <!-- Lógica Principal -->
+    <script>
+        // Estructura de datos por defecto (Cursos)
         window.courseData = {
             "Auxiliar en Servicios Farmacéuticos": {
                 category: "Programa Técnico", img: "https://image2url.com/r2/default/images/1775745615976-dcb347de-c701-4c5f-bf72-ae20d14dca21.png", bgImg: "https://images.unsplash.com/photo-1587854692152-cbe660dbde88?ixlib=rb-4.0.3&auto=format&fit=crop&w=1200&q=80", bgColor: "bg-blue-900", imgClass: "scale-[1.28] translate-y-1", duration: "3 Semestres", price: "$150.000 COP / Mensualidad", modules: ["Anatomía y Fisiología", "Farmacología General", "Dispensación de Medicamentos", "Legislación Farmacéutica", "Atención al Cliente", "Prácticas Formativas"]
@@ -595,41 +452,6 @@
             }
         };
 
-        // ====== FUNCIÓN DE SEGURIDAD PARA EVITAR CUELGUES INFINITOS ======
-        const saveWithTimeout = (promise, ms = 8000) => {
-            const timeout = new Promise((_, reject) => setTimeout(() => reject(new Error("TIMEOUT_FIREBASE")), ms));
-            return Promise.race([promise, timeout]);
-        };
-
-        // ====== AUTENTICACIÓN Y CARGA DE DATOS FIREBASE ======
-        async function loadFirebaseData() {
-            try {
-                // Cargar Base de datos de Cursos
-                const coursesSnap = await getDocs(collection(db, "courses"));
-                if (!coursesSnap.empty) {
-                    coursesSnap.forEach(docSnap => {
-                        window.courseData[docSnap.id] = { ...window.courseData[docSnap.id], ...docSnap.data() };
-                    });
-                } else {
-                    for (const [key, data] of Object.entries(window.courseData)) {
-                        if(key !== "General") {
-                            await setDoc(doc(db, "courses", key), data);
-                        }
-                    }
-                }
-            } catch(e) {
-                console.warn("Firebase falló al cargar los cursos, usando datos locales:", e);
-            }
-        }
-
-        onAuthStateChanged(auth, (user) => {
-            if (user) {
-                loadFirebaseData();
-            } else {
-                signInAnonymously(auth).catch(e => console.error("Error signing in anonymously:", e));
-            }
-        });
-
         // ====== NAVEGACIÓN Y VISTAS ======
         window.showCourseDetails = function(courseName) {
             document.getElementById('landing-view')?.classList.add('hidden');
@@ -670,124 +492,7 @@
             window.scrollTo(0,0);
         };
 
-        // ====== PANEL ADMIN ======
-        window.showPasswordModal = function() {
-            document.getElementById('password-modal').classList.remove('hidden');
-            document.getElementById('admin-pass-input').value = '';
-            document.getElementById('admin-pass-input').focus();
-        };
-
-        window.closePasswordModal = function() {
-            document.getElementById('password-modal').classList.add('hidden');
-        };
-
-        window.verifyPassword = function() {
-            const pass = document.getElementById('admin-pass-input').value;
-            if (pass === ADMIN_PASS) {
-                window.closePasswordModal();
-                window.openAdminPanel();
-            } else {
-                document.getElementById('pass-error').classList.remove('hidden');
-            }
-        };
-
-        window.openAdminPanel = function() {
-            document.getElementById('admin-modal').classList.remove('hidden');
-            renderAdminCourseList();
-        };
-
-        window.closeAdminPanel = function() {
-            document.getElementById('admin-modal').classList.add('hidden');
-        };
-
-        function renderAdminCourseList() {
-            const listContainer = document.getElementById('admin-course-list');
-            listContainer.innerHTML = '';
-            Object.keys(window.courseData).forEach(key => {
-                if(key === "General") return;
-                const btn = document.createElement('button');
-                btn.className = "w-full text-left px-4 py-3 rounded-xl hover:bg-gray-100 transition-colors font-semibold text-gray-700 text-sm flex items-center justify-between group";
-                btn.innerHTML = `<span class="truncate pr-2">${key}</span> <i data-lucide="chevron-right" class="w-4 h-4 text-gray-400 group-hover:text-red-500"></i>`;
-                btn.onclick = () => loadCourseIntoAdmin(key);
-                listContainer.appendChild(btn);
-            });
-            if (typeof lucide !== 'undefined') lucide.createIcons({root: listContainer});
-        }
-
-        function loadCourseIntoAdmin(key) {
-            const data = window.courseData[key];
-            document.getElementById('admin-editor-placeholder').classList.add('hidden');
-            document.getElementById('admin-editor-form').classList.remove('hidden');
-            document.getElementById('editor-display-title').innerText = key;
-            document.getElementById('editor-course-key').value = key;
-            document.getElementById('editor-category').value = data.category || '';
-            document.getElementById('editor-duration').value = data.duration || '';
-            document.getElementById('editor-price').value = data.price || '';
-            document.getElementById('editor-img').value = data.img || '';
-            document.getElementById('editor-bgimg').value = data.bgImg || data.img || '';
-            document.getElementById('editor-modules').value = data.modules ? data.modules.join('\n') : '';
-        }
-
-        // ====== FUNCIONES DE GUARDADO (Cursos) ======
-        window.saveCourseEdits = async function() {
-            const key = document.getElementById('editor-course-key').value;
-            if(!key || !window.courseData[key]) return;
-            
-            const adminSaveText = document.getElementById('admin-save-text');
-            if(adminSaveText) adminSaveText.innerText = "Guardando...";
-            
-            showAdminToast("Guardando cambios del curso...", "loading");
-            
-            const modulesRaw = document.getElementById('editor-modules').value;
-            window.courseData[key].category = document.getElementById('editor-category').value;
-            window.courseData[key].duration = document.getElementById('editor-duration').value;
-            window.courseData[key].price = document.getElementById('editor-price').value;
-            window.courseData[key].img = document.getElementById('editor-img').value;
-            window.courseData[key].bgImg = document.getElementById('editor-bgimg').value;
-            window.courseData[key].modules = modulesRaw.split('\n').map(m => m.trim()).filter(m => m !== '');
-            
-            try {
-                await saveWithTimeout(setDoc(doc(db, "courses", key), window.courseData[key]));
-                showAdminToast("¡Curso guardado correctamente!", "success");
-                if(adminSaveText) adminSaveText.innerText = "Guardar Cambios";
-            } catch(e) {
-                console.error("Error guardando curso:", e);
-                if (e.message === "TIMEOUT_FIREBASE") {
-                    showAdminToast("Conexión muy lenta. Revisa tu red.", "error");
-                } else {
-                    showAdminToast("Fallo de conexión o permisos.", "error");
-                }
-                if(adminSaveText) adminSaveText.innerText = "Reintentar";
-            }
-        };
-
-        function showAdminToast(msg, type = 'success') {
-            const toast = document.getElementById('admin-toast');
-            const icon = document.getElementById('toast-icon');
-            document.getElementById('toast-msg').innerText = msg;
-            
-            if (type === 'success') {
-                icon.setAttribute('data-lucide', 'check-circle');
-                icon.className = 'w-6 h-6 text-green-400';
-            } else if (type === 'loading') {
-                icon.setAttribute('data-lucide', 'loader-2');
-                icon.className = 'w-6 h-6 text-blue-400 animate-spin';
-            } else if (type === 'error') {
-                icon.setAttribute('data-lucide', 'x-circle');
-                icon.className = 'w-6 h-6 text-red-400';
-            }
-            
-            if (typeof lucide !== 'undefined') lucide.createIcons({root: toast});
-            
-            toast.classList.remove('translate-x-[150%]');
-            
-            if (type !== 'loading') {
-                setTimeout(() => {
-                    toast.classList.add('translate-x-[150%]');
-                }, 3000);
-            }
-        }
-
+        // ====== EVENTOS INICIALES ======
         document.addEventListener('DOMContentLoaded', () => {
             if (typeof lucide !== 'undefined') lucide.createIcons();
             const btnMenu = document.getElementById('mobile-menu-btn');
