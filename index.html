@@ -100,7 +100,7 @@
             <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10 flex flex-col lg:flex-row items-center gap-12 lg:gap-8">
                 <div class="lg:w-1/2 text-center lg:text-left">
                     <div class="inline-flex items-center gap-2 py-1.5 px-4 rounded-full bg-white text-funetec-main font-bold text-sm mb-6 tracking-widest uppercase border border-red-100 shadow-sm">
-                        <span class="w-2 h-2 rounded-full bg-funetec-main animate-pulse"></span> Calendario A - 2026
+                        <span class="w-2 h-2 rounded-full bg-funetec-main animate-pulse"></span> Calendario A - 2027
                     </div>
                     <h1 class="text-4xl md:text-6xl lg:text-7xl font-black text-gray-900 leading-[1.1] mb-6 tracking-tight text-balance">El tiempo corre <br><span class="text-transparent bg-clip-text bg-gradient-to-r from-red-700 to-red-500">¿Aún estás pensando qué estudiar?</span></h1>
                     <p class="text-lg md:text-xl text-gray-600 mb-10 max-w-lg mx-auto lg:mx-0 font-medium text-balance">Las matrículas están abiertas. Prepárate para tu futuro con nuestros programas de alta demanda laboral. ¡Te estamos esperando!</p>
@@ -111,7 +111,7 @@
                 </div>
                 <div class="lg:w-1/2 relative w-full">
                     <div class="relative w-full h-[400px] md:h-[500px] rounded-[2rem] overflow-hidden shadow-[0_20px_50px_rgba(0,0,0,0.15)] border-8 border-white group">
-                        <img src="https://images.unsplash.com/photo-1576267423445-b2e0074d68a4?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80" alt="Estudiantes" class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-700">
+                        <img src="https://www.image2url.com/r2/default/images/1791994591437-99074b6e-7719-4f02-b92b-f9e738172d05.png" alt="Estudiantes" class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-700">
                         <div class="absolute inset-0 bg-gradient-to-t from-black/80 via-black/20 to-transparent"></div>
                         <div class="absolute bottom-0 left-0 right-0 p-8 text-white">
                             <div class="flex items-end space-x-1.5 h-8 mb-3"><div class="w-3 h-8 bg-funetec-dark rounded-sm"></div><div class="w-3 h-5 bg-funetec-main rounded-sm"></div><div class="w-3 h-8 bg-funetec-light rounded-sm"></div></div>
@@ -314,8 +314,7 @@
                                 <div class="bg-gray-800 p-3 rounded-xl text-[#25D366] group-hover:bg-[#25D366] group-hover:text-white transition-colors">
                                     <svg class="w-5 h-5" fill="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51a12.8 12.8 0 0 0-.57-.01c-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 0 1-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 0 1-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 0 1 2.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0 0 12.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 0 0 5.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 0 0-3.48-8.413Z"/></svg>
                                 </div>
-                                <div class="flex flex-col text-gray-300 font-medium mt-1 space-y-1">
-                                    <a href="https://wa.me/573006988876" class="hover:text-white transition">300 698 8876</a>
+                                <div class="flex flex-col text-gray-300 font-medium mt-2.5">
                                     <a href="https://wa.me/573046781679" class="hover:text-white transition">304 678 1679</a>
                                 </div>
                             </li>
@@ -348,21 +347,78 @@
                     </div>
                 </div>
                 <div class="p-8 md:p-12">
-                    <div class="mb-12">
-                        <div class="bg-red-50 p-6 rounded-2xl border border-red-100 inline-flex items-start gap-5 w-full md:w-auto min-w-[280px]">
-                            <div class="bg-white p-3 rounded-xl shadow-sm text-red-600"><i data-lucide="clock" class="w-6 h-6"></i></div>
+                    <!-- Tarjetas de Duración, Horario de Clases y Atención -->
+                    <div id="detail-info-grid" class="grid grid-cols-1 md:grid-cols-2 gap-6 mb-12">
+                        <div class="bg-red-50 p-6 rounded-2xl border border-red-100 flex items-start gap-5">
+                            <div class="bg-white p-3 rounded-xl shadow-sm text-red-600 flex-shrink-0"><i data-lucide="clock" class="w-6 h-6"></i></div>
                             <div>
-                                <h4 class="font-bold text-gray-900 text-lg uppercase tracking-wide">Duración</h4>
-                                <p id="detail-duration" class="text-gray-600 mt-1.5 font-medium text-lg">3 Semestres</p>
+                                <h4 class="font-bold text-gray-900 text-sm uppercase tracking-wider text-red-700">Duración del Programa</h4>
+                                <p id="detail-duration" class="text-gray-800 mt-1 font-bold text-lg">3 Semestres</p>
+                            </div>
+                        </div>
+                        <div id="detail-schedule-box" class="hidden bg-gray-50 p-6 rounded-2xl border border-gray-200 flex items-start gap-5">
+                            <div class="bg-white p-3 rounded-xl shadow-sm text-gray-700 flex-shrink-0"><i data-lucide="calendar" class="w-6 h-6"></i></div>
+                            <div>
+                                <h4 class="font-bold text-gray-500 text-sm uppercase tracking-wider">Horarios de Clases</h4>
+                                <p id="detail-schedule" class="text-gray-800 mt-1 font-bold text-lg">Según cronograma disponible</p>
+                            </div>
+                        </div>
+                        <div id="detail-attention-box" class="hidden bg-gray-50 p-6 rounded-2xl border border-gray-200 flex items-start gap-5">
+                            <div class="bg-white p-3 rounded-xl shadow-sm text-gray-700 flex-shrink-0"><i data-lucide="building-2" class="w-6 h-6"></i></div>
+                            <div>
+                                <h4 class="font-bold text-gray-500 text-sm uppercase tracking-wider">Horario de Atención</h4>
+                                <p id="detail-attention" class="text-gray-800 mt-1 font-bold text-lg">Lunes a sábados: 8:00 a.m. a 4:00 p.m.</p>
                             </div>
                         </div>
                     </div>
+
+                    <!-- Costos del Programa -->
+                    <div id="detail-costs-section" class="hidden mb-12">
+                        <h3 class="text-2xl font-black text-gray-900 uppercase mb-6 flex items-center gap-3">
+                            <i data-lucide="credit-card" class="text-funetec-main w-7 h-7"></i> Inversión del Programa
+                        </h3>
+                        <div id="detail-costs" class="grid grid-cols-1 md:grid-cols-3 gap-6">
+                            <!-- Costs will be inserted here -->
+                        </div>
+                    </div>
                     
-                    <h3 class="text-2xl font-black text-gray-900 uppercase mb-8 flex items-center gap-3"><i data-lucide="list-checks" class="text-funetec-main w-7 h-7"></i> Plan de Estudio (Módulos)</h3>
+                    <!-- Contenido de Formación -->
+                    <h3 class="text-2xl font-black text-gray-900 uppercase mb-6 flex items-center gap-3">
+                        <i data-lucide="list-checks" class="text-funetec-main w-7 h-7"></i> Contenido de Formación
+                    </h3>
                     <div class="bg-gray-50 rounded-2xl p-6 md:p-8 border border-gray-100 mb-12">
                         <ul id="detail-modules" class="grid grid-cols-1 md:grid-cols-2 gap-x-8 gap-y-4">
                             <!-- Modules will be inserted here -->
                         </ul>
+                    </div>
+
+                    <!-- Formación Complementaria -->
+                    <div id="detail-complementary-section" class="hidden mb-12">
+                        <div class="flex flex-col sm:flex-row sm:items-center justify-between gap-2 mb-6">
+                            <h3 class="text-2xl font-black text-gray-900 uppercase flex items-center gap-3">
+                                <i data-lucide="award" class="text-funetec-main w-7 h-7"></i> Formación Complementaria
+                            </h3>
+                            <span class="bg-green-100 text-green-800 text-xs font-extrabold px-3.5 py-1.5 rounded-full uppercase tracking-wider w-max border border-green-200">
+                                Sin costo adicional
+                            </span>
+                        </div>
+                        <div class="bg-white rounded-2xl p-6 md:p-8 border border-gray-200 shadow-sm">
+                            <ul id="detail-complementary" class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4">
+                                <!-- Complementary modules will be inserted here -->
+                            </ul>
+                        </div>
+                    </div>
+
+                    <!-- Requisitos -->
+                    <div id="detail-requirements-section" class="hidden mb-12">
+                        <h3 class="text-2xl font-black text-gray-900 uppercase mb-6 flex items-center gap-3">
+                            <i data-lucide="file-check-2" class="text-funetec-main w-7 h-7"></i> Requisitos de Matrícula
+                        </h3>
+                        <div class="bg-red-50/50 rounded-2xl p-6 md:p-8 border border-red-100">
+                            <ul id="detail-requirements" class="grid grid-cols-1 md:grid-cols-2 gap-4">
+                                <!-- Requirements will be inserted here -->
+                            </ul>
+                        </div>
                     </div>
 
                     <div class="text-center pt-8 border-t border-gray-100 flex flex-col items-center">
@@ -386,31 +442,375 @@
         // Estructura de datos por defecto (Cursos)
         window.courseData = {
             "Auxiliar en Servicios Farmacéuticos": {
-                category: "Programa Técnico", img: "https://image2url.com/r2/default/images/1775745615976-dcb347de-c701-4c5f-bf72-ae20d14dca21.png", bgImg: "https://images.unsplash.com/photo-1587854692152-cbe660dbde88?ixlib=rb-4.0.3&auto=format&fit=crop&w=1200&q=80", bgColor: "bg-blue-900", imgClass: "scale-[1.28] translate-y-1", duration: "3 Semestres", modules: ["Anatomía y Fisiología", "Farmacología General", "Dispensación de Medicamentos", "Legislación Farmacéutica", "Atención al Cliente", "Prácticas Formativas"]
+                category: "Programa Técnico",
+                img: "https://image2url.com/r2/default/images/1775745615976-dcb347de-c701-4c5f-bf72-ae20d14dca21.png",
+                bgImg: "https://images.unsplash.com/photo-1587854692152-cbe660dbde88?ixlib=rb-4.0.3&auto=format&fit=crop&w=1200&q=80",
+                bgColor: "bg-blue-900",
+                imgClass: "scale-[1.28] translate-y-1",
+                duration: "2 Semestres (1 año) + 6 meses de prácticas externas",
+                schedule: "Según cronograma disponible",
+                costs: [
+                    { label: "Matrícula", value: "$100.000", note: "Incluye inscripción, carnet, seguro estudiantil y porta carnet" },
+                    { label: "Mensualidad", value: "$60.000", note: "Pago mensual durante el programa" },
+                    { label: "Uniforme", value: "$110.000", note: "Dotación institucional reglamentaria" }
+                ],
+                modules: [
+                    "1. Atender y orientar a las personas",
+                    "2. Controlar las infecciones en los usuarios",
+                    "3. Dispensar medicamentos",
+                    "4. Administrar medicamentos",
+                    "5. Recibir y despachar medicamentos",
+                    "6. Negociar productos y servicios",
+                    "7. Seguridad y salud en el trabajo",
+                    "8. Emprendimiento y desarrollo personal"
+                ],
+                complementary: [
+                    "Primeros Auxilios",
+                    "Farmacognosia",
+                    "Interacción de Medicamentos",
+                    "Administración y Gestión del Servicio Farmacéutico",
+                    "Uso Racional de Medicamentos de Control Especial",
+                    "Dispositivos Médicos",
+                    "Clasificación y Manejo Práctico de los Analgésicos",
+                    "Toxicología (Física y Biológica)",
+                    "Marketing e Innovación"
+                ],
+                requirements: [
+                    "Ser mayor de 16 años",
+                    "Fotocopia de cédula o tarjeta de identidad",
+                    "Fotocopia del último grado cursado (mínimo 9°), acta de grado o diploma si es bachiller",
+                    "Certificación de EPS o SISBEN"
+                ]
             },
             "Auxiliar Administrativo en Salud": {
-                category: "Programa Técnico", img: "https://image2url.com/r2/default/images/1775745524150-e3153919-f337-403b-be90-c4670a4f7d87.png", bgImg: "https://images.unsplash.com/photo-1519494026892-80bbd2d6fd0d?ixlib=rb-4.0.3&auto=format&fit=crop&w=1200&q=80", bgColor: "bg-teal-900", imgClass: "scale-[1.42] translate-y-3", duration: "3 Semestres", modules: ["Admisión al Usuario", "Facturación en Salud", "Legislación en Salud", "Manejo de Software Médico", "Atención y Servicio al Cliente"]
+                category: "Programa Técnico",
+                img: "https://image2url.com/r2/default/images/1775745524150-e3153919-f337-403b-be90-c4670a4f7d87.png",
+                bgImg: "https://images.unsplash.com/photo-1519494026892-80bbd2d6fd0d?ixlib=rb-4.0.3&auto=format&fit=crop&w=1200&q=80",
+                bgColor: "bg-teal-900",
+                imgClass: "scale-[1.42] translate-y-3",
+                duration: "2 Semestres (1 año) + 6 meses de práctica",
+                schedule: "Según cronograma disponible",
+                attentionHours: "Lunes a sábados: 8:00 a.m. a 4:00 p.m.",
+                costs: [
+                    { label: "Matrícula", value: "$100.000", note: "Incluye inscripción, carnet, seguro estudiantil y porta carnet" },
+                    { label: "Mensualidad", value: "$60.000", note: "Pago mensual durante el programa" },
+                    { label: "Uniforme", value: "$110.000", note: "Dotación institucional reglamentaria" }
+                ],
+                modules: [
+                    "1. Atender y orientar a las personas",
+                    "2. Afiliar a la población al Sistema General de Seguridad Social en Salud",
+                    "3. Admitir al usuario en la red de servicios de salud",
+                    "4. Facturar la prestación de los servicios de salud",
+                    "5. Manejar valores e ingresos relacionados con la operación",
+                    "6. Seguridad y salud en el trabajo",
+                    "7. Emprendimiento y desarrollo personal",
+                    "8. Ética",
+                    "9. Informática"
+                ],
+                complementary: [
+                    "Primeros Auxilios",
+                    "Atención y Humanización en Servicios de Salud",
+                    "Eficiencia Tecnológica del Servicio de Salud",
+                    "Glosas",
+                    "Terminología Médica",
+                    "RIPS (Registros Individuales de Prestación de Servicios)",
+                    "Cartera",
+                    "Legislación Laboral y Seguridad Social en Colombia",
+                    "SOAT"
+                ],
+                requirements: [
+                    "Ser mayor de 16 años",
+                    "Fotocopia de cédula o tarjeta de identidad",
+                    "Fotocopia del último grado cursado (mínimo 9°), acta de grado o diploma si es bachiller",
+                    "Certificación de EPS o SISBEN"
+                ]
             },
             "Auxiliar en Enfermería": {
-                category: "Programa Técnico", img: "https://image2url.com/r2/default/images/1775747694884-659acee1-1cf2-48c6-8f9c-9993102d4dbe.png", bgImg: "https://images.unsplash.com/photo-1631815587646-b85a1bb027e1?ixlib=rb-4.0.3&auto=format&fit=crop&w=1200&q=80", bgColor: "bg-rose-900", imgClass: "scale-[1.15] translate-y-1", duration: "3 Semestres", modules: ["Cuidados Básicos", "Administración de Medicamentos", "Primeros Auxilios", "Salud Pública", "Enfermería Médico-Quirúrgica", "Prácticas Clínicas"]
+                category: "Programa Técnico",
+                img: "https://image2url.com/r2/default/images/1775747694884-659acee1-1cf2-48c6-8f9c-9993102d4dbe.png",
+                bgImg: "https://images.unsplash.com/photo-1631815587646-b85a1bb027e1?ixlib=rb-4.0.3&auto=format&fit=crop&w=1200&q=80",
+                bgColor: "bg-rose-900",
+                imgClass: "scale-[1.15] translate-y-1",
+                duration: "2 Semestres (1 año) + 6 meses de prácticas hospitalarias externas",
+                schedule: "Según cronograma disponible",
+                attentionHours: "Lunes a sábados: 8:00 a.m. a 4:00 p.m.",
+                costs: [
+                    { label: "Matrícula", value: "$100.000", note: "Incluye inscripción, carnet, seguro estudiantil y porta carnet" },
+                    { label: "Mensualidad", value: "$60.000", note: "Pago mensual durante el programa" },
+                    { label: "Uniforme", value: "$110.000", note: "Dotación institucional reglamentaria" }
+                ],
+                modules: [
+                    "1. Atender y orientar a las personas",
+                    "2. Admitir al usuario en la red de servicios de salud",
+                    "3. Controlar las infecciones en los usuarios",
+                    "4. Seguridad y salud en el trabajo",
+                    "5. Apoyo diagnóstico individual",
+                    "6. Emprendimiento y desarrollo personal",
+                    "7. Ética",
+                    "8. Asistir a las personas en las actividades de la vida diaria",
+                    "9. Participar en el cuidado a las personas",
+                    "10. Administrar medicamentos"
+                ],
+                complementary: [
+                    "Primeros Auxilios",
+                    "Seguridad del Paciente",
+                    "Cuidados de las Heridas",
+                    "Técnicas de Sutura",
+                    "Toma de Muestra para Exámenes de Laboratorio",
+                    "Pruebas POCT",
+                    "Citología",
+                    "Cuidado del Adulto Mayor",
+                    "Cuidados Paliativos",
+                    "Vacunación",
+                    "BLS",
+                    "ACLS",
+                    "Violencia de Género",
+                    "Gestión del Duelo",
+                    "Ataque con Sustancias Químicas"
+                ],
+                requirements: [
+                    "Ser mayor de 16 años",
+                    "Fotocopia de cédula o tarjeta de identidad",
+                    "Fotocopia del último grado cursado (mínimo 9°), acta de grado o diploma si es bachiller",
+                    "Certificación de EPS o SISBEN"
+                ]
             },
             "Técnico Peluquería y Belleza": {
-                category: "Programa Técnico", img: "https://images.unsplash.com/photo-1522337660859-02fbefca4702?ixlib=rb-4.0.3&auto=format&fit=crop&w=1200&q=80", duration: "3 Semestres", modules: ["Corte y Barbería", "Colorimetría", "Peinados y Maquillaje", "Tratamientos Capilares", "Bioseguridad", "Emprendimiento"]
+                title: "Belleza y Peluquería Integral",
+                category: "Programa Técnico",
+                img: "https://images.unsplash.com/photo-1522337660859-02fbefca4702?ixlib=rb-4.0.3&auto=format&fit=crop&w=1200&q=80",
+                duration: "2 Semestres (1 año)",
+                schedule: "Según cronograma disponible",
+                attentionHours: "Lunes a sábados: 8:00 a.m. a 5:00 p.m.",
+                costs: [
+                    { label: "Matrícula", value: "$100.000", note: "Incluye inscripción, carnet, seguro estudiantil y porta carnet" },
+                    { label: "Mensualidad", value: "$80.000", note: "Pago mensual durante el programa" },
+                    { label: "Uniforme", value: "$110.000", note: "Dotación institucional reglamentaria" }
+                ],
+                modules: [
+                    "1. Aplicar tratamiento capilar",
+                    "2. Seguridad y salud en el trabajo",
+                    "3. Modificar color del cabello",
+                    "4. Emprendimiento y desarrollo personal",
+                    "5. Corte de cabello",
+                    "6. Maquillaje facial",
+                    "7. Maquillaje corporal",
+                    "8. Ética",
+                    "9. Informática",
+                    "10. Atender manicura y pedicura",
+                    "11. Epilar el vello",
+                    "12. Adaptar uñas artificiales",
+                    "13. Atender clientes"
+                ],
+                complementary: [
+                    "Primeros Auxilios",
+                    "Atención al Cliente",
+                    "Emprendimiento",
+                    "Marketing",
+                    "Desarrollo del Ser"
+                ],
+                requirements: [
+                    "Ser mayor de 16 años",
+                    "Fotocopia de cédula o tarjeta de identidad",
+                    "Fotocopia del último grado cursado (mínimo 9°), acta de grado o diploma si es bachiller",
+                    "Certificación de EPS o SISBEN"
+                ]
             },
             "Auxiliar Contable": {
-                category: "Programa Técnico", img: "https://images.unsplash.com/photo-1554224155-8d04cb21cd6c?ixlib=rb-4.0.3&auto=format&fit=crop&w=1200&q=80", duration: "3 Semestres", modules: ["Contabilidad Básica", "Legislación Tributaria", "Software Contable", "Nómina y Prestaciones", "Análisis Financiero"]
+                title: "Auxiliar Contable y Financiero",
+                category: "Programa Técnico",
+                img: "https://images.unsplash.com/photo-1554224155-8d04cb21cd6c?ixlib=rb-4.0.3&auto=format&fit=crop&w=1200&q=80",
+                duration: "2 Semestres (1 año) + 4 meses de prácticas externas",
+                schedule: "Según cronograma disponible",
+                attentionHours: "Lunes a sábados: 8:00 a.m. a 4:00 p.m.",
+                costs: [
+                    { label: "Matrícula", value: "$100.000", note: "Incluye inscripción, carnet, seguro estudiantil y porta carnet" },
+                    { label: "Mensualidad", value: "$60.000", note: "Pago mensual durante el programa" },
+                    { label: "Uniforme", value: "$150.000", note: "Dotación institucional reglamentaria" }
+                ],
+                modules: [
+                    "1. Controlar recursos monetarios",
+                    "2. Atender clientes",
+                    "3. Generar nómina",
+                    "4. Elaborar documentos",
+                    "5. Reconocer recursos financieros",
+                    "6. Planear tributación",
+                    "7. Calcular costos de operación",
+                    "8. Seguridad y salud en el trabajo",
+                    "9. Emprendimiento y desarrollo personal",
+                    "10. Procesar el recaudo de caja"
+                ],
+                complementary: [
+                    "Primeros Auxilios",
+                    "Desarrollo del Ser",
+                    "Nómina y Prestaciones Sociales",
+                    "Habilidades Blandas y Talento Humano",
+                    "Liderazgo Efectivo",
+                    "Relaciones Interpersonales y Clima Laboral",
+                    "Networking Tecnológica Organizacional",
+                    "Estrategias y Gestión de Recursos Administrativos",
+                    "Procesamiento de Datos y Unidad Administrativa"
+                ],
+                requirements: [
+                    "Fotocopia de cédula o tarjeta de identidad",
+                    "Fotocopia de acta de grado o diploma de bachiller",
+                    "Certificación de EPS o SISBEN"
+                ]
             },
             "Auxiliar Administrativo": {
-                category: "Programa Técnico", img: "https://images.unsplash.com/photo-1497215728101-856f4ea42174?ixlib=rb-4.0.3&auto=format&fit=crop&w=1200&q=80", duration: "3 Semestres", modules: ["Gestión Documental", "Servicio al Cliente", "Herramientas Ofimáticas", "Redacción de Documentos", "Organización de Eventos"]
+                category: "Programa Técnico",
+                img: "https://images.unsplash.com/photo-1497215728101-856f4ea42174?ixlib=rb-4.0.3&auto=format&fit=crop&w=1200&q=80",
+                duration: "2 Semestres (1 año) + 4 meses de prácticas externas",
+                schedule: "Según cronograma disponible",
+                attentionHours: "Lunes a sábados: 8:00 a.m. a 4:00 p.m.",
+                costs: [
+                    { label: "Matrícula", value: "$100.000", note: "Incluye inscripción, carnet, seguro estudiantil y porta carnet" },
+                    { label: "Mensualidad", value: "$60.000", note: "Pago mensual durante el programa" },
+                    { label: "Uniforme", value: "$150.000", note: "Dotación institucional reglamentaria" }
+                ],
+                modules: [
+                    "1. Tramitar documentos",
+                    "2. Atender clientes",
+                    "3. Elaborar documentos",
+                    "4. Seguridad y salud en el trabajo",
+                    "5. Emprendimiento y desarrollo personal",
+                    "6. Procesar los datos",
+                    "7. Organizar archivos",
+                    "8. Ética",
+                    "9. Informática"
+                ],
+                complementary: [
+                    "Primeros Auxilios",
+                    "Desarrollo del Ser",
+                    "Habilidades Blandas y Oratoria",
+                    "Liderazgo Efectivo",
+                    "Relaciones Interpersonales y Clima Laboral",
+                    "Networking Tecnológica Organizacional",
+                    "Estrategias Digitales en Tiempos de Transformación",
+                    "Procesamiento de Datos y Unidad Administrativa"
+                ],
+                requirements: [
+                    "Ser mayor de 16 años",
+                    "Fotocopia de cédula o tarjeta de identidad",
+                    "Fotocopia del último grado cursado (mínimo 9°), acta de grado o diploma si es bachiller",
+                    "Certificación de EPS o SISBEN"
+                ]
             },
             "Recursos Humanos": {
-                category: "Programa Técnico", img: "https://images.unsplash.com/photo-1521737604893-d14cc237f11d?ixlib=rb-4.0.3&auto=format&fit=crop&w=1200&q=80", duration: "3 Semestres", modules: ["Selección de Personal", "Contratación y Nómina", "Seguridad y Salud en el Trabajo", "Clima Organizacional", "Legislación Laboral"]
+                title: "Auxiliar en Recursos Humanos",
+                category: "Programa Técnico",
+                img: "https://images.unsplash.com/photo-1521737604893-d14cc237f11d?ixlib=rb-4.0.3&auto=format&fit=crop&w=1200&q=80",
+                duration: "2 Semestres (1 año) + 4 meses de prácticas externas",
+                schedule: "Según cronograma disponible",
+                attentionHours: "Lunes a sábados: 8:00 a.m. a 4:00 p.m.",
+                costs: [
+                    { label: "Matrícula", value: "$100.000", note: "Incluye inscripción, carnet, seguro estudiantil y porta carnet" },
+                    { label: "Mensualidad", value: "$60.000", note: "Pago mensual durante el programa" },
+                    { label: "Uniforme", value: "$150.000", note: "Dotación institucional reglamentaria" }
+                ],
+                modules: [
+                    "1. Estructurar cargos",
+                    "2. Generar nómina de acuerdo con métodos y normativa técnica",
+                    "3. Atender clientes",
+                    "4. Vincular talento humano",
+                    "5. Seguridad y salud en el trabajo",
+                    "6. Diseñar manual de funciones",
+                    "7. Emprendimiento y desarrollo personal",
+                    "8. Inducción de personal",
+                    "9. Informática"
+                ],
+                complementary: [
+                    "Primeros Auxilios",
+                    "Desarrollo del Ser",
+                    "Nómina y Prestaciones Sociales",
+                    "Habilidades Blandas y Talento Humano",
+                    "Liderazgo Efectivo",
+                    "Relaciones Interpersonales y Clima Laboral",
+                    "Networking Tecnológica Organizacional",
+                    "Estrategias y Gestión de Recursos Administrativos",
+                    "Procesamiento de Datos y Unidad Administrativa"
+                ],
+                requirements: [
+                    "Ser mayor de 16 años",
+                    "Fotocopia de cédula o tarjeta de identidad",
+                    "Fotocopia del último grado cursado (mínimo 9°), acta de grado o diploma si es bachiller",
+                    "Certificación de EPS o SISBEN"
+                ]
             },
             "Educación Primera Infancia": {
-                category: "Programa Técnico", img: "https://images.unsplash.com/photo-1503454537195-1dcabb73ffb9?ixlib=rb-4.0.3&auto=format&fit=crop&w=1200&q=80", duration: "3 Semestres", modules: ["Psicología Infantil", "Didáctica y Pedagogía", "Nutrición y Cuidado", "Expresión Artística", "Estimulación Temprana"]
+                title: "Auxiliar de Educación para la Primera Infancia",
+                category: "Programa Técnico",
+                img: "https://images.unsplash.com/photo-1503454537195-1dcabb73ffb9?ixlib=rb-4.0.3&auto=format&fit=crop&w=1200&q=80",
+                duration: "2 Semestres (1 año) + 4 meses de prácticas externas",
+                schedule: "Según cronograma disponible",
+                attentionHours: "Lunes a sábados: 8:00 a.m. a 4:00 p.m.",
+                costs: [
+                    { label: "Matrícula", value: "$100.000", note: "Incluye inscripción, carnet, seguro estudiantil y porta carnet" },
+                    { label: "Mensualidad", value: "$60.000", note: "Pago mensual durante el programa" },
+                    { label: "Uniforme", value: "$110.000", note: "Dotación institucional reglamentaria" }
+                ],
+                modules: [
+                    "1. Atender niños y niñas según proceso pedagógico",
+                    "2. Seguridad y salud en el trabajo",
+                    "3. Asistir actividades pedagógicas",
+                    "4. Elaborar material de juegos",
+                    "5. Orientar acciones de salud de acuerdo con protocolos y políticas de primera infancia",
+                    "6. Emprendimiento y desarrollo personal",
+                    "7. Orientar acciones de salud y nutrición",
+                    "8. Fundamentos de la educación inicial",
+                    "9. Ética"
+                ],
+                complementary: [
+                    "Primeros Auxilios",
+                    "Psicología del Aprendizaje",
+                    "Detección Precoz de Trastorno del Aprendizaje",
+                    "Psicomotricidad y Pautas de Neurodesarrollo",
+                    "Nutrición y Primera Infancia (Manipulación de Alimentos)",
+                    "Taller de Ayudas Didácticas 1-2",
+                    "Liderazgo Efectivo",
+                    "Destrezas Manuales y Educación Inicial",
+                    "Pedagogía Humana"
+                ],
+                requirements: [
+                    "Ser mayor de 16 años",
+                    "Fotocopia de cédula o tarjeta de identidad",
+                    "Fotocopia del último grado cursado (mínimo 9°), acta de grado o diploma si es bachiller",
+                    "Certificación de EPS o SISBEN"
+                ]
             },
             "Cosmetología y Estética": {
-                category: "Programa Técnico", img: "https://images.unsplash.com/photo-1616394584738-fc6e612e71b9?ixlib=rb-4.0.3&auto=format&fit=crop&w=1200&q=80", duration: "3 Semestres", modules: ["Cuidado Facial", "Tratamientos Corporales", "Masoterapia", "Aparatología Estética", "Bioseguridad", "Maquillaje Profesional"]
+                title: "Cosmetología y Estética Integral",
+                category: "Programa Técnico",
+                img: "https://images.unsplash.com/photo-1616394584738-fc6e612e71b9?ixlib=rb-4.0.3&auto=format&fit=crop&w=1200&q=80",
+                duration: "2 Semestres (1 año) + 4 meses de prácticas externas",
+                schedule: "Según cronograma disponible",
+                attentionHours: "Lunes a sábados: 8:00 a.m. a 4:00 p.m.",
+                costs: [
+                    { label: "Matrícula", value: "$100.000", note: "Incluye inscripción, carnet, seguro estudiantil y porta carnet" },
+                    { label: "Mensualidad", value: "$80.000", note: "Pago mensual durante el programa" },
+                    { label: "Uniforme", value: "$110.000", note: "Dotación institucional reglamentaria" }
+                ],
+                modules: [
+                    "1. Fomentar prácticas seguras y saludables en los ambientes de trabajo",
+                    "2. Bioseguridad",
+                    "3. Facial",
+                    "4. Corporal",
+                    "5. Epilación",
+                    "6. Estilos de maquillaje",
+                    "7. Emprendimiento y desarrollo personal",
+                    "8. Cuidados Postoperatorios",
+                    "9. SPA, Terapias Holísticas"
+                ],
+                complementary: [
+                    "Diplomado en Dermocosmiatría Facial",
+                    "Primeros Auxilios"
+                ],
+                requirements: [
+                    "Ser mayor de 16 años",
+                    "Fotocopia de cédula o tarjeta de identidad",
+                    "Fotocopia del último grado cursado (mínimo 9°), acta de grado o diploma si es bachiller",
+                    "Certificación de EPS o SISBEN"
+                ]
             },
             "Curso 5 en 1": {
                 category: "Curso Corto Intensivo", img: "https://images.unsplash.com/photo-1516549655169-df83a0774514?ixlib=rb-4.0.3&auto=format&fit=crop&w=1200&q=80", duration: "1 Jornada Intensiva", modules: ["Soporte Vital Básico (BLS)", "Soporte Vital Avanzado (ACLS)", "Violencia de Género", "Sustancias Químicas", "Gestión de Duelo"]
@@ -434,13 +834,63 @@
             window.scrollTo(0,0);
             
             const data = window.courseData[courseName] || window.courseData["General"];
-            const displayTitle = window.courseData[courseName] ? courseName : "Todos nuestros programas";
+            const displayTitle = data.title || (window.courseData[courseName] ? courseName : "Todos nuestros programas");
             
             const catEl = document.getElementById('detail-category'); if(catEl) catEl.innerText = data.category;
             const titleEl = document.getElementById('detail-title'); if(titleEl) titleEl.innerText = displayTitle;
             const bgImgEl = document.getElementById('detail-bg-img'); if(bgImgEl) bgImgEl.src = data.bgImg || data.img;
             const durEl = document.getElementById('detail-duration'); if(durEl) durEl.innerText = data.duration;
+
+            // Horario
+            const scheduleBox = document.getElementById('detail-schedule-box');
+            const scheduleEl = document.getElementById('detail-schedule');
+            if (scheduleBox && scheduleEl) {
+                if (data.schedule) {
+                    scheduleEl.innerText = data.schedule;
+                    scheduleBox.classList.remove('hidden');
+                } else {
+                    scheduleBox.classList.add('hidden');
+                }
+            }
+
+            // Horario de atención
+            const attentionBox = document.getElementById('detail-attention-box');
+            const attentionEl = document.getElementById('detail-attention');
+            const infoGrid = document.getElementById('detail-info-grid');
+            if (attentionBox && attentionEl && infoGrid) {
+                if (data.attentionHours) {
+                    attentionEl.innerText = data.attentionHours;
+                    attentionBox.classList.remove('hidden');
+                    infoGrid.classList.remove('md:grid-cols-2');
+                    infoGrid.classList.add('md:grid-cols-3');
+                } else {
+                    attentionBox.classList.add('hidden');
+                    infoGrid.classList.remove('md:grid-cols-3');
+                    infoGrid.classList.add('md:grid-cols-2');
+                }
+            }
+
+            // Costos
+            const costsSection = document.getElementById('detail-costs-section');
+            const costsContainer = document.getElementById('detail-costs');
+            if (costsSection && costsContainer) {
+                if (data.costs && data.costs.length > 0) {
+                    costsContainer.innerHTML = data.costs.map(c => `
+                        <div class="bg-white p-6 rounded-2xl border border-gray-200 shadow-sm flex flex-col justify-between">
+                            <div>
+                                <span class="text-xs font-bold uppercase tracking-wider text-gray-500">${c.label}</span>
+                                <div class="text-3xl font-black text-gray-900 mt-1 mb-2">${c.value}</div>
+                            </div>
+                            <p class="text-sm text-gray-600 font-medium leading-snug">${c.note || ''}</p>
+                        </div>
+                    `).join('');
+                    costsSection.classList.remove('hidden');
+                } else {
+                    costsSection.classList.add('hidden');
+                }
+            }
             
+            // Módulos principales
             const modUl = document.getElementById('detail-modules');
             if(modUl) {
                 modUl.innerHTML = (data.modules || []).map(m => `
@@ -449,8 +899,43 @@
                         <span class="font-bold text-gray-800">${m}</span>
                     </li>
                 `).join('');
-                if (typeof lucide !== 'undefined') lucide.createIcons({root: modUl});
             }
+
+            // Formación complementaria
+            const compSection = document.getElementById('detail-complementary-section');
+            const compUl = document.getElementById('detail-complementary');
+            if (compSection && compUl) {
+                if (data.complementary && data.complementary.length > 0) {
+                    compUl.innerHTML = data.complementary.map(c => `
+                        <li class="flex items-start gap-2.5 p-3 rounded-xl bg-gray-50 border border-gray-100">
+                            <i data-lucide="plus-circle" class="w-5 h-5 text-red-600 flex-shrink-0 mt-0.5"></i>
+                            <span class="font-semibold text-gray-700 text-sm">${c}</span>
+                        </li>
+                    `).join('');
+                    compSection.classList.remove('hidden');
+                } else {
+                    compSection.classList.add('hidden');
+                }
+            }
+
+            // Requisitos
+            const reqSection = document.getElementById('detail-requirements-section');
+            const reqUl = document.getElementById('detail-requirements');
+            if (reqSection && reqUl) {
+                if (data.requirements && data.requirements.length > 0) {
+                    reqUl.innerHTML = data.requirements.map(r => `
+                        <li class="flex items-start gap-3 bg-white p-4 rounded-xl border border-red-100 shadow-sm">
+                            <i data-lucide="check" class="w-5 h-5 text-red-600 flex-shrink-0 mt-0.5"></i>
+                            <span class="font-semibold text-gray-800 text-sm">${r}</span>
+                        </li>
+                    `).join('');
+                    reqSection.classList.remove('hidden');
+                } else {
+                    reqSection.classList.add('hidden');
+                }
+            }
+
+            if (typeof lucide !== 'undefined' && detailView) lucide.createIcons({root: detailView});
             
             const wpBtn = document.getElementById('detail-whatsapp-btn');
             if (wpBtn) {
